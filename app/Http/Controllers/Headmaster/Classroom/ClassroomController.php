@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Headmaster\Classroom;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Headmaster\BaseHeadmasterController;
 use App\Models\Headmaster\Classroom;
 use Illuminate\Http\Request;
 
-class ClassroomController extends Controller
+class ClassroomController extends BaseHeadmasterController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        //
+        return view($this->path."kelas/kelas", ["nama" => "kelas"]);
     }
 
     /**

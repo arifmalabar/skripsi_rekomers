@@ -3,7 +3,7 @@
 active
 @endsection
 @section('judul')
-Guru
+XII RPL D
 @endsection
 @section('css')
 <style>
@@ -15,42 +15,76 @@ Guru
 @section('content')
 <div class="row">
     <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- small card -->
+                <div class="small-box bg-gray">
+                    <div class="inner">
+                        <h3>44</h3>
+
+                        <p>Jenis Kelamin Pria</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-mars"></i>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- small card -->
+                <div class="small-box bg-pink">
+                    <div class="inner">
+                        <h3>44</h3>
+
+                        <p>Jenis Kelamin Wanita</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-venus"></i>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
         <div class="card card-success card-outline">
             <div class="card-header">
                 <h3 class="card-title">
-                    <i class="fa fa-book"></i>
+                    <i class="fa fa-users"></i>
                     &nbsp;
-                    Data Guru
+                    Data Siswa
                 </h3>
                 <div class="card-tools">
                     <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-lg"><i
-                            class="fa fa-upload"></i> Upload Data Excel</button>
+                            class="fa fa-upload"></i> Upload Excel Data</button>
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-lg"><i
-                            class="fa fa-plus"></i>Tambah Data</button>
+                            class="fa fa-plus"></i> Tambah Data</button>
 
                     <div class="modal fade" id="modal-lg">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Tambah Data Guru</h4>
+                                    <h4 class="modal-title">Tambah Data Siswa</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
+
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="">NIP<sup>*</sup></label>
+                                        <div class="col-md-12">
+                                            <label for="">NISN<sup>*</sup></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
-                                                        <i class="fa fa-address-card"></i>
+                                                        <i class="fa fa-id-card"></i>
                                                     </span>
                                                 </div>
-                                                <input type="number" class="form-control" placeholder="masukan nip">
+                                                <input type="text" class="form-control upper"
+                                                    placeholder="masukan kode jurusan">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <label for="">Nama<sup>*</sup></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
@@ -58,8 +92,12 @@ Guru
                                                         <i class="fa fa-user"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control" placeholder="masukan nama">
+                                                <input type="text" class="form-control upper"
+                                                    placeholder="masukan nama siswa">
                                             </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="">Jenis Kelamin</label>
                                         </div>
                                     </div>
                                 </div>
@@ -85,21 +123,22 @@ Guru
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example2" style="text-align: center" class="table table-bordered table-hover">
+
+                <table id="example2" style="text-align: center;" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NIP</th>
+                            <th>NISN</th>
                             <th>Nama</th>
-                            <th>Status</th>
+                            <th>Jns Kelamin</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>19988299121212001</td>
-                            <td>Dian Puspita Yulianti S.pd</td>
+                            <td><a href="kelas/002718212">002718055</a></td>
+                            <td>RIDHO ARIF WICAKSONO</td>
                             <td><span class="badge badge-success">Aktif</span></td>
                             <td style="text-align: center">
                                 <button class="btn btn-outline-warning btn-sm">
@@ -125,90 +164,8 @@ Guru
 
 <script>
     $(function () {
-        /* ChartJS
-        * -------
-        * Here we will create a few charts using ChartJS
-        */
+        //Initialize Select2 Elements
 
-        //--------------
-        //- AREA CHART -
-        //--------------
-
-        // Get context with jQuery - using jQuery's .get() method.
-        //var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-
-        var areaChartData = {
-        labels  : ['Risiko Tinggi', 'Risiko Tengah', 'Risiko Rendah'],
-        datasets: [
-            {
-            label               : 'Digital Goods',
-            backgroundColor     : 'rgba(60,141,188,0.9)',
-            borderColor         : 'rgba(60,141,188,0.8)',
-            pointRadius          : false,
-            pointColor          : '#3b8bba',
-            pointStrokeColor    : 'rgba(60,141,188,1)',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : [28, 48, 40, 19, 86, 27, 90]
-            },
-            {
-            label               : 'Electronics',
-            backgroundColor     : 'rgba(210, 214, 222, 1)',
-            borderColor         : 'rgba(210, 214, 222, 1)',
-            pointRadius         : false,
-            pointColor          : 'rgba(210, 214, 222, 1)',
-            pointStrokeColor    : '#c1c7d1',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(220,220,220,1)',
-            data                : [65, 59, 80, 81, 56, 55, 40]
-            },
-        ]
-        }
-
-        var areaChartOptions = {
-        maintainAspectRatio : false,
-        responsive : true,
-        legend: {
-            display: false
-        },
-        scales: {
-            xAxes: [{
-            gridLines : {
-                display : false,
-            }
-            }],
-            yAxes: [{
-            gridLines : {
-                display : false,
-            }
-            }]
-        }
-        }
-
-        
-        //-------------
-        //- BAR CHART -
-        //-------------
-        var barChartCanvas = $('#barChart').get(0).getContext('2d')
-        var barChartData = $.extend(true, {}, areaChartData)
-        var temp0 = areaChartData.datasets[0]
-        var temp1 = areaChartData.datasets[1]
-        barChartData.datasets[0] = temp1
-        barChartData.datasets[1] = temp0
-
-        var barChartOptions = {
-        responsive              : true,
-        maintainAspectRatio     : false,
-        datasetFill             : false
-        }
-
-        new Chart(barChartCanvas, {
-        type: 'bar',
-        data: barChartData,
-        options: barChartOptions
-        })
-    });
-    $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');

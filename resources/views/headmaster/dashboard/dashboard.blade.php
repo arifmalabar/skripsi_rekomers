@@ -1,210 +1,232 @@
 @extends('template/headmaster_layout/layout')
 @section('status')
-    active
+active
 @endsection
 @section('judul')
-    Dashboard
+Dashboard
 @endsection
 @section('content')
 <div class="row">
-    <div class="row">
-        <div class="col-md-4 col-sm-6 col-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Jumlah Siswa</span>
-              <span class="info-box-number">1,410</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
+        <div class="info-box-content">
+          <span class="info-box-text">Jumlah Siswa</span>
+          <span class="info-box-number">240</span>
         </div>
-        <!-- /.col -->
-        <div class="col-md-4 col-sm-6 col-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Jumlah Jurusan</span>
-              <span class="info-box-number">410</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-4 col-sm-6 col-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-purple"><i class="far fa-copy"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Jumlah Guru</span>
-              <span class="info-box-number">13,648</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
     </div>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card card-default">
-                <div class="card-header" >
-                    <h3 class="card-title">
-                        <button class="btn btn-success btn-xl">
-                            <i class="fa fa-chart-bar"></i>
-                        </button>
-                        &nbsp;
-                        Distribusi Tingkat Risiko Siswa
-                    </h3>
-                </div>
-                <div class="card-body">
-                  <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                    <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 765px;" width="765" height="250" class="chartjs-render-monitor"></canvas>
-                  </div>
-                </div>
-                <!-- /.card-body -->
-              </div>
+    <!-- /.col -->
+    <div class="col-md-4 col-sm-6 col-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Jumlah Jurusan</span>
+          <span class="info-box-number">4</span>
         </div>
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-lg-12 col-6">
-                  <!-- small box -->
-                  <div class="small-box bg-danger">
-                    <div class="inner">
-                      <h3>50<sup>%</sup></h3>
-        
-                      <p>Risiko Tinggi</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                  </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-6 col-6">
-                  <!-- small box -->
-                  <div class="small-box bg-success">
-                    <div class="inner">
-                      <h3>11<sup style="font-size: 20px">%</sup></h3>
-        
-                      <p>Risiko Rendah</p>
-                    </div>
-                    <div class="icon">
-                      <i class="ion ion-stats-bars"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                  </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-6 col-6">
-                  <!-- small box -->
-                  <div class="small-box bg-warning">
-                    <div class="inner">
-                      <h3>44</h3>
-        
-                      <p>Risiko Menengah</p>
-                    </div>
-                    <div class="icon">
-                      <i class="ion ion-person-add"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                  </div>
-                </div>
-                
-                <!-- ./col -->
-            </div>
-        </div>   
-        
-        
-        <div class="col-md-6">
-            <div class="card card-info card-outline">
-              <div class="card-header">
-                <h3 class="card-title">
-                    <i class="fa fa-book"></i>
-                    &nbsp;
-                    Kurikulum
-                </h3>
-                <div class="card-tools">
-                    <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i>Tambah Data</button>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Kurikulum</th>
-                      <th>Tahun Kurikulum</th>
-                      <th>Opsi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>Trident</td>
-                      <td>Internet
-                        Explorer 4.0
-                      </td>
-                      <td>Win 95+</td>
-                      <td> 4</td>
-                    </tr>
-                    </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
-        <div class="col-md-6">
-            <div class="card card-info card-outline">
-              <div class="card-header">
-                <h3 class="card-title">
-                    <i class="fa fa-book"></i>
-                    &nbsp;
-                    Tahun Ajaran
-                </h3>
-                <div class="card-tools">
-                    <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i>Tambah Data</button>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Kurikulum</th>
-                      <th>Tahun Kurikulum</th>
-                      <th>Opsi</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>Trident</td>
-                      <td>Internet
-                        Explorer 4.0
-                      </td>
-                      <td>Win 95+</td>
-                      <td> 4</td>
-                    </tr>
-                    </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
     </div>
+    <!-- /.col -->
+    <div class="col-md-4 col-sm-6 col-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-purple"><i class="far fa-copy"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Jumlah Guru</span>
+          <span class="info-box-number">5</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card card-default">
+        <div class="card-header">
+          <h3 class="card-title">
+            <button class="btn btn-success btn-xl">
+              <i class="fa fa-chart-bar"></i>
+            </button>
+            &nbsp;
+            Distribusi Tingkat Risiko Siswa
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div class="chartjs-size-monitor">
+              <div class="chartjs-size-monitor-expand">
+                <div class=""></div>
+              </div>
+              <div class="chartjs-size-monitor-shrink">
+                <div class=""></div>
+              </div>
+            </div>
+            <canvas id="barChart"
+              style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 765px;"
+              width="765" height="250" class="chartjs-render-monitor"></canvas>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-lg-12 col-6">
+          <!-- small box -->
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h3>50<sup>%</sup></h3>
+
+              <p>Risiko Tinggi</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">Cek <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-6 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3>11<sup style="font-size: 20px">%</sup></h3>
+
+              <p>Risiko Rendah</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">Cek <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-6 col-6">
+          <!-- small box -->
+          <div class="small-box bg-warning">
+            <div class="inner">
+              <h3>44<sup style="font-size: 20px">%</sup></h3>
+
+              <p>Risiko Menengah</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-chart-bar"></i>
+            </div>
+            <a href="#" class="small-box-footer">Cek <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <!-- ./col -->
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <div class="card card-info card-outline">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fa fa-book"></i>
+            &nbsp;
+            Kurikulum
+          </h3>
+          <div class="card-tools">
+            <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i>Tambah Data</button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <table id="example2" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Kurikulum</th>
+                <th>Tahun Kurikulum</th>
+                <th>Opsi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Merdeka</td>
+                <td>2024</td>
+                <td style="text-align: center">
+                  <button class="btn btn-outline-warning btn-sm">
+                    <i class="fa fa-edit"></i>
+                    Update
+                  </button>
+                  <button class="btn btn-outline-danger btn-sm">
+                    <i class="fa fa-trash"></i>
+                    Hapus
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <div class="col-md-6">
+      <div class="card card-info card-outline">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fa fa-book"></i>
+            &nbsp;
+            Tahun Ajaran
+          </h3>
+          <div class="card-tools">
+            <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i>Tambah Data</button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <table id="example1" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Th Ajaran</th>
+                <th>Opsi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>2024-2025</td>
+                <td style="text-align: center">
+                  <button class="btn btn-outline-warning btn-sm">
+                    <i class="fa fa-edit"></i>
+                    Update
+                  </button>
+                  <button class="btn btn-outline-danger btn-sm">
+                    <i class="fa fa-trash"></i>
+                    Hapus
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
 </div>
 @endsection
 @section('js')
 
-    <script>
-        $(function () {
+<script>
+  $(function () {
         /* ChartJS
         * -------
         * Here we will create a few charts using ChartJS
@@ -302,5 +324,5 @@
       "responsive": true,
     });
   });
-    </script>
+</script>
 @endsection

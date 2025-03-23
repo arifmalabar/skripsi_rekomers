@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Headmaster\ProgramStudy;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Headmaster\BaseHeadmasterController;
 use App\Models\Headmaster\ProgramStudy;
 use Illuminate\Http\Request;
 
-class ProgramStudyController extends Controller
+class ProgramStudyController extends BaseHeadmasterController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class ProgramStudyController extends Controller
      */
     public function index()
     {
-        //
+        return view($this->path."/jurusan/jurusan", ["nama" => "jurusan"]);
     }
 
     /**

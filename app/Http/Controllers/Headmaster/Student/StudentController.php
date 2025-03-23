@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Headmaster\Student;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Headmaster\BaseHeadmasterController;
 use App\Models\Headmaster\Student;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class StudentController extends BaseHeadmasterController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        return view($this->path."/siswa/siswa", ["nama" => "kelas"]);
     }
 
     /**

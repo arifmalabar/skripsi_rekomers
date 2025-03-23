@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Headmaster\Classroom\ClassroomController;
 use App\Http\Controllers\Headmaster\Dashboard\DashboardController;
 use App\Http\Controllers\Headmaster\Teacher\TeacherController;
 use App\Models\Penghuni;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login\LoginController;
-
+use App\Http\Controllers\Headmaster\ProgramStudy\ProgramStudyController;
+use App\Http\Controllers\Headmaster\Student\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,18 @@ Route::controller(DashboardController::class)->group(function() {
 Route::controller(TeacherController::class)->group(function() {
     $root = "/kakomli/";
     Route::get($root."guru", "index");
+});
+Route::controller(ProgramStudyController::class)->group(function () {
+    $root = "/kakomli/";
+    Route::get($root."jurusan", "index");
+});
+Route::controller(ClassroomController::class)->group(function(){
+    $root = "/kakomli/";
+    Route::get($root."kelas", "index");
+});
+Route::controller(StudentController::class)->group(function(){
+    $root = "/kakomli/";
+    Route::get($root."kelas/{id}", "index");
 });
 
 /*Route::get('/dashboard', function () {
