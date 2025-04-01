@@ -44,7 +44,10 @@ Route::controller(StudentController::class)->group(function(){
     $root = "/kakomli/";
     Route::get($root."kelas/{id}", "index");
 });
+function headMasterRoutes($data)
+{
 
+}
 /*Route::get('/dashboard', function () {
     return view('dashboard/dashboard', ["nama" => "dashboard"]);
 })->name('dashboard');*/

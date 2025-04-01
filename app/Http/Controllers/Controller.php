@@ -12,7 +12,7 @@ use Exception;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    public Model $model;
+    /*public Model $model;
     public function getData()
     {
        try {
@@ -74,6 +74,6 @@ class Controller extends BaseController
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), $th->getCode());
         }
-    }
+    }*/
 
 }

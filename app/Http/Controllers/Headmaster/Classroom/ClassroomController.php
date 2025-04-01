@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class ClassroomController extends BaseHeadmasterController
 {
+    function __construct() {
+        $this->model = new Classroom();
+    }
     /**
      * Display a listing of the resource.
      *
