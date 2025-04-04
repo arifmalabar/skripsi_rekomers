@@ -40,14 +40,15 @@ Guru
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="">NIP<sup>*</sup></label>
+                                            <label for="">NIaP<sup>*</sup></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         <i class="fa fa-address-card"></i>
                                                     </span>
                                                 </div>
-                                                <input type="number" class="form-control" placeholder="masukan nip">
+                                                <input type="number" class="form-control" id="insert-nip"
+                                                    placeholder="masukan nip">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -58,7 +59,9 @@ Guru
                                                         <i class="fa fa-user"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control" placeholder="masukan nama">
+                                                <input type="text" class="form-control" id="insert-nama"
+                                                    placeholder="masukan nama">
+                                                <input type="hidden" value="{{ csrf_token() }}" class="token">
                                             </div>
                                         </div>
                                     </div>
@@ -70,8 +73,9 @@ Guru
                                                 data-dismiss="modal">Close</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" style="width: 100%" class="btn btn-primary"><i
-                                                    class="fa fa-plus"></i>Tambah Data</button>
+                                            <button type="button" style="width: 100%" class="btn btn-primary btn-tambah"
+                                                data-dismiss="modal"><i class="fa fa-plus"></i>Tambah
+                                                Data</button>
                                         </div>
                                     </div>
 
@@ -102,14 +106,7 @@ Guru
                             <td>Dian Puspita Yulianti S.pd</td>
                             <td><span class="badge badge-success">Aktif</span></td>
                             <td style="text-align: center">
-                                <button class="btn btn-outline-warning btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                    Update
-                                </button>
-                                <button class="btn btn-outline-danger btn-sm">
-                                    <i class="fa fa-trash"></i>
-                                    Hapus
-                                </button>
+
                             </td>
                         </tr>
                     </tbody>
@@ -122,7 +119,7 @@ Guru
 </div>
 @endsection
 @section('js')
-
+<script type="module" src="{{ asset('js/guru/app.js') }}"></script>
 <script>
     $(function () {
         /* ChartJS
@@ -212,15 +209,7 @@ Guru
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
+    
   });
 </script>
 @endsection

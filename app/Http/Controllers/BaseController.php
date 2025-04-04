@@ -34,7 +34,7 @@ abstract class BaseController extends Controller
             return $this->showError($th->getMessage());
         }
     }
-    public function deleteData($named, $id)
+    public function deleteData($id)
     {
         try {
             return $this->model->findOrFail($id)->delete();

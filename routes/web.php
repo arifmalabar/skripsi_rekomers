@@ -31,6 +31,10 @@ Route::controller(DashboardController::class)->group(function() {
 Route::controller(TeacherController::class)->group(function() {
     $root = "/kakomli/";
     Route::get($root."guru", "index");
+    Route::get($root."guru/api", "getData");
+    Route::post($root."guru/api", "insertData");
+    Route::put($root."guru/api/{id}", "updateData");
+    Route::delete($root."guru/api/{id}", "deleteData");
 });
 Route::controller(ProgramStudyController::class)->group(function () {
     $root = "/kakomli/";
@@ -44,9 +48,58 @@ Route::controller(StudentController::class)->group(function(){
     $root = "/kakomli/";
     Route::get($root."kelas/{id}", "index");
 });
-function headMasterRoutes($data)
+function routes($data)
 {
-
+    $index = 0;
+    while(arrayCheck($data, "GET") && $index < count($data["GET"]))
+    {
+        $uri = $data["GET"][$index];
+        Route::get($uri["path"], $uri["action"]);
+        $index++;
+    }
+    $index = 0;
+    while(arrayCheck($data, "POST") && $index < count($data["POST"]))
+    {
+        echo 1;
+        $uri = $data["POST"][$index];
+        Route::post($uri["path"], $uri["action"]);
+        $index++;
+    }
+   /*if(!(arrayCheck($data, "GET")))
+   {
+        foreach($data["GET"] as $get)
+        {
+            Route::get($get["path"], $get["action"]);
+        }
+   }
+   if(!(arrayCheck($data, "POST")))
+   {
+        foreach($data["POST"] as $post)
+        {
+            Route::post($post["path"], $post["action"]);
+        }
+   }
+    /*foreach(isset($data["POST"]) as $post)
+    {
+        Route::post($post["path"], $post["action"]);
+    }
+    foreach($data["PUT"] as $put)
+    {
+        Route::put($put["path"], $put["action"]);
+    }
+    foreach($data["DELETE"] as $del)
+    {
+        Route::delete($del["path"], $del["action"]);
+    }*/
+}
+function arrayCheck($arr, $type)
+{
+    if(array_key_exists($type, $arr))
+    {
+        return true;
+    } else {
+        return false;
+    }
 }
 /*Route::get('/dashboard', function () {
     return view('dashboard/dashboard', ["nama" => "dashboard"]);
