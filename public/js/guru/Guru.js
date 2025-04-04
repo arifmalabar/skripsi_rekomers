@@ -1,5 +1,6 @@
 import { delete_guru, get_guru, insert_guru } from "../config/end_point.js";
 import { deleteData, getData, insertData } from "../fetch/fetch.js";
+import { clearField, clearFields } from "../helper/clear_form.js";
 import { validateEmptyField } from "../helper/form_validation.js";
 var token = "";
 export function init() {
@@ -76,11 +77,11 @@ async function insert() {
         validateEmptyField(nama);
         validateEmptyField(nip);
         await insertData(insert_guru, data, token);
-        alert("insert success");
+        clearFields(["#insert-nama", "#insert-nip"]);
+        get();
     } catch (error) {
         alert(error);
     }
-    get();
 }
 function update() {}
 async function deleteDataGuru(id) {
