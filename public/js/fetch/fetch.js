@@ -25,7 +25,7 @@ export async function insertData(url, data, token) {
     }
 }
 export async function updateData(url, data, token) {
-    const response = await fetch(`${url}/${data["id"]}`, {
+    const response = await fetch(url, {
         body: JSON.stringify(data),
         method: "PUT",
         headers: {
@@ -33,10 +33,10 @@ export async function updateData(url, data, token) {
             "X-CSRF-TOKEN": token,
         },
     });
-    if ((response.ok && response.status == 201) || response.status == 200) {
+    if (response.ok && response.status == 200) {
         return response.json();
     } else {
-        throw new Error(showError(response));
+        throw new Error(showError(response.json()));
     }
 }
 export async function deleteData(url, id, token) {

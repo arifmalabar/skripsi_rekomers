@@ -111,6 +111,64 @@ Guru
                         </tr>
                     </tbody>
                 </table>
+
+                <div class="modal fade" id="modal-update">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-warning">
+                                <h4 class="modal-title">Update Data Guru</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">NIP<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-address-card"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control update-nip"
+                                                placeholder="masukan nip">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="">Nama<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control update-nama"
+                                                placeholder="masukan nama">
+                                            <input type="hidden" value="{{ csrf_token() }}" class="token">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="row" style="width: 100%; text-align: center">
+                                    <div class="col-md-6">
+                                        <button type="button" style="width: 100%" class="btn btn-outline-warning"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" style="width: 100%" class="btn btn-warning btn-proses-update"
+                                            data-dismiss="modal"><i class="fa fa-plus"></i>Update
+                                            Data</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                </div>
             </div>
             <!-- /.card-body -->
         </div>

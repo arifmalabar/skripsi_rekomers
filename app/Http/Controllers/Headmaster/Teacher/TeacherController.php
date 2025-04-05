@@ -16,7 +16,8 @@ class TeacherController extends BaseController
      */
     public function __construct() {
         $this->model = new Teacher();
-    }
+        $this->kode = "G";
+    }   
     public function index()
     {
         return view("headmaster/guru/guru", ["nama" => "guru"]);
@@ -40,7 +41,7 @@ class TeacherController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $this->inserDataByid($request, "G");
     }
 
     /**

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 abstract class BaseController extends Controller
 {
     public Model $model;
+    public $kode = "";
     public function getData()
     {
         try {
@@ -19,17 +20,32 @@ abstract class BaseController extends Controller
     public function insertData(Request $request)
     {
         $data = $request->all();
+        if($this->kode != "")
+        {
+            $data["id"] = $this->getKode($this->model, $this->kode);
+        }
         try {
             return $this->model->insert($data);
         } catch (\Throwable $th) {
             return $this->showError($th->getMessage());
         }
     }
+    public function inserDataByid(Request $request, $char)
+    {
+        $data = $request->all();
+        $data["id"] = $this->getKode($this->model, $char);
+        try {
+            return $this->model->insert($data);
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
+
+    }
     public function updateData(Request $request, $id)
     {
         $data = $request->all();
         try {
-            return $this->model->findOrFail($id)->update();
+            return $this->model->findOrFail($id)->update($data);
         } catch (\Throwable $th) {
             return $this->showError($th->getMessage());
         }
@@ -45,6 +61,20 @@ abstract class BaseController extends Controller
     private function showError($message)
     {
         return response()->json($message, 500);
+    }
+    private function getKode(Model $mo, $char)
+    {
+        try {
+            $last = $mo->orderBy("id", "DESC")->first();
+            if(!$last ||!$last->id)
+            {
+                return $char."001";
+            }
+            $lastnum = intval(substr($last->id, 1));
+            return $char.str_pad($lastnum+1, 3, "0", STR_PAD_LEFT);
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
     }
 
 }
