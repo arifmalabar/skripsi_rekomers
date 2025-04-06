@@ -50,6 +50,21 @@ abstract class BaseController extends Controller
             return $this->showError($th->getMessage());
         }
     }
+    public function activateData($id)
+    {
+        //$data = $request->all();
+        try {
+            $field = $this->model->findOrFail($id);
+            if($field->status){
+                $field->status = false;
+            } else {
+                $field->status = true;
+            }
+            $field->save();
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
+    }
     public function deleteData($id)
     {
         try {
@@ -58,9 +73,9 @@ abstract class BaseController extends Controller
             return $this->showError($th->getMessage());
         }
     }
-    private function showError($message)
+    protected function showError($message)
     {
-        return response()->json($message, 500);
+        return response()->json(["erorr" => $message], 500);
     }
     private function getKode(Model $mo, $char)
     {

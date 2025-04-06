@@ -13,7 +13,7 @@ class ProgramstudiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('programs_studies', function (Blueprint $table) {
+        Schema::create('program_studies', function (Blueprint $table) {
             $table->char("id", 100)->primary();
             $table->char("program_study_name");
         });

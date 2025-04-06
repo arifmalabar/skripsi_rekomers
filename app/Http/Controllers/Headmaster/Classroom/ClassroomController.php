@@ -11,80 +11,23 @@ class ClassroomController extends BaseHeadmasterController
 {
     function __construct() {
         $this->model = new Classroom();
+        $this->kode = "K";
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view($this->path."kelas/kelas", ["nama" => "kelas"]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getData()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Headmaster\Classroom  $classroom
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Classroom $classroom)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Headmaster\Classroom  $classroom
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Classroom $classroom)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Headmaster\Classroom  $classroom
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Classroom $classroom)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Headmaster\Classroom  $classroom
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Classroom $classroom)
-    {
-        //
+        try {
+            return $this->model->selectRaw("
+                id, 
+                classname, 
+                (SELECT program_study_name FROM program_studies WHERE id = classrooms.program_study_id) as nama_jurusan,
+                (SELECT COUNT(*) FROM students WHERE classroom_id = id) as jml_siswa
+            ")->get();
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
     }
 }

@@ -13,9 +13,9 @@ class ClassroomTable extends Migration
      */
     public function up()
     {
-        Schema::create('classroom', function (Blueprint $table) {
+        Schema::create('classrooms', function (Blueprint $table) {
             $table->char("id", 150)->primary();
-            $table->string("program_study_name", 100);
+            $table->string("program_study_id", 100);
             $table->string("classname", 200);
         });
     }

@@ -46,7 +46,7 @@ Jurusan
                                                         <i class="fa fa-university"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control upper"
+                                                <input type="text" class="form-control upper insert-kode-prodi"
                                                     placeholder="masukan kode jurusan">
                                             </div>
                                         </div>
@@ -58,8 +58,9 @@ Jurusan
                                                         <i class="fa fa-home"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control upper"
+                                                <input type="text" class="form-control upper insert-nama-prodi"
                                                     placeholder="masukan nama jurusan">
+                                                    <input type="hidden" class="token" value="{{ csrf_token() }}">
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +72,7 @@ Jurusan
                                                 data-dismiss="modal">Close</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" style="width: 100%" class="btn btn-primary"><i
+                                            <button type="button" style="width: 100%" class="btn btn-primary btn-tambah"><i
                                                     class="fa fa-plus"></i>Tambah Data</button>
                                         </div>
                                     </div>
@@ -117,6 +118,61 @@ Jurusan
                         </tr>
                     </tbody>
                 </table>
+                <div class="modal fade" id="modal-update">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-warning">
+                                <h4 class="modal-title">Update Data Jurusan</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">Kode Jurusan<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-university"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control upper update-kode-prodi"
+                                                placeholder="masukan kode jurusan">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="">Nama Jurusan<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-home"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control upper update-nama-prodi"
+                                                placeholder="masukan nama jurusan">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="row" style="width: 100%; text-align: center">
+                                    <div class="col-md-6">
+                                        <button type="button" style="width: 100%" class="btn btn-outline-warning"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" style="width: 100%" class="btn btn-warning btn-proses-update"><i
+                                                class="fa fa-plus" data-dismiss="modal"></i>Update Data</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                </div>
             </div>
             <!-- /.card-body -->
         </div>
@@ -125,21 +181,13 @@ Jurusan
 </div>
 @endsection
 @section('js')
-
+<script type="module" src="{{ asset("js/program_study/app.js") }}"></script>
 <script>
     $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
+    
   });
 </script>
 @endsection

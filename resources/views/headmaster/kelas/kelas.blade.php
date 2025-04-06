@@ -39,25 +39,23 @@ Kelas
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label for="">Kode Kelas<sup>*</sup></label>
+                                            <label for="">Nama Kelas<sup>*</sup></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         <i class="fa fa-university"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control upper"
-                                                    placeholder="masukan kode jurusan">
+                                                <input type="text" class="form-control upper insert-nama-kelas"
+                                                    placeholder="masukan nama kelas">
+                                                    <input type="hidden" class="token" value="{{ csrf_token() }}">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <label for="">Jurusan<sup>*</sup></label>
-                                            <select class="form-control select2bs4" style="width: 100%;">
+                                            <select class="form-control select2bs4 list-jurusan insert-kode-jurusan" style="width: 100%;">
                                                 <option selected="selected">Pilih Jurusan</option>
-                                                <option>RPL</option>
-                                                <option>TKJ</option>
-                                                <option>Metro</option>
-
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -69,8 +67,8 @@ Kelas
                                                 data-dismiss="modal">Close</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" style="width: 100%" class="btn btn-primary"><i
-                                                    class="fa fa-plus"></i>Tambah Data</button>
+                                            <button type="button" style="width: 100%" class="btn btn-primary btn-tambah"><i
+                                                   data-dismiss="modal" class="fa fa-plus"></i>Tambah Data</button>
                                         </div>
                                     </div>
 
@@ -86,7 +84,7 @@ Kelas
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3">
-                        <select class="form-control" style="position: absolute; z-index: 10;">
+                        <select class="form-control list-jurusan" style="position: absolute; z-index: 10;">
                             <option selected="selected">Pilih Jurusan</option>
                             <option>RPL</option>
                             <option>TKJ</option>
@@ -98,33 +96,68 @@ Kelas
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Kelas</th>
+                            <th>Kode Kelas</th>
+                            <th>Nama Kelas</th>
                             <th>Jurusan</th>
                             <th>Jml Siswa</th>
-                            <th>Status</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="kelas/002718212">XII RPL A</a></td>
-                            <td>Rekayasa Perangkat Lunak</td>
-                            <td>35</td>
-                            <td><span class="badge badge-success">Aktif</span></td>
-                            <td style="text-align: center">
-                                <button class="btn btn-outline-warning btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                    Update
-                                </button>
-                                <button class="btn btn-outline-danger btn-sm">
-                                    <i class="fa fa-trash"></i>
-                                    Hapus
-                                </button>
-                            </td>
-                        </tr>
+                        
                     </tbody>
                 </table>
+                <div class="modal fade" id="modal-update">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-warning">
+                                <h4 class="modal-title">Update Data Jurusan</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">Nama Kelas<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-university"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control upper update-nama-kelas"
+                                                placeholder="masukan nama kelas">
+                                                <input type="hidden" class="token" value="{{ csrf_token() }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="">Jurusan<sup>*</sup></label>
+                                        <select class="form-control list-jurusan update-kode-jurusan" style="width: 100%;">
+                                            <option selected="selected">Pilih Jurusan</option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="row" style="width: 100%; text-align: center">
+                                    <div class="col-md-6">
+                                        <button type="button" style="width: 100%" class="btn btn-outline-warning"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" style="width: 100%" class="btn btn-warning btn-proses-update"><i
+                                               data-dismiss="modal" class="fa fa-plus"></i>Update Data</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                </div>
             </div>
             <!-- /.card-body -->
         </div>
@@ -133,7 +166,7 @@ Kelas
 </div>
 @endsection
 @section('js')
-
+<script type="module" src="{{ asset("js/kelas/app.js") }}"></script>
 <script>
     $(function () {
         //Initialize Select2 Elements

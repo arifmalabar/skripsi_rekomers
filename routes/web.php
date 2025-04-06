@@ -37,16 +37,24 @@ Route::controller(TeacherController::class)->group(function() {
     Route::delete($root."guru/api/{id}", "deleteData");
 });
 Route::controller(ProgramStudyController::class)->group(function () {
-    $root = "/kakomli/";
-    Route::get($root."jurusan", "index");
+    $root = "/kakomli/jurusan/";
+    Route::get($root, "index");
+    Route::get($root."api", "getData");
+    Route::post($root."api", "insertData");
+    Route::put($root."api/{id}", "updateData");
+    Route::delete($root."api/{id}", "deleteData");
 });
 Route::controller(ClassroomController::class)->group(function(){
-    $root = "/kakomli/";
-    Route::get($root."kelas", "index");
+    $root = "/kakomli/kelas/";
+    Route::get($root, "index");
+    Route::get($root."api", "getData");
+    Route::post($root."api", "insertData");
+    Route::put($root."api/{id}", "updateData");
+    Route::delete($root."api/{id}", "deleteData");
 });
 Route::controller(StudentController::class)->group(function(){
     $root = "/kakomli/";
-    Route::get($root."kelas/{id}", "index");
+    //Route::get($root."detail_kelas/{id}", "index");
 });
 function routes($data)
 {
