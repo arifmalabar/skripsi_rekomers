@@ -27,7 +27,7 @@
         @endphp
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-header">Manufacturing</li>
+                <li class="nav-header">Main</li>
 
                 <li class="nav-item">
                     <a href="/kakomli/dashboard" class="nav-link {{ $nama == 'dashboard' ? 'active' : '' }}">
@@ -97,7 +97,7 @@
                         </li>
                     </ul>
                 </li>-->
-                <li class="nav-header">Reporting</li>
+                <li class="nav-header">Clustering</li>
                 <li class="nav-item">
                     <a href="/produk" class="nav-link {{ $nama == 'manufacturing' ? 'active' : '' }}">
                         <i class="fas nav-icon fa-users"></i>

@@ -136,10 +136,56 @@ Dashboard
           <h3 class="card-title">
             <i class="fa fa-book"></i>
             &nbsp;
-            Kurikulum
+            Semester
           </h3>
           <div class="card-tools">
-            <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i>Tambah Data</button>
+            <button class="btn btn-sm btn-success" data-target="#modal-lg" data-toggle="modal"><i class="fa fa-plus"></i>Tambah Data</button>
+            
+            <div class="modal fade" id="modal-lg">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h4 class="modal-title">Tambah Data Semester</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <label for="">Semester<sup>*</sup></label>
+                                  <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                              <i class="fa fa-address-card"></i>
+                                          </span>
+                                      </div>
+                                      <input type="text" class="form-control upper" id="insert-semester"
+                                          placeholder="masukan Masukan Semester">
+                                          <input type="hidden" class="token" value="{{ csrf_token() }}">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <div class="row" style="width: 100%; text-align: center">
+                              <div class="col-md-6">
+                                  <button type="button" style="width: 100%" class="btn btn-outline-primary"
+                                      data-dismiss="modal">Close</button>
+                              </div>
+                              <div class="col-md-6">
+                                  <button type="button" style="width: 100%" class="btn btn-primary btn-tambah"
+                                      data-dismiss="modal" data-dismiss="modal"><i class="fa fa-plus"></i>Tambah
+                                      Data</button>
+                              </div>
+                          </div>
+
+
+                      </div>
+                  </div>
+                  <!-- /.modal-content -->
+              </div>
+            </div>
           </div>
         </div>
         <!-- /.card-header -->
@@ -148,16 +194,14 @@ Dashboard
             <thead>
               <tr>
                 <th>No</th>
-                <th>Kurikulum</th>
-                <th>Tahun Kurikulum</th>
+                <th>Semester</th>
                 <th>Opsi</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>1</td>
-                <td>Merdeka</td>
-                <td>2024</td>
+                <td>Ganjil</td>
                 <td style="text-align: center">
                   <button class="btn btn-outline-warning btn-sm">
                     <i class="fa fa-edit"></i>
@@ -171,6 +215,51 @@ Dashboard
               </tr>
             </tbody>
           </table>
+          <div class="modal fade" id="modal-update-semester">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning">
+                        <h4 class="modal-title">Update Data Semester</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="">Semester<sup>*</sup></label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-address-card"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control upper" id="update-semester"
+                                        placeholder="masukan Masukan Semester">
+                                        <input type="hidden" class="token" value="{{ csrf_token() }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row" style="width: 100%; text-align: center">
+                            <div class="col-md-6">
+                                <button type="button" style="width: 100%" class="btn btn-outline-warning"
+                                    data-dismiss="modal">Close</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" style="width: 100%" class="btn btn-warning btn-proses-update"
+                                    data-dismiss="modal" data-dismiss="modal"><i class="fa fa-plus"></i>Update
+                                    Data</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+          </div>
         </div>
         <!-- /.card-body -->
       </div>
@@ -224,7 +313,7 @@ Dashboard
 </div>
 @endsection
 @section('js')
-
+<script type="module" src="{{ asset("js/semester/app.js") }}"></script>
 <script>
   $(function () {
         /* ChartJS

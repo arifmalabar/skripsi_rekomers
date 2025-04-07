@@ -40,7 +40,7 @@ Guru
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="">NIaP<sup>*</sup></label>
+                                            <label for="">NIP<sup>*</sup></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">

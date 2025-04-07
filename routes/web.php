@@ -7,6 +7,7 @@ use App\Models\Penghuni;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Headmaster\ProgramStudy\ProgramStudyController;
+use App\Http\Controllers\Headmaster\Semester\SemesterController;
 use App\Http\Controllers\Headmaster\Student\StudentController;
 
 /*
@@ -27,6 +28,14 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::controller(DashboardController::class)->group(function() {
     $root = "/kakomli/";
     Route::get($root."dashboard", "index")->name("dashboard");
+});
+Route::controller(SemesterController::class)->group(function(){
+    $root = "/kakomli/semester/";
+    Route::get($root, "index");
+    Route::get($root."api", "getData");
+    Route::post($root."api", "insertData");
+    Route::put($root."api/{id}", "updateData");
+    Route::delete($root."api/{id}", "deleteData");
 });
 Route::controller(TeacherController::class)->group(function() {
     $root = "/kakomli/";

@@ -14,7 +14,7 @@ class SemestersTable extends Migration
     public function up()
     {
         Schema::create('semesters', function (Blueprint $table) {
-            $table->integer("semester")->unsigned()->primary();
+            $table->char("semester", 200)->primary();
             $table->integer("year")->unsigned();
         });
     }
