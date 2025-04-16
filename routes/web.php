@@ -9,6 +9,7 @@ use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Headmaster\ProgramStudy\ProgramStudyController;
 use App\Http\Controllers\Headmaster\Semester\SemesterController;
 use App\Http\Controllers\Headmaster\Student\StudentController;
+use App\Http\Controllers\Headmaster\Year\YearController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,13 @@ Route::controller(StudentController::class)->group(function(){
     Route::post($root."siswa/api", "insertData");
     Route::put($root."siswa/api/{id}", "updateData");
     Route::delete($root."siswa/api/{id}", "deleteData");
+});
+Route::controller(YearController::class)->group(function () {
+    $root = "/kakomli/tahun_ajaran/";
+    Route::get($root."api", "getData");
+    Route::post($root."api", "insertData");
+    Route::put($root."api/{id}", "updateData");
+    Route::delete($root."api/{id}", "deleteData");
 });
 function routes($data)
 {

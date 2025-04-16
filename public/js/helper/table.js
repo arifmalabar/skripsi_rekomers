@@ -1,5 +1,6 @@
-export function showTables(dt, col) {
-    $("#example2").DataTable({
+export function showTables(dt, col, tbid = null) {
+    const id = tbid == null ? "#example2" : tbid;
+    $(id).DataTable({
         paging: true,
         lengthChange: false,
         searching: true,

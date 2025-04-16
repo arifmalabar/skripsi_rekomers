@@ -10,3 +10,4 @@ export const prodi = `/${kakomlipath}/jurusan/api`;
 export const kelas = `/${kakomlipath}/kelas/api`;
 export const semester = `/${kakomlipath}/semester/api`;
 export const siswa = `/${kakomlipath}/siswa/api`;
+export const tahun_ajaran = `/${kakomlipath}/tahun_ajaran/api`;

@@ -139,51 +139,52 @@ Dashboard
             Semester
           </h3>
           <div class="card-tools">
-            <button class="btn btn-sm btn-success" data-target="#modal-lg" data-toggle="modal"><i class="fa fa-plus"></i>Tambah Data</button>
-            
+            <button class="btn btn-sm btn-success" data-target="#modal-lg" data-toggle="modal"><i
+                class="fa fa-plus"></i>Tambah Data</button>
+
             <div class="modal fade" id="modal-lg">
               <div class="modal-dialog modal-lg modal-dialog-centered">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h4 class="modal-title">Tambah Data Semester</h4>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                          </button>
-                      </div>
-                      <div class="modal-body">
-                          <div class="row">
-                              <div class="col-md-12">
-                                  <label for="">Semester<sup>*</sup></label>
-                                  <div class="input-group mb-3">
-                                      <div class="input-group-prepend">
-                                          <span class="input-group-text">
-                                              <i class="fa fa-address-card"></i>
-                                          </span>
-                                      </div>
-                                      <input type="text" class="form-control upper" id="insert-semester"
-                                          placeholder="masukan Masukan Semester">
-                                          <input type="hidden" class="token" value="{{ csrf_token() }}">
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="modal-footer">
-                          <div class="row" style="width: 100%; text-align: center">
-                              <div class="col-md-6">
-                                  <button type="button" style="width: 100%" class="btn btn-outline-primary"
-                                      data-dismiss="modal">Close</button>
-                              </div>
-                              <div class="col-md-6">
-                                  <button type="button" style="width: 100%" class="btn btn-primary btn-tambah"
-                                      data-dismiss="modal" data-dismiss="modal"><i class="fa fa-plus"></i>Tambah
-                                      Data</button>
-                              </div>
-                          </div>
-
-
-                      </div>
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Tambah Data Semester</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
-                  <!-- /.modal-content -->
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label for="">Semester<sup>*</sup></label>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="fa fa-address-card"></i>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control upper" id="insert-semester"
+                            placeholder="masukan Masukan Semester">
+                          <input type="hidden" class="token" value="{{ csrf_token() }}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="row" style="width: 100%; text-align: center">
+                      <div class="col-md-6">
+                        <button type="button" style="width: 100%" class="btn btn-outline-primary"
+                          data-dismiss="modal">Close</button>
+                      </div>
+                      <div class="col-md-6">
+                        <button type="button" style="width: 100%" class="btn btn-primary btn-tambah"
+                          data-dismiss="modal" data-dismiss="modal"><i class="fa fa-plus"></i>Tambah
+                          Data</button>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+                <!-- /.modal-content -->
               </div>
             </div>
           </div>
@@ -217,47 +218,47 @@ Dashboard
           </table>
           <div class="modal fade" id="modal-update-semester">
             <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header bg-warning">
-                        <h4 class="modal-title">Update Data Semester</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label for="">Semester<sup>*</sup></label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-address-card"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" class="form-control upper" id="update-semester"
-                                        placeholder="masukan Masukan Semester">
-                                        <input type="hidden" class="token" value="{{ csrf_token() }}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="row" style="width: 100%; text-align: center">
-                            <div class="col-md-6">
-                                <button type="button" style="width: 100%" class="btn btn-outline-warning"
-                                    data-dismiss="modal">Close</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button type="button" style="width: 100%" class="btn btn-warning btn-proses-update"
-                                    data-dismiss="modal" data-dismiss="modal"><i class="fa fa-plus"></i>Update
-                                    Data</button>
-                            </div>
-                        </div>
-
-
-                    </div>
+              <div class="modal-content">
+                <div class="modal-header bg-warning">
+                  <h4 class="modal-title">Update Data Semester</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
-                <!-- /.modal-content -->
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="">Semester<sup>*</sup></label>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fa fa-address-card"></i>
+                          </span>
+                        </div>
+                        <input type="text" class="form-control upper" id="update-semester"
+                          placeholder="masukan Masukan Semester">
+                        <input type="hidden" class="token" value="{{ csrf_token() }}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="row" style="width: 100%; text-align: center">
+                    <div class="col-md-6">
+                      <button type="button" style="width: 100%" class="btn btn-outline-warning"
+                        data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" style="width: 100%" class="btn btn-warning btn-proses-update"
+                        data-dismiss="modal" data-dismiss="modal"><i class="fa fa-plus"></i>Update
+                        Data</button>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+              <!-- /.modal-content -->
             </div>
           </div>
         </div>
@@ -274,7 +275,67 @@ Dashboard
             Tahun Ajaran
           </h3>
           <div class="card-tools">
-            <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i>Tambah Data</button>
+            <button class="btn btn-sm btn-success" data-target="#modal-tambah-thajar" data-toggle="modal"><i
+                class="fa fa-plus"></i>Tambah Data</button>
+
+            <div class="modal fade" id="modal-tambah-thajar">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Tambah Data Tahun Ajaran</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label for="">Tahun<sup>*</sup></label>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="fa fa-calendar"></i>
+                            </span>
+                          </div>
+                          <input type="number" class="form-control upper" id="insert-tahun-ajar"
+                            placeholder="masukan Masukan Tahun Ajaran">
+                          <input type="hidden" class="token" value="{{ csrf_token() }}">
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <label for="">Periode Ajaran<sup>*</sup></label>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i class="fa fa-times"></i>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control upper" id="insert-periode"
+                            placeholder="masukan Masukan Periode Ajaran">
+                          <input type="hidden" class="token" value="{{ csrf_token() }}">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="row" style="width: 100%; text-align: center">
+                      <div class="col-md-6">
+                        <button type="button" style="width: 100%" class="btn btn-outline-primary"
+                          data-dismiss="modal">Close</button>
+                      </div>
+                      <div class="col-md-6">
+                        <button type="button" style="width: 100%" class="btn btn-primary btn-tambah-thajar"
+                          data-dismiss="modal" data-dismiss="modal"><i class="fa fa-plus"></i>Tambah
+                          Data</button>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+            </div>
           </div>
         </div>
         <!-- /.card-header -->
@@ -283,27 +344,74 @@ Dashboard
             <thead>
               <tr>
                 <th>No</th>
-                <th>Th Ajaran</th>
+                <th>Tahun</th>
+                <th>Periode Ajaran</th>
                 <th>Opsi</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>2024-2025</td>
-                <td style="text-align: center">
-                  <button class="btn btn-outline-warning btn-sm">
-                    <i class="fa fa-edit"></i>
-                    Update
-                  </button>
-                  <button class="btn btn-outline-danger btn-sm">
-                    <i class="fa fa-trash"></i>
-                    Hapus
-                  </button>
-                </td>
-              </tr>
+
             </tbody>
           </table>
+
+          <div class="modal fade" id="modal-update-thajar">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header bg-warning">
+                  <h4 class="modal-title">Update Data Tahun Ajaran</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="">Tahun<sup>*</sup></label>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fa fa-calendar"></i>
+                          </span>
+                        </div>
+                        <input type="number" class="form-control upper" id="update-tahun-ajar"
+                          placeholder="masukan Masukan Tahun Ajaran">
+                        <input type="hidden" class="token" value="{{ csrf_token() }}">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="">Periode Ajaran<sup>*</sup></label>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fa fa-times"></i>
+                          </span>
+                        </div>
+                        <input type="text" class="form-control upper" id="update-periode"
+                          placeholder="masukan Masukan Periode Ajaran">
+                        <input type="hidden" class="token" value="{{ csrf_token() }}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="row" style="width: 100%; text-align: center">
+                    <div class="col-md-6">
+                      <button type="button" style="width: 100%" class="btn btn-outline-warning"
+                        data-dismiss="modal">Close</button>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" style="width: 100%" class="btn btn-warning btn-proses-update-thajar"
+                        data-dismiss="modal" data-dismiss="modal"><i class="fa fa-save"></i>Update
+                        Data</button>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+          </div>
         </div>
         <!-- /.card-body -->
       </div>
@@ -313,7 +421,8 @@ Dashboard
 </div>
 @endsection
 @section('js')
-<script type="module" src="{{ asset("js/semester/app.js") }}"></script>
+<script type="module" src="{{ asset('js/semester/app.js') }}"></script>
+<script type="module" src="{{ asset('js/tahun_ajaran/app.js') }}"></script>
 <script>
   $(function () {
         /* ChartJS
@@ -400,9 +509,6 @@ Dashboard
         })
     });
     $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
