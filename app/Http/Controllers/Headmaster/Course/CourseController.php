@@ -2,85 +2,19 @@
 
 namespace App\Http\Controllers\Headmaster\Course;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Headmaster\Course;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class CourseController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct() {
+        $this->model = new Course();
+    }
     public function index()
     {
-        //
+        return view("headmaster/course/course", ["nama" => "course"]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Headmaster\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Course $course)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Headmaster\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Course $course)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Headmaster\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Course $course)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Headmaster\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Course $course)
-    {
-        //
-    }
 }

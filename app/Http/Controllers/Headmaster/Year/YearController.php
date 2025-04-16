@@ -12,4 +12,8 @@ class YearController extends BaseController
     public function __construct() {
         $this->model = new Year();
     }
+    public function index()
+    {
+        
+    }
 }
