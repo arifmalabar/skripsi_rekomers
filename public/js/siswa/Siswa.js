@@ -1,4 +1,4 @@
-import { kelas, prodi } from "../config/end_point.js";
+import { siswa, prodi } from "../config/end_point.js";
 import { deleteData, getData, insertData, updateData } from "../fetch/fetch.js";
 import { clearField, clearFields } from "../helper/clear_form.js";
 import { validateEmptyField } from "../helper/form_validation.js";
@@ -16,8 +16,8 @@ export function init() {
     });
     $("body").on("click", ".btn-update", function () {
         lastid = $(this).data("id");
-        //$(".update-kode-prodi").val($(this).data("id"));
-        $(".update-nama-kelas").val($(this).data("namakelas"));
+        $(".update-nisn").val($(this).data("id"));
+        $(".update-nama").val($(this).data("nama"));
     });
     $(".btn-proses-update").on("click", function () {
         update();
@@ -36,7 +36,7 @@ async function showListJurusan() {
 async function get() {
     try {
         var no = 1;
-        var data = await getData(kelas);
+        var data = await getData(siswa);
         var columm = [
             {
                 data: null,
@@ -48,72 +48,73 @@ async function get() {
                 data: "id",
             },
             {
-                data: null,
-                render: function (p1, p2, p3) {
-                    return `<a href="/kakomli/detail_kelas/${p3.id}">${p3.classname}</href>`;
-                },
+                data: "name",
             },
             {
-                data: "nama_jurusan",
+                data: "gender",
             },
-            {
-                data: null,
-                render: function (p1, p2, p3) {
-                    return `<span class="badge badge-primary">${p3.jml_siswa}</span>`;
-                },
-            },
+
             {
                 data: null,
                 render: function (p1, p2, p3) {
                     return `
-                                <button class="btn btn-outline-warning btn-sm btn-update" data-id="${p3.id}" data-namakelas="${p3.classname}" data-kodejurusan="1"
-                                 data-toggle="modal" data-target="#modal-update"
-                                >
-                                        <i class="fa fa-edit"></i>
-                                        Update
-                                    </button>
-                                    <button class="btn btn-outline-danger btn-sm btn-hapus" data-id="${p3.id}">
-                                        <i class="fa fa-trash"></i>
-                                        Hapus
-                                    </button>
-                            `;
+                        <button class="btn btn-outline-warning btn-sm btn-update" data-id="${p3.id}" data-nama="${p3.name}" data-jk="${p3.gender}"
+                         data-toggle="modal" data-target="#modal-update"
+                        >
+                                <i class="fa fa-edit"></i>
+                                Update
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm btn-hapus" data-id="${p3.id}">
+                                <i class="fa fa-trash"></i>
+                                Hapus
+                            </button>
+                    `;
                 },
             },
         ];
+
         showTables(data, columm);
     } catch (error) {
         alert(error);
     }
 }
 async function insert() {
-    var nama = $(".insert-nama-kelas").val();
-    var kode_jurusan = $(".insert-kode-jurusan").val();
+    var nisn = $(".insert-nisn").val();
+    var nama = $(".insert-nama").val();
+    var gender = $(".insert-gender").val();
     var data = {
-        classname: nama,
-        program_study_id: kode_jurusan,
+        id: nisn,
+        name: nama,
+        gender: gender,
     };
     try {
+        validateEmptyField(nisn);
         validateEmptyField(nama);
-        validateEmptyField(kode_jurusan);
-        await insertData(kelas, data, token);
-        clearField(".insert-nama-kelas");
+        validateEmptyField(gender);
+        await insertData(siswa, data, token);
+        clearField(".insert-nisn");
+        clearField(".insert-nama");
         get();
     } catch (error) {
         alert(error);
     }
 }
 async function update() {
-    var nama = $(".update-nama-kelas").val();
-    var kode_jurusan = $(".update-kode-jurusan").val();
+    var nisn = $(".update-nisn").val();
+    var nama = $(".update-nama").val();
+    var gender = $(".update-gender").val();
     var data = {
-        classname: nama,
-        program_study_id: kode_jurusan,
+        id: nisn,
+        name: nama,
+        gender: gender,
     };
     try {
+        validateEmptyField(nisn);
         validateEmptyField(nama);
-        validateEmptyField(kode_jurusan);
-        await updateData(`${kelas}/${lastid}`, data, token);
-        clearField(".insert-nama-kelas");
+        validateEmptyField(gender);
+        await updateData(`${siswa}/${lastid}`, data, token);
+        clearField(".update-nisn");
+        clearField(".update-nama");
         get();
     } catch (error) {
         alert(error);
@@ -123,7 +124,7 @@ async function delData(id) {
     try {
         var opt = confirm("Apakah anda ingin mneghapus data?");
         if (opt) {
-            await deleteData(kelas, id, token);
+            await deleteData(siswa, id, token);
         } else {
             alert("batal hapus data");
         }

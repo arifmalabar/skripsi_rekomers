@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Headmaster\Student;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Headmaster\BaseHeadmasterController;
 use App\Models\Headmaster\Student;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends BaseHeadmasterController
 {
@@ -14,74 +16,27 @@ class StudentController extends BaseHeadmasterController
      *
      * @return \Illuminate\Http\Response
      */
+    private $classroom_id;
+    public function __construct() {
+        $this->model = new Student();
+        $this->classroom_id = Session::get("classroom_id");
+    }
     public function index($id)
     {
+        Session::put("classroom_id", $id);
         return view($this->path."/siswa/siswa", ["nama" => "kelas"]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getData()
     {
-        //
+        try {
+            return $this->model->where("classroom_id", "=", Session::get("classroom_id"))->get();
+        } catch (QueryException $th) {
+            return $th->getMessage();
+        }
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function insertData(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Headmaster\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Student $student)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Headmaster\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Student $student)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Headmaster\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Student $student)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Headmaster\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Student $student)
-    {
-        //
+        $request->merge(["classroom_id" => Session::get("classroom_id")]);
+        return parent::insertData($request);
     }
 }

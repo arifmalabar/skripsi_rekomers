@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Headmaster\Teacher\TeacherController;
+use App\Http\Controllers\Headmaster\Student\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,10 @@ Route::controller(TeacherController::class)->group(function() {
     Route::post($root."guru", "insertData");
     Route::put($root."guru/{id}", "updateData");
     Route::delete($root."guru/{id}", "deleteData");
+});
+Route::controller(StudentController::class)->group(function(){
+    $root = "/kakomli/";
+    Route::get($root."detail_kelas/{id}", "index");
+    Route::get($root."siswa/api", "getData");
+    Route::post($root."siswa/api", "insertData");
 });

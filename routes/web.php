@@ -63,7 +63,11 @@ Route::controller(ClassroomController::class)->group(function(){
 });
 Route::controller(StudentController::class)->group(function(){
     $root = "/kakomli/";
-    //Route::get($root."detail_kelas/{id}", "index");
+    Route::get($root."detail_kelas/{id}", "index");
+    Route::get($root."siswa/api", "getData");
+    Route::post($root."siswa/api", "insertData");
+    Route::put($root."siswa/api/{id}", "updateData");
+    Route::delete($root."siswa/api/{id}", "deleteData");
 });
 function routes($data)
 {

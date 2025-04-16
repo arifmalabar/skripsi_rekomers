@@ -9,3 +9,4 @@ export const delete_guru = `/${kakomlipath}/guru/api`;
 export const prodi = `/${kakomlipath}/jurusan/api`;
 export const kelas = `/${kakomlipath}/kelas/api`;
 export const semester = `/${kakomlipath}/semester/api`;
+export const siswa = `/${kakomlipath}/siswa/api`;

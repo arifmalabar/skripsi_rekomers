@@ -80,8 +80,8 @@ XII RPL D
                                                         <i class="fa fa-id-card"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control upper"
-                                                    placeholder="masukan kode jurusan">
+                                                <input type="text" class="form-control insert-nisn"
+                                                    placeholder="masukan NISN siswa">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -92,12 +92,18 @@ XII RPL D
                                                         <i class="fa fa-user"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control upper"
+                                                <input type="text" class="form-control upper insert-nama"
                                                     placeholder="masukan nama siswa">
+                                                <input type="hidden" class="token" value="{{ csrf_token() }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <label for="">Jenis Kelamin</label>
+                                            <select class="form-control insert-gender">
+                                                <option value="">Pilih gender</option>
+                                                <option value="pria">pria</option>
+                                                <option value="wanita">wanita</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -108,8 +114,9 @@ XII RPL D
                                                 data-dismiss="modal">Close</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" style="width: 100%" class="btn btn-primary"><i
-                                                    class="fa fa-plus"></i>Tambah Data</button>
+                                            <button type="button" style="width: 100%" class="btn btn-primary btn-tambah"
+                                                data-dismiss="modal"><i class="fa fa-plus"></i>Tambah
+                                                Data</button>
                                         </div>
                                     </div>
 
@@ -135,24 +142,76 @@ XII RPL D
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="kelas/002718212">002718055</a></td>
-                            <td>RIDHO ARIF WICAKSONO</td>
-                            <td><span class="badge badge-success">Aktif</span></td>
-                            <td style="text-align: center">
-                                <button class="btn btn-outline-warning btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                    Update
-                                </button>
-                                <button class="btn btn-outline-danger btn-sm">
-                                    <i class="fa fa-trash"></i>
-                                    Hapus
-                                </button>
-                            </td>
-                        </tr>
+
                     </tbody>
                 </table>
+                <div class="modal fade" id="modal-update">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-warning">
+                                <h4 class="modal-title">Update Data Siswa</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="">NISN<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-id-card"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control update-nisn"
+                                                placeholder="masukan NISN siswa">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="">Nama<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control upper update-nama"
+                                                placeholder="masukan nama siswa">
+                                            <input type="hidden" class="token" value="{{ csrf_token() }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="">Jenis Kelamin</label>
+                                        <select class="form-control update-gender">
+                                            <option value="">Pilih gender</option>
+                                            <option value="pria">pria</option>
+                                            <option value="wanita">wanita</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="row" style="width: 100%; text-align: center">
+                                    <div class="col-md-6">
+                                        <button type="button" style="width: 100%" class="btn btn-outline-warning"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" style="width: 100%"
+                                            class="btn btn-warning btn-proses-update" data-dismiss="modal"><i
+                                                class="fa fa-save"></i> Update
+                                            Data</button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                </div>
             </div>
             <!-- /.card-body -->
         </div>
@@ -161,7 +220,7 @@ XII RPL D
 </div>
 @endsection
 @section('js')
-
+<script type="module" src="{{ asset('js/siswa/app.js') }}"></script>
 <script>
     $(function () {
         //Initialize Select2 Elements
@@ -169,15 +228,7 @@ XII RPL D
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
+    
   });
 </script>
 @endsection

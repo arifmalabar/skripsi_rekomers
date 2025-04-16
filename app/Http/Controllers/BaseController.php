@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 abstract class BaseController extends Controller
@@ -26,7 +27,7 @@ abstract class BaseController extends Controller
         }
         try {
             return $this->model->insert($data);
-        } catch (\Throwable $th) {
+        } catch (QueryException $th) {
             return $this->showError($th->getMessage());
         }
     }
