@@ -3,7 +3,7 @@
 active
 @endsection
 @section('judul')
-Guru
+Mata Pelajaran
 @endsection
 @section('css')
 <style>
@@ -20,11 +20,10 @@ Guru
                 <h3 class="card-title">
                     <i class="fa fa-book"></i>
                     &nbsp;
-                    Data Guru
+                    Data Mata Pelajaran
                 </h3>
                 <div class="card-tools">
-                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-lg"><i
-                            class="fa fa-upload"></i> Upload Data Excel</button>
+
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-lg"><i
                             class="fa fa-plus"></i>Tambah Data</button>
 
@@ -32,7 +31,7 @@ Guru
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Tambah Data Guru</h4>
+                                    <h4 class="modal-title">Tambah Data Mapel</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -40,28 +39,56 @@ Guru
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="">NIP<sup>*</sup></label>
+                                            <label for="">Nama Mapel<sup>*</sup></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         <i class="fa fa-address-card"></i>
                                                     </span>
                                                 </div>
-                                                <input type="number" class="form-control" id="insert-nip"
-                                                    placeholder="masukan nip">
+                                                <input type="text" class="form-control upper" id="insert-nm-mapel"
+                                                    placeholder="Masukan Nama Mapel">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="">Nama<sup>*</sup></label>
+                                            <label for="">Semester<sup>*</sup></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
-                                                        <i class="fa fa-user"></i>
+                                                        <i class="fa fa-book"></i>
                                                     </span>
                                                 </div>
-                                                <input type="text" class="form-control" id="insert-nama"
-                                                    placeholder="masukan nama">
+                                                <select class="form-control cb-semester" id="insert-semester">
+                                                    <option value="">Pilih Smt</option>
+                                                </select>
                                                 <input type="hidden" value="{{ csrf_token() }}" class="token">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="">Tahun Ajaran<sup>*</sup></label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <select class="form-control cb-thajar" id="insert-thajar">
+                                                    <option value="">Pilih Th Ajaran</option>
+                                                </select>
+                                                <input type="hidden" value="{{ csrf_token() }}" class="token">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="">Kelas<sup>*</sup></label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                </div>
+                                                <select class="form-control cb-kelas" id="insert-kelas">
+                                                    <option value="">Pilih Kelas</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -93,22 +120,13 @@ Guru
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NIP</th>
-                            <th>Nama</th>
-                            <th>Status</th>
+                            <th>Nama Mapel</th>
+                            <th>Kelas</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>19988299121212001</td>
-                            <td>Dian Puspita Yulianti S.pd</td>
-                            <td><span class="badge badge-success">Aktif</span></td>
-                            <td style="text-align: center">
 
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
 
@@ -123,29 +141,57 @@ Guru
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <label for="">NIP<sup>*</sup></label>
+                                    <div class="col-md-6">
+                                        <label for="">Nama Mapel<sup>*</sup></label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fa fa-address-card"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control update-nip"
-                                                placeholder="masukan nip">
+                                            <input type="text" class="form-control upper" id="insert-nm-mapel"
+                                                placeholder="Masukan Nama Mapel">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <label for="">Nama<sup>*</sup></label>
+                                    <div class="col-md-6">
+                                        <label for="">Semester<sup>*</sup></label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-user"></i>
+                                                    <i class="fa fa-book"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control update-nama"
-                                                placeholder="masukan nama">
+                                            <select class="form-control cb-semester" id="insert-semester">
+                                                <option value="">Pilih Smt</option>
+                                            </select>
                                             <input type="hidden" value="{{ csrf_token() }}" class="token">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="">Tahun Ajaran<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+                                            <select class="form-control cb-thajar" id="insert-thajar">
+                                                <option value="">Pilih Th Ajaran</option>
+                                            </select>
+                                            <input type="hidden" value="{{ csrf_token() }}" class="token">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="">Kelas<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-home"></i>
+                                                </span>
+                                            </div>
+                                            <select class="form-control select2bs4 cb-kelas" id="insert-kelas">
+                                                <option value="">Pilih Kelas</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +224,7 @@ Guru
 </div>
 @endsection
 @section('js')
-<script type="module" src="{{ asset('js/guru/app.js') }}"></script>
+<script type="module" src="{{ asset('js/course/app.js') }}"></script>
 <script>
     $(function () {
         /* ChartJS

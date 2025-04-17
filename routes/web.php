@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Headmaster\Classroom\ClassroomController;
+use App\Http\Controllers\Headmaster\Course\CourseController;
 use App\Http\Controllers\Headmaster\Dashboard\DashboardController;
 use App\Http\Controllers\Headmaster\Teacher\TeacherController;
 use App\Models\Penghuni;
@@ -77,7 +78,7 @@ Route::controller(YearController::class)->group(function () {
     Route::put($root."api/{id}", "updateData");
     Route::delete($root."api/{id}", "deleteData");
 });
-Route::controller(StudentController::class)->group(function(){
+Route::controller(CourseController::class)->group(function(){
     $root = "/kakomli/mata_pelajaran";
     Route::get($root, "index");
     Route::get($root."/api", "getData");

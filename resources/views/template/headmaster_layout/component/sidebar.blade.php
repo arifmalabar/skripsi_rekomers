@@ -56,7 +56,7 @@
 
                 <li class="nav-header">Mapel</li>
                 <li class="nav-item">
-                    <a href="/produk" class="nav-link {{ $nama == 'manufacturing' ? 'active' : '' }}">
+                    <a href="/kakomli/mata_pelajaran" class="nav-link {{ $nama == 'course' ? 'active' : '' }}">
                         <i class="fas nav-icon fa-users"></i>
                         <p>Mapel</p>
                     </a>
