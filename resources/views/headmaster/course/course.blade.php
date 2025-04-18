@@ -91,6 +91,19 @@ Mata Pelajaran
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <label for="">Guru<sup>*</sup></label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                </div>
+                                                <select class="form-control cb-guru" id="insert-guru">
+                                                    <option value="">Pilih Guru</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -149,7 +162,7 @@ Mata Pelajaran
                                                     <i class="fa fa-address-card"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control upper" id="insert-nm-mapel"
+                                            <input type="text" class="form-control upper" id="update-nm-mapel"
                                                 placeholder="Masukan Nama Mapel">
                                         </div>
                                     </div>
@@ -161,7 +174,7 @@ Mata Pelajaran
                                                     <i class="fa fa-book"></i>
                                                 </span>
                                             </div>
-                                            <select class="form-control cb-semester" id="insert-semester">
+                                            <select class="form-control cb-semester" id="update-semester">
                                                 <option value="">Pilih Smt</option>
                                             </select>
                                             <input type="hidden" value="{{ csrf_token() }}" class="token">
@@ -175,7 +188,7 @@ Mata Pelajaran
                                                     <i class="fa fa-calendar"></i>
                                                 </span>
                                             </div>
-                                            <select class="form-control cb-thajar" id="insert-thajar">
+                                            <select class="form-control cb-thajar" id="update-thajar">
                                                 <option value="">Pilih Th Ajaran</option>
                                             </select>
                                             <input type="hidden" value="{{ csrf_token() }}" class="token">
@@ -189,8 +202,21 @@ Mata Pelajaran
                                                     <i class="fa fa-home"></i>
                                                 </span>
                                             </div>
-                                            <select class="form-control select2bs4 cb-kelas" id="insert-kelas">
+                                            <select class="form-control cb-kelas" id="update-kelas">
                                                 <option value="">Pilih Kelas</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="">Guru<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-home"></i>
+                                                </span>
+                                            </div>
+                                            <select class="form-control cb-guru" id="update-guru">
+                                                <option value="">Pilih Guru</option>
                                             </select>
                                         </div>
                                     </div>
@@ -205,7 +231,7 @@ Mata Pelajaran
                                     <div class="col-md-6">
                                         <button type="button" style="width: 100%"
                                             class="btn btn-warning btn-proses-update" data-dismiss="modal"><i
-                                                class="fa fa-plus"></i>Update
+                                                class="fa fa-save"></i>Update
                                             Data</button>
                                     </div>
                                 </div>

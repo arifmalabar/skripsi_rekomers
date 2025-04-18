@@ -2,6 +2,7 @@ import { mapel, semester } from "../config/end_point.js";
 import { deleteData, getData, insertData, updateData } from "../fetch/fetch.js";
 import { clearField, clearFields } from "../helper/clear_form.js";
 import {
+    setCbGuru,
     setCbKelas,
     setCbSemester,
     setCbThAjar,
@@ -16,6 +17,7 @@ export function init() {
     setCbSemester();
     setCbThAjar();
     setCbKelas();
+    setCbGuru();
     $(".btn-tambah").click(function (e) {
         insert();
     });
@@ -24,8 +26,7 @@ export function init() {
     });
     $("body").on("click", ".btn-update", function () {
         lastid = $(this).data("id");
-        $(".update-nip").val($(this).data("id"));
-        $(".update-nama").val($(this).data("nama"));
+        $("#update-nm-mapel").val($(this).data("nama"));
     });
     $(".btn-proses-update").on("click", function () {
         update();
@@ -56,7 +57,7 @@ async function get() {
                 data: null,
                 render: function (p1, p2, p3) {
                     return `
-                        <button class="btn btn-outline-warning btn-sm btn-update" data-id="${p3.id}" data-nama="${p3.course_name}"
+                        <button class="btn btn-outline-warning btn-sm btn-update" data-id="${p3.id}" data-nama="${p3.course_name}" data-semester="${p3.semester_id}" data-year="${p3.year}" data-classroom="${p3.classroom_id}" data-teacher="${p3.teacher_id}"
                          data-toggle="modal" data-target="#modal-update"
                         >
                                 <i class="fa fa-edit"></i>
@@ -76,35 +77,64 @@ async function get() {
     }
 }
 async function insert() {
-    var nama = $("#insert-nama").val();
-    var nip = $("#insert-nip").val();
+    var nama = $("#insert-nm-mapel").val();
+    var semester = $("#insert-semester").val();
+    var th_ajar = $("#insert-thajar").val();
+    var kelas = $("#insert-kelas").val();
+    var guru = $("#insert-guru").val();
     var data = {
-        id: nip,
-        name: nama,
+        course_name: nama,
+        teacher_id: guru,
+        year: th_ajar,
+        classroom_id: kelas,
+        semester_id: semester,
     };
     try {
         validateEmptyField(nama);
-        validateEmptyField(nip);
-        await insertData(insert_guru, data, token);
-        clearFields(["#insert-nama", "#insert-nip"]);
+        validateEmptyField(guru);
+        validateEmptyField(th_ajar);
+        validateEmptyField(kelas);
+        validateEmptyField(semester);
+        await insertData(mapel, data, token);
+        clearFields([
+            "#insert-nm-mapel",
+            "#insert-semester",
+            "#insert-thajar",
+            "#insert-kelas",
+            "#insert-guru",
+        ]);
         get();
     } catch (error) {
         alert(error);
     }
 }
 async function update() {
-    var nama = $(".update-nama").val();
-    var nip = $(".update-nip").val();
+    var nama = $("#update-nm-mapel").val();
+    var semester = $("#update-semester").val();
+    var th_ajar = $("#update-thajar").val();
+    var kelas = $("#update-kelas").val();
+    var guru = $("#update-guru").val();
     var data = {
-        id: nip,
-        name: nama,
+        course_name: nama,
+        teacher_id: guru,
+        year: th_ajar,
+        classroom_id: kelas,
+        semester_id: semester,
     };
     try {
-        //alert(`${update_guru}/${lastid}`);
         validateEmptyField(nama);
-        validateEmptyField(nip);
-        await updateData(`${update_guru}/${lastid}`, data, token);
-        clearFields([".update-nama", ".update-nip"]);
+        validateEmptyField(guru);
+        validateEmptyField(th_ajar);
+        validateEmptyField(kelas);
+        validateEmptyField(semester);
+        await updateData(`${mapel}/${lastid}`, data, token);
+        clearFields([
+            "#update-nm-mapel",
+            "#update-semester",
+            "#update-thajar",
+            "#update-kelas",
+            "#update-guru",
+        ]);
         get();
     } catch (error) {
         alert(error);
@@ -114,7 +144,7 @@ async function deleteDataGuru(id) {
     try {
         var opt = confirm("Apakah anda ingin mneghapus data?");
         if (opt) {
-            await deleteData(delete_guru, id, token);
+            await deleteData(mapel, id, token);
         } else {
             alert("batal hapus data");
         }

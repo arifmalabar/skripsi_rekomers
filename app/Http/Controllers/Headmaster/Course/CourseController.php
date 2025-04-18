@@ -12,6 +12,7 @@ class CourseController extends BaseController
 {
     public function __construct() {
         $this->model = new Course();
+        $this->kode = "C";
     }
     public function index()
     {
@@ -22,10 +23,10 @@ class CourseController extends BaseController
         try {
             return $this->model->selectRaw("
                 id,
-                (SELECT id FROM semesters WHERE id = courses.semester_id) as semester,
-                (SELECT id FROM teachers WHERE id = courses.teacher_id) as guru,
-                (SELECT years.year FROM years WHERE id = courses.year) as tahun_ajar,
-                (SELECT id FROM classrooms WHERE id = courses.classroom_id) as kelas,
+                (SELECT semester FROM semesters WHERE semester = courses.semester_id) as semester,
+                (SELECT name FROM teachers WHERE id = courses.teacher_id) as guru,
+                (SELECT years.year FROM years WHERE years.year = courses.year) as tahun_ajar,
+                (SELECT classname FROM classrooms WHERE id = courses.classroom_id) as kelas,
                 course_name"
             )->get();
         } catch (QueryException $th) {
