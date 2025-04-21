@@ -18,6 +18,14 @@ abstract class BaseController extends Controller
             return $this->showError($th->getMessage());
         }
     }
+    public function getDataByActivate()
+    {
+        try {
+            return $this->model->where("status", "=","aktif")->get();
+        } catch (QueryException $th) {
+            return $this->showError($th->getMessage());
+        }
+    }
     public function insertData(Request $request)
     {
         $data = $request->all();
@@ -51,20 +59,38 @@ abstract class BaseController extends Controller
             return $this->showError($th->getMessage());
         }
     }
-    public function activateData($id)
+    public function activateData($id, $collname = null)
     {
         //$data = $request->all();
         try {
-            $field = $this->model->findOrFail($id);
-            if($field->status){
-                $field->status = false;
+            if($collname == null) {
+                $this->ifNullableCollname($id);
             } else {
-                $field->status = true;
+                $this->ifNotNullableCollname($id, $collname);
             }
-            $field->save();
-        } catch (\Throwable $th) {
+        } catch (QueryException $th) {
             return $this->showError($th->getMessage());
         }
+    }
+    private function ifNullableCollname($id)
+    {
+        $field = $this->model->findOrFail($id);
+        if($field->status){
+            $field->status = false;
+        } else {
+            $field->status = true;
+        }
+        $field->save();
+    }
+    private function ifNotNullableCollname($id, $colname)
+    {
+        $field = $this->model->findOrFail($id);
+        if($field[$colname]){
+            $field[$colname] = false;
+        } else {
+            $field[$colname] = true;
+        }
+        $field->save();
     }
     public function deleteData($id)
     {
