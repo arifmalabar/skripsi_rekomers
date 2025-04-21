@@ -61,18 +61,17 @@ abstract class BaseController extends Controller
     }
     public function activateData($id, $collname = null)
     {
-        //$data = $request->all();
         try {
             if($collname == null) {
-                $this->ifNullableCollname($id);
+                $this->setStateByStatus($id);
             } else {
-                $this->ifNotNullableCollname($id, $collname);
+                $this->setStateByCustomColname($id, $collname);
             }
         } catch (QueryException $th) {
             return $this->showError($th->getMessage());
         }
     }
-    private function ifNullableCollname($id)
+    private function setStateByStatus($id) 
     {
         $field = $this->model->findOrFail($id);
         if($field->status){
@@ -80,9 +79,9 @@ abstract class BaseController extends Controller
         } else {
             $field->status = true;
         }
-        $field->save();
+        return $field->save();
     }
-    private function ifNotNullableCollname($id, $colname)
+    private function setStateByCustomColname($id, $colname)
     {
         $field = $this->model->findOrFail($id);
         if($field[$colname]){
@@ -90,7 +89,7 @@ abstract class BaseController extends Controller
         } else {
             $field[$colname] = true;
         }
-        $field->save();
+        return $field->save();
     }
     public function deleteData($id)
     {
