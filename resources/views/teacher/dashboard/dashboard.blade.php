@@ -1,0 +1,9 @@
+@extends('template.teacher_layout.layout')
+@section('status')
+active
+@endsection
+@section('judul')
+Dashboard
+@endsection
+@section('content')
+@endsection

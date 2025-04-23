@@ -15,15 +15,15 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
                 <img style="width: 30px; height: 30px;" src="{{ asset('assets/dist/img/user2-160x160.jpg') }}"
-                    class="img-circle elevation-1" alt="User Image">Welcome back,
+                    class="img-circle elevation-1" alt="User Image">Dian PY
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('profile') }}" class="dropdown-item logout-item">
+                <a href="#" class="dropdown-item logout-item">
                     <i class="fa-solid fa-user"></i> Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('logout') }}" class="dropdown-item logout-item">
+                <a href="#" class="dropdown-item logout-item">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </div>
