@@ -9,5 +9,6 @@ use Illuminate\Http\Request;
 class BaseTeacherController extends BaseController
 {
     public $path = "teacher/";
+    protected $user = "";
     
 }

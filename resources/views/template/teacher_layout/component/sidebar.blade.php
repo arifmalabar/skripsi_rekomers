@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/kakomli/dashboard" class="nav-link {{ $nama == 'penilaian' ? 'active' : '' }}">
+                    <a href="/teacher/grades" class="nav-link {{ $nama == 'penilaian' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon fas fa-pen"></i>
                         <p>Penilaian</p>
                     </a>

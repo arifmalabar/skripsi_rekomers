@@ -96,6 +96,10 @@ Route::controller(TeacherDashboardController::class)->group(function() {
 Route::controller(GradingController::class)->group(function () {
     $root = "/teacher/grades";
     Route::get($root, "index");
+    Route::get($root."/api", "getData");
+    Route::post($root."/api", "insertData");
+    Route::put($root."/api/{id}", "updateData");
+    Route::delete($root."/api/{id}", "deleteData");
 });
 function routes($data)
 {
