@@ -4,6 +4,7 @@ use App\Http\Controllers\Headmaster\Classroom\ClassroomController;
 use App\Http\Controllers\Headmaster\Course\CourseController;
 use App\Http\Controllers\Headmaster\Dashboard\DashboardController;
 use App\Http\Controllers\Headmaster\Teacher\TeacherController;
+use App\Http\Controllers\Teacher\Grading\GradingController;
 use App\Models\Penghuni;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login\LoginController;
@@ -90,6 +91,10 @@ Route::controller(CourseController::class)->group(function(){
 
 Route::controller(TeacherDashboardController::class)->group(function() {
     $root = "/teacher/dashboard";
+    Route::get($root, "index");
+});
+Route::controller(GradingController::class)->group(function () {
+    $root = "/teacher/grades";
     Route::get($root, "index");
 });
 function routes($data)

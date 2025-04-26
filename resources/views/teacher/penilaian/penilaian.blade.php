@@ -1,0 +1,9 @@
+@extends('template.teacher_layout.layout')
+@section('status')
+active
+@endsection
+@section('judul')
+Penilaian
+@endsection
+@section('content')
+@endsection
