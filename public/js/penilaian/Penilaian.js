@@ -111,8 +111,8 @@ async function insert() {
         await insertData(nilai, data, token).then((e) => {
             console.log(e);
         });
-        //clearFields(["#insert-nama", "#insert-nip"]);
-        //get();
+        clearFields(["#insert-mapel", "#insert-thajaran", "#insert-semester"]);
+        get();
     } catch (error) {
         alert(error);
     }

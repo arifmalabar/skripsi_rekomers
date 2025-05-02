@@ -67,29 +67,7 @@ class GradingController extends BaseTeacherController
                     grades.year = ".$data["tahun"]." AND 
                     grades.semester = '".$data["semester"]."'
         ");
-        /*$result = DB::select("
-                SELECT 
-                    courses.id as course_id,
-                    years.year as year,
-                    students.id as student_id,
-                    semesters.semester as semester
-                FROM 
-                    courses, years, students, semesters
-                WHERE 
-                    students.classroom_id = 'K001'
-                EXCEPT
-                select 
-                    grades.course_id,
-                    grades.year,
-                    grades.student_id,
-                    grades.semester
-                FROM 
-                    grades
-                WHERE 
-                    grades.course_id = 'C001' AND 
-                    grades.year = 2025 AND 
-                    grades.semester = 'GANJIL'
-        ");*/
+        
             return $result;
         } catch (QueryException $th) {
             throw new QueryException($th->getMessage());
@@ -97,8 +75,26 @@ class GradingController extends BaseTeacherController
     }
     public function insertData(Request $request)
     {
-        $data = $this->getUngradedStudent($request->all());
-        //insert data
-        return $data;
+        try {
+            $data = $this->getUngradedStudent($request->all());
+            $ready_toinsert = [];
+            foreach ($data as $key) {
+                $ready_toinsert[] = [
+                    "course_id" => $key->course_id,
+                    "year" => $key->year,
+                    "semester" => $key->semester,
+                    "student_id" => $key->student_id,
+                    "assignment" => 0.0,
+                    "project" => 0.0,
+                    "exams" => 0.0,
+                    "attendance_presence" => 0.0
+                ];
+            }
+            $this->model->insert($ready_toinsert);
+            //insert data
+            return response()->json(["status" => "success"], 200);
+        } catch (QueryException $th) {
+            return $this->showError($th->getMessage());
+        }
     }
 }
