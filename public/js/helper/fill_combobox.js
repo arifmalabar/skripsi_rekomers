@@ -1,6 +1,7 @@
 import {
     get_guru,
     kelas,
+    mapel,
     semester,
     tahun_ajaran,
 } from "../config/end_point.js";
@@ -42,4 +43,12 @@ export async function setCbGuru() {
         list += `<option value="${element.id}">${element.name}</option>`;
     });
     $(".cb-guru").html(list);
+}
+export async function setCbMapel() {
+    const data = await getData(mapel);
+    var list = `<option value="">Pilih Mapel</option>`;
+    data.forEach((element) => {
+        list += `<option value="${element.id}">${element.course_name}</option>`;
+    });
+    $(".cb-mapel").html(list);
 }

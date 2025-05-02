@@ -13,6 +13,7 @@ use App\Http\Controllers\Headmaster\Semester\SemesterController;
 use App\Http\Controllers\Headmaster\Student\StudentController;
 use App\Http\Controllers\Headmaster\Year\YearController;
 use App\Http\Controllers\Teacher\Dashboard\DashboardController as TeacherDashboardController;
+use App\Http\Controllers\Teacher\Grading\GradingDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +101,11 @@ Route::controller(GradingController::class)->group(function () {
     Route::post($root."/api", "insertData");
     Route::put($root."/api/{id}", "updateData");
     Route::delete($root."/api/{id}", "deleteData");
+});
+Route::controller(GradingDetailController::class)->group(function() {
+    $root = "/teacher/grades_detail";
+    Route::post($root, "index");
+    Route::get($root."/api", "insert");
 });
 function routes($data)
 {

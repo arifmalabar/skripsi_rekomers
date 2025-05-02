@@ -38,8 +38,8 @@ Penilaian
                                                         <i class="fa fa-address-card"></i>
                                                     </span>
                                                 </div>
-                                                <select name="" id="insert-mapel" class="form-control">
-                                                    <option value="">Pilih Mapel</option>
+                                                <select name="" id="insert-mapel" class="form-control cb-mapel">
+                                                    <option value="">Pilih asMapel</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -51,7 +51,7 @@ Penilaian
                                                         <i class="fa fa-calendar"></i>
                                                     </span>
                                                 </div>
-                                                <select name="" id="insert-thajaran" class="form-control">
+                                                <select name="" id="insert-thajaran" class="form-control cb-thajar">
                                                     <option value="">Pilih Tahun Ajaran</option>
                                                 </select>
                                                 <input type="hidden" value="{{ csrf_token() }}" class="token">
@@ -65,7 +65,7 @@ Penilaian
                                                         <i class="fa fa-book"></i>
                                                     </span>
                                                 </div>
-                                                <select name="" id="insert-mapel" class="form-control">
+                                                <select name="" id="insert-semester" class="form-control cb-semester">
                                                     <option value="">Pilih Semester</option>
                                                 </select>
                                                 <input type="hidden" value="{{ csrf_token() }}" class="token">

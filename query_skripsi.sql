@@ -15,12 +15,42 @@ SELECT
     (SELECT COUNT(*) FROM students WHERE classroom_id = id) as jml_siswa
 FROM classrooms;
 
+-- dihalaman nilai
 
 SELECT 
-	courses.id,
-	years.year,
-    students.id,
-    semesters.semester
+	(SELECT courses.classroom_id FROM courses WHERE courses.id = grades.course_id) as id_kels,
+	grades.course_id as id_mapel,
+	(SELECT course_name FROM courses WHERE courses.id = grades.course_id) AS nama_mapel,
+    grades.year as tahun,
+	(SELECT academic_year FROM years WHERE years.year = grades.year) as tahun_ajar,
+	semester
+FROM grades
+GROUP BY 
+	id_kelas,
+	course_id, 
+    year, 
+    semester
+;
+
+
+-- di halaman nilai siswa 
+SELECT 
+	(SELECT course_name FROM courses WHERE courses.id = grades.course_id) AS nama_mapel,
+                (SELECT academic_year FROM years WHERE years.year = grades.year) as tahun,
+                (SELECT name FROM students WHERE students.id = grades.student_id) as nama_siswa,
+                semester,
+                assignment,
+                project,
+                exams,
+                attendance_presence
+FROM grades;
+
+-- insert mata pelajaran
+SELECT 
+	courses.id as course_id,
+	years.year as year,
+    students.id as student_id,
+    semesters.semester as semester
 FROM 
 	courses, years, students, semesters
 WHERE 
