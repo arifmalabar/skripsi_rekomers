@@ -56,10 +56,10 @@ class GradingController extends BaseTeacherController
                     students.classroom_id = '".$kelas->classroom_id."'
                 EXCEPT
                 SELECT 
-                    grades.course_id,
-                    grades.year,
-                    grades.student_id,
-                    grades.semester
+                    grades.course_id as course_id,
+                    grades.year as year,
+                    grades.student_id as student_id,
+                    grades.semester as semester
                 FROM 
                     grades
                 WHERE 
@@ -79,7 +79,7 @@ class GradingController extends BaseTeacherController
             $data = $this->getUngradedStudent($request->all());
             $ready_toinsert = [];
             foreach ($data as $key) {
-                $ready_toinsert[] = [
+                $item_data = [
                     "course_id" => $key->course_id,
                     "year" => $key->year,
                     "semester" => $key->semester,
@@ -89,10 +89,11 @@ class GradingController extends BaseTeacherController
                     "exams" => 0.0,
                     "attendance_presence" => 0.0
                 ];
+                array_push($ready_toinsert, $item_data);
             }
-            $this->model->insert($ready_toinsert);
+            //$this->model->insert($data);
             //insert data
-            return response()->json(["status" => "success"], 200);
+            return response()->json(["data" => $data], 200);
         } catch (QueryException $th) {
             return $this->showError($th->getMessage());
         }

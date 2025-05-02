@@ -54,7 +54,7 @@ SELECT
 FROM 
 	courses, years, students, semesters
 WHERE 
-	students.classroom_id = 'K002' -- ini dari form 
+	students.classroom_id = 'K001' -- ini dari form 
 EXCEPT
 select 
 	grades.course_id,
@@ -64,7 +64,7 @@ select
 FROM 
 	grades
 WHERE 
-	grades.course_id = 'C001' AND -- ini dari form
+	grades.course_id = 'C003' AND -- ini dari form
     grades.year = 2025 AND -- ini dari form
-    grades.semester = 'GANJIL' -- ini dari form
+    grades.semester = 'GANJIL' -- ini dari form 
 ;
