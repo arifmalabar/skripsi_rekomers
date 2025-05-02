@@ -43,29 +43,34 @@ class GradingController extends BaseTeacherController
     private function getUngradedStudent($data)
     {
         try {
-            $kelas = Course::where("id", "=", $data["id_mapel"])->first();
+            //$kelas = Course::where("id", "=", $data["id_mapel"])->first();
             $result = DB::select("
-                SELECT 
-                    courses.id as course_id,
-                    years.year as year,
-                    students.id as student_id,
-                    semesters.semester as semester
-                FROM 
-                    courses, years, students, semesters
-                WHERE 
-                    students.classroom_id = '".$kelas->classroom_id."'
-                EXCEPT
-                SELECT 
-                    grades.course_id as course_id,
-                    grades.year as year,
-                    grades.student_id as student_id,
-                    grades.semester as semester
-                FROM 
-                    grades
-                WHERE 
-                    grades.course_id = '".$data["id_mapel"]."' AND 
-                    grades.year = ".$data["tahun"]." AND 
-                    grades.semester = '".$data["semester"]."'
+            SELECT 
+                courses.id as course_id,
+                courses.year as year,
+                students.id as students_id,
+                courses.semester_id as semester
+            FROM students
+            JOIN 
+                classrooms 
+            ON 
+                classrooms.id = students.classroom_id
+            JOIN
+                courses
+            ON
+                courses.classroom_id = classrooms.id
+            WHERE 
+                courses.id = '".$data["id_mapel"]."' AND -- ini dari form
+                courses.year = ".$data["tahun"]." AND -- ini dari form
+                courses.semester_id = '".$data["semester"]."' -- ini dari form 
+            EXCEPT 
+            select 
+                grades.course_id,
+                grades.year,
+                grades.student_id,
+                grades.semester
+            FROM 
+                grades
         ");
         
             return $result;
@@ -83,7 +88,7 @@ class GradingController extends BaseTeacherController
                     "course_id" => $key->course_id,
                     "year" => $key->year,
                     "semester" => $key->semester,
-                    "student_id" => $key->student_id,
+                    "student_id" => $key->students_id,
                     "assignment" => 0.0,
                     "project" => 0.0,
                     "exams" => 0.0,
@@ -91,9 +96,9 @@ class GradingController extends BaseTeacherController
                 ];
                 array_push($ready_toinsert, $item_data);
             }
-            //$this->model->insert($data);
+            $this->model->insert($ready_toinsert);
             //insert data
-            return response()->json(["data" => $data], 200);
+            return response()->json(["status" => "success"], 200);
         } catch (QueryException $th) {
             return $this->showError($th->getMessage());
         }

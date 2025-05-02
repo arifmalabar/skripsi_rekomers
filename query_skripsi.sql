@@ -54,7 +54,7 @@ SELECT
 FROM 
 	courses, years, students, semesters
 WHERE 
-	students.classroom_id = 'K001' -- ini dari form 
+	students.classroom_id = 'K001'; -- ini dari form 
 EXCEPT
 select 
 	grades.course_id,
@@ -67,4 +67,40 @@ WHERE
 	grades.course_id = 'C003' AND -- ini dari form
     grades.year = 2025 AND -- ini dari form
     grades.semester = 'GANJIL' -- ini dari form 
+;
+
+SELECT 
+	(SELECT classrooms.id FROM classrooms WHERE classrooms.id = students.classroom_id) as kelas,
+    (SELECT courses.course_name FROM courses WHERE courses.classroom_id = students.classroom_id) as kelas,
+    courses.year, 
+    courses.semester_id
+FROM students;
+
+-- coba nek berhasil
+SELECT 
+	courses.id as course_id,
+    courses.year as year,
+    students.id as students_id,
+    courses.semester_id as semester
+FROM students
+JOIN 
+	classrooms 
+ON 
+	classrooms.id = students.classroom_id
+JOIN
+	courses
+ON
+	courses.classroom_id = classrooms.id
+WHERE 
+	courses.id = 'C001' AND -- ini dari form
+    courses.year = 2021 AND -- ini dari form
+    courses.semester_id = 'GANJIL' -- ini dari form 
+EXCEPT
+SELECT 
+	grades.course_id,
+	grades.year,
+    grades.student_id,
+    grades.semester
+FROM 
+	grades
 ;
