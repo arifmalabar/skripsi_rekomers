@@ -8,6 +8,7 @@ use App\Models\Headmaster\Classroom;
 use App\Models\Headmaster\Course;
 use App\Models\Teacher\Grade;
 use Doctrine\DBAL\Query\QueryException;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -47,7 +48,6 @@ class GradingController extends BaseTeacherController
             $result = DB::select("
             SELECT 
                 courses.id as course_id,
-                courses.year as year,
                 students.id as students_id,
                 courses.semester_id as semester
             FROM students
@@ -60,17 +60,18 @@ class GradingController extends BaseTeacherController
             ON
                 courses.classroom_id = classrooms.id
             WHERE 
-                courses.id = '".$data["id_mapel"]."' AND -- ini dari form
-                courses.year = ".$data["tahun"]." AND -- ini dari form
-                courses.semester_id = '".$data["semester"]."' -- ini dari form 
+                courses.id = '".$data["id_mapel"]."' 
             EXCEPT 
             select 
                 grades.course_id,
-                grades.year,
                 grades.student_id,
                 grades.semester
             FROM 
                 grades
+            WHERE 
+                grades.course_id = '".$data["id_mapel"]."' AND 
+                grades.semester = '".$data["semester"]."' AND
+                grades.year = ".$data["tahun"]."
         ");
         
             return $result;
@@ -86,8 +87,8 @@ class GradingController extends BaseTeacherController
             foreach ($data as $key) {
                 $item_data = [
                     "course_id" => $key->course_id,
-                    "year" => $key->year,
-                    "semester" => $key->semester,
+                    "year" => $request->get("tahun"),
+                    "semester" => $request->get("semester"),
                     "student_id" => $key->students_id,
                     "assignment" => 0.0,
                     "project" => 0.0,
@@ -96,11 +97,18 @@ class GradingController extends BaseTeacherController
                 ];
                 array_push($ready_toinsert, $item_data);
             }
-            $this->model->insert($ready_toinsert);
+            if(count($ready_toinsert) != 0)
+            {
+                $this->model->insert($ready_toinsert);
+            } else {
+                throw new Exception("Gagal tambah nilai", 500);
+            }
             //insert data
             return response()->json(["status" => "success"], 200);
         } catch (QueryException $th) {
             return $this->showError($th->getMessage());
+        } catch (Exception $t){
+            return $this->showError($t->getMessage());
         }
     }
 }

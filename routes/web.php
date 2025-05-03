@@ -105,7 +105,7 @@ Route::controller(GradingController::class)->group(function () {
 Route::controller(GradingDetailController::class)->group(function() {
     $root = "/teacher/grades_detail";
     Route::post($root, "index");
-    Route::get($root."/api", "insert");
+    Route::get($root."/api", "getData");
 });
 function routes($data)
 {

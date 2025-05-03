@@ -36,12 +36,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/kakomli/dashboard" class="nav-link {{ $nama == 'kelola' ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon fas fa-folder-plus"></i>
-                        <p>Kelola Penilaian</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="/teacher/grades" class="nav-link {{ $nama == 'penilaian' ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon fas fa-pen"></i>
                         <p>Penilaian</p>

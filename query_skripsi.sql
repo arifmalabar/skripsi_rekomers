@@ -76,10 +76,16 @@ SELECT
     courses.semester_id
 FROM students;
 
+SELECT id, year, semester_id
+FROM courses
+EXCEPT
+SELECT course_id, year, semester
+FROM grades
+WHERE grades.year = 2020
+;
 -- coba nek berhasil
 SELECT 
 	courses.id as course_id,
-    courses.year as year,
     students.id as students_id,
     courses.semester_id as semester
 FROM students
@@ -92,15 +98,16 @@ JOIN
 ON
 	courses.classroom_id = classrooms.id
 WHERE 
-	courses.id = 'C001' AND -- ini dari form
-    courses.year = 2021 AND -- ini dari form
-    courses.semester_id = 'GANJIL' -- ini dari form 
+	courses.id = 'C001' -- ini dari form
 EXCEPT
 SELECT 
 	grades.course_id,
-	grades.year,
     grades.student_id,
     grades.semester
 FROM 
 	grades
+WHERE 
+    grades.course_id = 'C001' AND -- ini dari form
+    grades.semester = 'GENAP' AND -- ini dari form 
+    grades.year = 2021
 ;

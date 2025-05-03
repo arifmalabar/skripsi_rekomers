@@ -20,7 +20,7 @@ class GradingDetailController extends BaseTeacherController
     {
         $data = $request->except("_token");
         $this->setSession($data);
-        return "view";
+        return view("teacher.detail_nilai.detail_nilai", ["nama" => "penilaian"]);
     }
     private function setSession($data)
     {
@@ -36,6 +36,7 @@ class GradingDetailController extends BaseTeacherController
         try {
             return $this->model->selectRaw("(SELECT course_name FROM courses WHERE courses.id = grades.course_id) AS nama_mapel,
                 (SELECT academic_year FROM years WHERE years.year = grades.year) as tahun,
+                (SELECT id FROM students WHERE students.id = grades.student_id) as nisn,
                 (SELECT name FROM students WHERE students.id = grades.student_id) as nama_siswa,
                 semester,
                 assignment,
