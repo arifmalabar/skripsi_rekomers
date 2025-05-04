@@ -48,8 +48,7 @@ class GradingController extends BaseTeacherController
             $result = DB::select("
             SELECT 
                 courses.id as course_id,
-                students.id as students_id,
-                courses.semester_id as semester
+                students.id as students_id
             FROM students
             JOIN 
                 classrooms 
@@ -64,8 +63,7 @@ class GradingController extends BaseTeacherController
             EXCEPT 
             select 
                 grades.course_id,
-                grades.student_id,
-                grades.semester
+                grades.student_id
             FROM 
                 grades
             WHERE 
