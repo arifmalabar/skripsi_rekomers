@@ -1,5 +1,11 @@
-import { nilai } from "../config/end_point.js";
-import { deleteData, getData, insertData, updateData } from "../fetch/fetch.js";
+import { nilai, semester } from "../config/end_point.js";
+import {
+    deleteData,
+    deleteDataByCompact,
+    getData,
+    insertData,
+    updateData,
+} from "../fetch/fetch.js";
 import { clearField, clearFields } from "../helper/clear_form.js";
 import {
     setCbMapel,
@@ -10,6 +16,7 @@ import { validateEmptyField } from "../helper/form_validation.js";
 import { showTables } from "../helper/table.js";
 var token = "";
 var lastid = "";
+
 export function init() {
     token = $(".token").val();
     get();
@@ -20,7 +27,16 @@ export function init() {
         insert();
     });
     $("body").on("click", ".btn-hapus", function () {
-        deleteDataGuru($(this).data("id"));
+        //deleteDataGuru($(this).data("id"));
+        let course_id = $(this).data("courseid");
+        let year = $(this).data("year");
+        let smt = $(this).data("semester");
+        const data = {
+            course_id: course_id,
+            year: year,
+            semester: smt,
+        };
+        deleteDataNilai(data);
     });
     $("body").on("click", ".btn-update", function () {
         lastid = $(this).data("id");
@@ -79,7 +95,7 @@ async function get() {
                                         <i class="fa fa-edit"></i>
                                         Update
                                     </button>
-                                    <button class="dropdown-item btn-hapus">
+                                    <button class="dropdown-item btn-hapus" data-courseid="${p3.id_mapel}" data-year="${p3.tahun}" data-semester="${p3.semester}">
                                         <i class="fa fa-trash"></i>
                                         Hapus
                                     </button>
@@ -135,11 +151,13 @@ async function update() {
         alert(error);
     }
 }
-async function deleteDataGuru(id) {
+async function deleteDataNilai(data) {
     try {
         var opt = confirm("Apakah anda ingin mneghapus data?");
         if (opt) {
-            await deleteData(delete_guru, id, token);
+            await deleteDataByCompact(nilai, data, token).then((e) => {
+                console.log(e);
+            });
         } else {
             alert("batal hapus data");
         }

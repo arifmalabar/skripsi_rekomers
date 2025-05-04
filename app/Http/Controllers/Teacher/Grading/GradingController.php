@@ -77,27 +77,31 @@ class GradingController extends BaseTeacherController
             throw new QueryException($th->getMessage());
         }
     }
+    private function getReadyToInsert($request, $data) {
+        $ready_toinsert = [];
+        foreach ($data as $key) {
+            $item_data = [
+                "course_id" => $key->course_id,
+                "year" => $request->get("tahun"),
+                "semester" => $request->get("semester"),
+                "student_id" => $key->students_id,
+                "assignment" => 0.0,
+                "project" => 0.0,
+                "exams" => 0.0,
+                "attendance_presence" => 0.0
+            ];
+            array_push($ready_toinsert, $item_data);
+        }
+        return $ready_toinsert;
+    }
     public function insertData(Request $request)
     {
         try {
             $data = $this->getUngradedStudent($request->all());
-            $ready_toinsert = [];
-            foreach ($data as $key) {
-                $item_data = [
-                    "course_id" => $key->course_id,
-                    "year" => $request->get("tahun"),
-                    "semester" => $request->get("semester"),
-                    "student_id" => $key->students_id,
-                    "assignment" => 0.0,
-                    "project" => 0.0,
-                    "exams" => 0.0,
-                    "attendance_presence" => 0.0
-                ];
-                array_push($ready_toinsert, $item_data);
-            }
-            if(count($ready_toinsert) != 0)
+            
+            if(count($this->getReadyToInsert($request, $data)) != 0)
             {
-                $this->model->insert($ready_toinsert);
+                $this->model->insert($this->getReadyToInsert($request, $data));
             } else {
                 throw new Exception("Gagal tambah nilai", 500);
             }
@@ -108,5 +112,17 @@ class GradingController extends BaseTeacherController
         } catch (Exception $t){
             return $this->showError($t->getMessage());
         }
+    }
+    public function deleteNilai(Request $request)
+    {
+        try {
+            $this->model->where("course_id", "=", $request["course_id"])
+                        ->where("year", "=", $request["year"])
+                        ->where("semester", "=", $request["semester"])
+                        ->delete();
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
+        return response()->json($request->all());
     }
 }

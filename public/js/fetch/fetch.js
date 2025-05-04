@@ -53,3 +53,18 @@ export async function deleteData(url, id, token) {
         throw new Error(showError(response));
     }
 }
+export async function deleteDataByCompact(url, data, token) {
+    const response = await fetch(`${url}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": token,
+        },
+        body: JSON.stringify(data),
+    });
+    if ((response.ok && response.status == 201) || response.status == 200) {
+        return response.json();
+    } else {
+        throw new Error(showError(response));
+    }
+}

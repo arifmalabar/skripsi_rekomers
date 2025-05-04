@@ -107,23 +107,7 @@ Penilaian
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="">PBTGM</a></td>
-                            <td>GANJIL</td>
-                            <td>2021</td>
-                            <td style="text-align: center">
-                                <button class="btn btn-outline-warning btn-sm btn-update" data-id="${p3.id}"
-                                    data-nama="${p3.name}" data-toggle="modal" data-target="#modal-update">
-                                    <i class="fa fa-edit"></i>
-                                    Update
-                                </button>
-                                <button class="btn btn-outline-danger btn-sm btn-hapus" data-id="${p3.id}">
-                                    <i class="fa fa-trash"></i>
-                                    Hapus
-                                </button>
-                            </td>
-                        </tr>
+
                     </tbody>
                 </table>
 
@@ -146,7 +130,7 @@ Penilaian
                                                     <i class="fa fa-address-card"></i>
                                                 </span>
                                             </div>
-                                            <select name="" id="update-mapel" class="form-control">
+                                            <select name="" id="update-mapel" class="form-control cb-mapel">
                                                 <option value="">Pilih Mapel</option>
                                             </select>
                                         </div>
@@ -159,7 +143,7 @@ Penilaian
                                                     <i class="fa fa-calendar"></i>
                                                 </span>
                                             </div>
-                                            <select name="" id="update-thajaran" class="form-control">
+                                            <select name="" id="update-thajaran" class="form-control cb-thajar">
                                                 <option value="">Pilih Tahun Ajaran</option>
                                             </select>
                                             <input type="hidden" value="{{ csrf_token() }}" class="token">
@@ -173,7 +157,7 @@ Penilaian
                                                     <i class="fa fa-book"></i>
                                                 </span>
                                             </div>
-                                            <select name="" id="update-mapel" class="form-control">
+                                            <select name="" id="update-mapel" class="form-control cb-semester">
                                                 <option value="">Pilih Semester</option>
                                             </select>
                                             <input type="hidden" value="{{ csrf_token() }}" class="token">

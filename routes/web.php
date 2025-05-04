@@ -100,7 +100,7 @@ Route::controller(GradingController::class)->group(function () {
     Route::get($root."/api", "getData");
     Route::post($root."/api", "insertData");
     Route::put($root."/api/{id}", "updateData");
-    Route::delete($root."/api/{id}", "deleteData");
+    Route::delete($root."/api", "deleteNilai");
 });
 Route::controller(GradingDetailController::class)->group(function() {
     $root = "/teacher/grades_detail";
