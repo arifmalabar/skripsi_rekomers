@@ -16,7 +16,9 @@ import { validateEmptyField } from "../helper/form_validation.js";
 import { showTables } from "../helper/table.js";
 var token = "";
 var lastid = "";
-
+var course_id;
+var year;
+var smt;
 export function init() {
     token = $(".token").val();
     get();
@@ -28,9 +30,9 @@ export function init() {
     });
     $("body").on("click", ".btn-hapus", function () {
         //deleteDataGuru($(this).data("id"));
-        let course_id = $(this).data("courseid");
-        let year = $(this).data("year");
-        let smt = $(this).data("semester");
+        course_id = $(this).data("courseid");
+        year = $(this).data("year");
+        smt = $(this).data("semester");
         const data = {
             course_id: course_id,
             year: year,
@@ -39,12 +41,18 @@ export function init() {
         deleteDataNilai(data);
     });
     $("body").on("click", ".btn-update", function () {
-        lastid = $(this).data("id");
-        $(".update-nip").val($(this).data("id"));
-        $(".update-nama").val($(this).data("nama"));
+        course_id = $(this).data("courseid");
+        year = $(this).data("year");
+        smt = $(this).data("semester");
     });
     $(".btn-proses-update").on("click", function () {
-        update();
+        const data = {
+            course_id: course_id,
+            year: year,
+            semester: smt,
+        };
+        console.log(data);
+        //update(data);
     });
 }
 async function get() {
@@ -90,7 +98,7 @@ async function get() {
                                     </button>
                                 </form>
                                 <button class="dropdown-item"
-                                data-toggle="modal" data-target="#modal-update"
+                                data-toggle="modal" data-target="#modal-update" data-courseid="${p3.id_mapel}" data-year="${p3.tahun}" data-semester="${p3.semester}"
                                 >
                                         <i class="fa fa-edit"></i>
                                         Update
@@ -133,23 +141,26 @@ async function insert() {
         alert(error);
     }
 }
-async function update() {
-    var nama = $(".update-nama").val();
-    var nip = $(".update-nip").val();
+async function update(last_data) {
+    var id_mapel = $("#update-mapel").val();
+    var tahun = $("#update-thajaran").val();
+    var semester = $("#update-semester").val();
     var data = {
-        id: nip,
-        name: nama,
+        id_mapel: id_mapel,
+        tahun: tahun,
+        semester: semester,
     };
-    try {
+    data = { ...data, last_data };
+    console.log(data);
+
+    /*try {
         //alert(`${update_guru}/${lastid}`);
-        validateEmptyField(nama);
-        validateEmptyField(nip);
-        await updateData(`${update_guru}/${lastid}`, data, token);
+        await updateData(`${nilai}/0`, data, token);
         clearFields([".update-nama", ".update-nip"]);
         get();
     } catch (error) {
         alert(error);
-    }
+    }*/
 }
 async function deleteDataNilai(data) {
     try {

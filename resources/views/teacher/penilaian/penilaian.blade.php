@@ -157,7 +157,7 @@ Penilaian
                                                     <i class="fa fa-book"></i>
                                                 </span>
                                             </div>
-                                            <select name="" id="update-mapel" class="form-control cb-semester">
+                                            <select name="" id="update-semester" class="form-control cb-semester">
                                                 <option value="">Pilih Semester</option>
                                             </select>
                                             <input type="hidden" value="{{ csrf_token() }}" class="token">

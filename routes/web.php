@@ -99,7 +99,7 @@ Route::controller(GradingController::class)->group(function () {
     Route::get($root, "index");
     Route::get($root."/api", "getData");
     Route::post($root."/api", "insertData");
-    Route::put($root."/api/{id}", "updateData");
+    Route::put($root."/api/{id}", "updateNilai");
     Route::delete($root."/api", "deleteNilai");
 });
 Route::controller(GradingDetailController::class)->group(function() {

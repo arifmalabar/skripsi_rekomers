@@ -113,16 +113,41 @@ class GradingController extends BaseTeacherController
             return $this->showError($t->getMessage());
         }
     }
+    public function condition($request)
+    {
+        return $this->model->where("course_id", "=", $request["course_id"])
+                            ->where("year", "=", $request["year"])
+                            ->where("semester", "=", $request["semester"]);
+    }
     public function deleteNilai(Request $request)
     {
         try {
-            $this->model->where("course_id", "=", $request["course_id"])
-                        ->where("year", "=", $request["year"])
-                        ->where("semester", "=", $request["semester"])
-                        ->delete();
+            $this->condition($request)->delete();
         } catch (\Throwable $th) {
             return $this->showError($th->getMessage());
         }
         return response()->json($request->all());
+    }
+    public function updateNilai(Request $request, $id)
+    {
+        try {
+            $data = $this->getUngradedStudent($request->all());
+            if(count($this->getReadyToInsert($request, $data)) != 0)
+            {
+                $data = [
+                    "course_id" => $request["new_course_id"],
+                    "year" => $request["new_year"],
+                    "semester" => $request["new_semester"]
+                ];
+                $this->condition($request)->update($data);
+            } else {
+                throw new Exception("Gagal tambah nilai", 500);
+            }
+            return response()->json(["status" => "success"], 200);
+        } catch (QueryException $th) {
+            return $this->showError($th->getMessage());
+        } catch (Exception $t){
+            return $this->showError($t->getMessage());
+        }
     }
 }
