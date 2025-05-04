@@ -38,7 +38,10 @@ async function get() {
                 },
             },
             {
-                data: "nisn",
+                data: null,
+                render: function (p1, p2, p3) {
+                    return `<b class="input-nisn">${p3.nisn}</b>`;
+                },
             },
             {
                 data: "nama_siswa",
@@ -84,23 +87,26 @@ async function get() {
     }
 }
 async function insert() {
-    var id_mapel = $("#insert-mapel").val();
-    var tahun = $("#insert-thajaran").val();
-    var semester = $("#insert-semester").val();
-    var data = {
-        id_mapel: id_mapel,
-        tahun: tahun,
-        semester: semester,
-    };
+    let nilai = [];
+    $("#example2 tbody tr").each(function (indexInArray, valueOfElement) {
+        const row = $(this);
+        const student_id = row.find(".input-nisn").text().trim();
+        const assignment = row.find(".input-tugas").val();
+        const project = row.find(".input-proyek").val();
+        const exams = row.find(".input-ujian").val();
+        const attendance_presence = row.find(".input-presensi").val();
+        nilai.push({
+            student_id,
+            assignment,
+            project,
+            exams,
+            attendance_presence,
+        });
+    });
     try {
-        validateEmptyField(id_mapel);
-        validateEmptyField(tahun);
-        validateEmptyField(semester);
-        await insertData(nilai, data, token).then((e) => {
+        insertData(detai_nilai, nilai, token).then((e) => {
             console.log(e);
         });
-        clearFields(["#insert-mapel", "#insert-thajaran", "#insert-semester"]);
-        get();
     } catch (error) {
         alert(error);
     }

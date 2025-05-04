@@ -88,4 +88,26 @@ class GradingDetailController extends BaseTeacherController
         $data = $this->getUngradedStudent($request->all());
         return $data;
     }
+    public function saveNilai(Request $request)
+    {
+        $data = $request->except("_token");
+        try {
+            $nilai = [];
+            foreach ($data as $key) {
+                $item = [
+                    "assignment" => $key['assignment'],
+                    "project" => $key['project'],
+                    "exams" => $key['exams'],
+                    "attendance_presence" => $key['attendance_presence']
+                ];
+                $this->model->where("student_id", "=", $key['student_id'])
+                            ->where("course_id", "=", Session::get("id_mapel"))
+                            ->where("year", "=", Session::get("tahun"))
+                            ->where("semester", "=", Session::get("semester"))
+                            ->update($item);
+            }
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
+    }
 }

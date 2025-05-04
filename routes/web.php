@@ -106,6 +106,7 @@ Route::controller(GradingDetailController::class)->group(function() {
     $root = "/teacher/grades_detail";
     Route::post($root, "index");
     Route::get($root."/api", "getData");
+    Route::post($root."/api", "saveNilai");
 });
 function routes($data)
 {

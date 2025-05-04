@@ -95,7 +95,8 @@ Detail Penilaian
                     </div>
                     <div class="col-md-12">
                         <br>
-                        <button class="btn btn-sm btn-outline-primary w-100">Update Data Nilai</button>
+                        <input type="hidden" placeholder="Input Nilai Tugas token" class="form-control input-presensi">
+                        <button class="btn btn-sm btn-outline-primary w-100 btn-tambah">Simpan Data Nilai</button>
                     </div>
                 </div>
                 <div class="modal fade" id="modal-update">
