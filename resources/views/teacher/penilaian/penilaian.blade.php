@@ -161,6 +161,9 @@ Penilaian
                                                 <option value="">Pilih Semester</option>
                                             </select>
                                             <input type="hidden" value="{{ csrf_token() }}" class="token">
+                                            <input type="hidden" value="" id="last_course_id">
+                                            <input type="hidden" id="last_year">
+                                            <input type="hidden" id="last_semester">
                                         </div>
                                     </div>
                                 </div>

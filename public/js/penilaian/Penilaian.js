@@ -44,6 +44,9 @@ export function init() {
         course_id = $(this).data("courseid");
         year = $(this).data("year");
         smt = $(this).data("semester");
+        $("#last_course_id").val($(this).data("courseid"));
+        $("#last_year").val(year);
+        $("#last_semester").val(smt);
     });
     $(".btn-proses-update").on("click", function () {
         const data = {
