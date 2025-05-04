@@ -86,8 +86,7 @@ WHERE grades.year = 2020
 -- coba nek berhasil
 SELECT 
 	courses.id as course_id,
-    students.id as students_id,
-    courses.semester_id as semester
+    students.id as students_id
 FROM students
 JOIN 
 	classrooms 
@@ -102,12 +101,11 @@ WHERE
 EXCEPT
 SELECT 
 	grades.course_id,
-    grades.student_id,
-    grades.semester
+    grades.student_id
 FROM 
 	grades
 WHERE 
     grades.course_id = 'C001' AND -- ini dari form
     grades.semester = 'GENAP' AND -- ini dari form 
-    grades.year = 2021
+    grades.year = 2025
 ;
