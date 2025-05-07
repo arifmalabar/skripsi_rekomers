@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Clustering\ClusteringController;
 use App\Http\Controllers\Headmaster\Classroom\ClassroomController;
 use App\Http\Controllers\Headmaster\Course\CourseController;
 use App\Http\Controllers\Headmaster\Dashboard\DashboardController;
@@ -107,6 +108,9 @@ Route::controller(GradingDetailController::class)->group(function() {
     Route::post($root, "index");
     Route::get($root."/api", "getData");
     Route::post($root."/api", "saveNilai");
+});
+Route::controller(ClusteringController::class)->group(function () {
+    Route::get("/clustering", "index");
 });
 function routes($data)
 {
