@@ -72,9 +72,20 @@ class ClusteringController extends BaseController
     ];
     public function index()
     {
-        return $this->runKmeans();
+        //return $this->runKmeans();
     }
-    public function runKmeans()
+    public function getGradeStudent($request)
+    {
+        try {
+            return $this->model->where("course_id", "=", $request["course_id"])
+                            ->where("year", "=", $request["year"])
+                            ->where("semester", "=", $request["semester"])
+                            ->get();
+        } catch (\Throwable $th) {
+            return $this->siswa;
+        }
+    }
+    public function runKmeans($request)
     {
         $list_jarak = [];
         $k = 3;
@@ -92,7 +103,7 @@ class ClusteringController extends BaseController
         $iterate = 0;
         $maxiterate = 100;
         $same = 0;
-        $student = $this->model->where("course_id", "=", "C001")->get();
+        $student = $this->getGradeStudent($request);
         $histori_jarak = [];
         $histori_cluster = [];
         do {
@@ -226,6 +237,7 @@ class ClusteringController extends BaseController
             );
             $item_jarak = [
                 "student_id" => $key['student_id'],
+                "course_id" => $key["course_id"],
                 "assignment" => $key["assignment"],
                 "project" => $key["project"],
                 "exams" => $key["exams"],
@@ -243,23 +255,29 @@ class ClusteringController extends BaseController
         foreach ($list_jarak as $key) {
             $min = min($key["centroid1"], min($key["centroid2"], $key["centroid3"]));
             $cluster = "";
+            $risk = "";
             if($min == $key["centroid1"])
             {
                 $cluster = "C1";
+                $risk = "high";
             } else if($min == $key["centroid2"]){
                 $cluster = "C2";
+                $risk = "medium";
             } else if($min == $key["centroid3"]){
                 $cluster = "C3";
+                $risk = "less";
             }
             $item_cluster = [
                 "student_id" => $key['student_id'],
+                "course_id" => $key["course_id"],
                 "assignment" => $key["assignment"],
                 "project" => $key["project"],
                 "exams" => $key["exams"],
                 "centroid1" => $key["centroid1"],
                 "centroid2" => $key["centroid2"], 
                 "centroid3" => $key["centroid3"],
-                "cluster" => $cluster
+                "cluster" => $cluster,
+                "risk" => $risk
             ];
             array_push($clusters, $item_cluster);
         }

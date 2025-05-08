@@ -109,3 +109,5 @@ WHERE
     grades.semester = 'GENAP' AND -- ini dari form 
     grades.year = 2025
 ;
+SELECT * FROM clusterings
+WHERE ;

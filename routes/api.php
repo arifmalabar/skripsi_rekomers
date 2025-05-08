@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Headmaster\Clustering\ClusteringHeadmasterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Headmaster\Teacher\TeacherController;
@@ -32,4 +33,11 @@ Route::controller(StudentController::class)->group(function(){
     Route::get($root."detail_kelas/{id}", "index");
     Route::get($root."siswa/api", "getData");
     Route::post($root."siswa/api", "insertData");
+});
+Route::controller(ClusteringHeadmasterController::class)->group(function () {
+    $root = "/kakomli/";
+    Route::get($root."clustering", function() {
+        return ["response" => "asas"];
+    });
+    Route::post($root."clustering", "insertData");
 });
