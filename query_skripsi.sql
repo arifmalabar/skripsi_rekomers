@@ -109,5 +109,34 @@ WHERE
     grades.semester = 'GENAP' AND -- ini dari form 
     grades.year = 2025
 ;
-SELECT * FROM clusterings
-WHERE ;
+SELECT 
+	student_id,
+    course_id
+FROM 
+	grades
+EXCEPT
+SELECT 
+	student_id,
+    course_id
+FROM 
+	clusterings
+WHERE 
+	year = 2025 
+AND
+    semester = 'GANJIL'
+;
+
+SELECT 
+	course_id, 
+    course_name,
+    clusterings.year,
+    clusterings.semester
+FROM 
+	clusterings
+JOIN 
+	courses
+ON
+	courses.id = clusterings.course_id
+GROUP BY 
+	year, semester, course_id
+;

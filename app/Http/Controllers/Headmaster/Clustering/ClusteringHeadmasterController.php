@@ -5,17 +5,44 @@ namespace App\Http\Controllers\Headmaster\Clustering;
 use App\Http\Controllers\Clustering\ClusteringController;
 use App\Http\Controllers\Controller;
 use App\Models\Clustering;
+use App\Models\Teacher\Grade;
+use Error;
 use Illuminate\Http\Request;
+use Exception;
 
 class ClusteringHeadmasterController extends ClusteringController
 {
     private Clustering $mdl;
     public function __construct() {
+        $this->model = new Grade();
         $this->mdl = new Clustering();
     }
     public function index()
     {
-
+        return view("headmaster/clustering/clustering", ["nama" => "clustering"]);
+    }
+    public function getData()
+    {
+        try {
+            return $this->mdl->selectRaw("
+                            course_id, 
+                            course_name,
+                            clusterings.year,
+                            clusterings.semester"
+                        )->join("courses", "courses.id", "=", "clusterings.course_id")
+                        ->groupByRaw("year, semester, course_id")
+                        ->get();
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
+    }
+    public function getClusteringDetail(Request $request)
+    {
+        try {
+            return $this->runKmeans($request);
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
     }
     public function insertData(Request $request)
     {
@@ -25,14 +52,16 @@ class ClusteringHeadmasterController extends ClusteringController
                              ->where("semester", "=", $request["semester"])
                              ->where("course_id", "=",$request["course_id"]);
             $data_ready = $this->getReadyToInsert($request);
-            if($old->count() == 0){
+            if($old->count() == 0 && sizeof($data_ready) != 0){
                 $this->mdl->insert($data_ready);
-            } else{
+            } elseif($old->count() != 0 && sizeof($data_ready) != 0) {
                 $old->delete();
                 $this->mdl->insert($data_ready);
+            } else {
+                throw new Exception("Data Nilai Tidak ditemukan", 1);
             }
             return $data_ready;
-        } catch (\Throwable $th) {
+        } catch (Exception $th) {
             return $this->showError($th->getMessage());
         }
     }
@@ -43,7 +72,6 @@ class ClusteringHeadmasterController extends ClusteringController
         $data = $this->runKmeans($reqdata);
         $ready_toinsert = [];
         foreach ($data['hasil'] as $key) {
-            
             $item_data = [
                 "course_id" => $key['course_id'],
                 "year" => $request->get("year"),
@@ -61,5 +89,6 @@ class ClusteringHeadmasterController extends ClusteringController
             array_push($ready_toinsert, $item_data);
         }
         return $ready_toinsert;
+        
     }
 }

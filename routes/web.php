@@ -15,6 +15,7 @@ use App\Http\Controllers\Headmaster\Student\StudentController;
 use App\Http\Controllers\Headmaster\Year\YearController;
 use App\Http\Controllers\Teacher\Dashboard\DashboardController as TeacherDashboardController;
 use App\Http\Controllers\Teacher\Grading\GradingDetailController;
+use App\Http\Controllers\Headmaster\Clustering\ClusteringHeadmasterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +109,13 @@ Route::controller(GradingDetailController::class)->group(function() {
     Route::post($root, "index");
     Route::get($root."/api", "getData");
     Route::post($root."/api", "saveNilai");
+});
+Route::controller(ClusteringHeadmasterController::class)->group(function () {
+    $root = "/kakomli/clustering";
+
+    Route::get($root, "index");
+    Route::get($root."/api", "getData");
+    Route::post($root."/api", "insertData");
 });
 Route::controller(ClusteringController::class)->group(function () {
     Route::get("/clustering", "index");

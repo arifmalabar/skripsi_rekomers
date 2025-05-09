@@ -1,5 +1,5 @@
 function showError(response) {
-    return `Error : ${response.statusText} Error Code : ${response.status}`;
+    return `Error : ${response} Error Code : ${response.status}`;
 }
 export async function getData(url) {
     const response = await fetch(url);
@@ -21,7 +21,9 @@ export async function insertData(url, data, token) {
     if (response.ok && response.status == 200) {
         return response.json();
     } else {
-        throw new Error(showError(response));
+        const errorData = await response.json();
+        //const errorMessage = errorData.erorr || "Terjadi kesalahan di server";
+        throw new Error(showError(errorData.erorr));
     }
 }
 export async function updateData(url, data, token) {

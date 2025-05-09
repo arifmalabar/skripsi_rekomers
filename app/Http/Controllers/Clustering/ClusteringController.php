@@ -17,7 +17,7 @@ class ClusteringController extends BaseController
             "course_id"=> "C001",
             "year"=> 2021,
             "semester"=> "GANJIL",
-            "student_id"=> "002272323",
+            "student_id"=> "002272323/debug",
             "assignment"=> 20,
             "project"=> 20,
             "exams"=>10,
@@ -76,14 +76,10 @@ class ClusteringController extends BaseController
     }
     public function getGradeStudent($request)
     {
-        try {
-            return $this->model->where("course_id", "=", $request["course_id"])
-                            ->where("year", "=", $request["year"])
-                            ->where("semester", "=", $request["semester"])
-                            ->get();
-        } catch (\Throwable $th) {
-            return $this->siswa;
-        }
+        return $this->model->where("course_id", "=", $request["course_id"])
+        ->where("year", "=", $request["year"])
+        ->where("semester", "=", $request["semester"])
+        ->get();
     }
     public function runKmeans($request)
     {
@@ -104,6 +100,7 @@ class ClusteringController extends BaseController
         $maxiterate = 100;
         $same = 0;
         $student = $this->getGradeStudent($request);
+        
         $histori_jarak = [];
         $histori_cluster = [];
         do {

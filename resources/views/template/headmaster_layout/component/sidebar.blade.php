@@ -62,15 +62,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/produk" class="nav-link {{ $nama == 'manufacturing' ? 'active' : '' }}">
+                    <a href="/produk" class="nav-link {{ $nama == 'clustering' ? 'active' : '' }}">
                         <i class="fas nav-icon fa-users"></i>
-                        <p>Guru Mapel</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/produk" class="nav-link {{ $nama == 'manufacturing' ? 'active' : '' }}">
-                        <i class="fas nav-icon fa-users"></i>
-                        <p>Clustering MP</p>
+                        <p>Clustering Mapel</p>
                     </a>
                 </li>
                 <!--<li class="nav-header">Purchase</li>
