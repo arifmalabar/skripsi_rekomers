@@ -30,7 +30,7 @@ export function init() {
     });
     $("body").on("click", ".btn-hapus", function () {
         //deleteDataGuru($(this).data("id"));
-        course_id = $(this).data("courseid");
+        course_id = $(this).data("id");
         year = $(this).data("year");
         smt = $(this).data("semester");
         const data = {
@@ -82,19 +82,19 @@ async function get() {
                 data: null,
                 render: function (p1, p2, p3) {
                     return `
-                            <form method="POST" action="grades_detail">
+                            <form method="POST" action="clustering/detail">
                                     <input type="hidden" value="${p3.course_id}" name="course_id">
                                     <input type="hidden" value="${p3.semester}" name="semester">
                                     <input type="hidden" value="${p3.year}" name="year">
                                     <input type="hidden" value="${token}" name="_token">
-                                    <button class="btn btn-outline-primary btn-sm" type="submit" data-id="${p3.id}" data-nama="${p3.name}"
+                                    <button class="btn btn-outline-primary btn-sm" type="submit" data-id="${p3.course_id}"
                          data-toggle="modal">
                                     <i class="fa fa-info"></i>
                                     Detail
                                 </button>
                             </form>
                         
-                            <button class="btn btn-outline-danger btn-sm btn-hapus" data-id="${p3.id}">
+                            <button class="btn btn-outline-danger btn-sm btn-hapus" data-id="${p3.course_id}" data-semester="${p3.semester}" data-year="${p3.year}">
                                 <i class="fa fa-trash"></i>
                                 Hapus
                             </button>
@@ -155,7 +155,7 @@ async function deleteDataNilai(data) {
     try {
         var opt = confirm("Apakah anda ingin mneghapus data?");
         if (opt) {
-            await deleteDataByCompact(nilai, data, token).then((e) => {
+            await deleteDataByCompact(clustering, data, token).then((e) => {
                 console.log(e);
             });
         } else {

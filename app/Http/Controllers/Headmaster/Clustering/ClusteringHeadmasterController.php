@@ -21,6 +21,10 @@ class ClusteringHeadmasterController extends ClusteringController
     {
         return view("headmaster/clustering/clustering", ["nama" => "clustering"]);
     }
+    public function clusteringSiswa()
+    {
+        return view("headmaster/clustering_siswa/clustering_siswa", ["nama" => "clustering"]);
+    }
     public function getData()
     {
         try {
@@ -39,11 +43,12 @@ class ClusteringHeadmasterController extends ClusteringController
     public function getClusteringDetail(Request $request)
     {
         try {
-            return $this->runKmeans($request);
+            return view("headmaster/detail_clustering/detail_clustering", ["nama" => "clustering", "data" => $this->runKmeans($request)]);
         } catch (\Throwable $th) {
             return $this->showError($th->getMessage());
         }
     }
+    
     public function insertData(Request $request)
     {
         try {
@@ -65,7 +70,21 @@ class ClusteringHeadmasterController extends ClusteringController
             return $this->showError($th->getMessage());
         }
     }
-    
+    public function condition($request)
+    {
+        return $this->mdl->where("course_id", "=", $request["course_id"])
+                            ->where("year", "=", $request["year"])
+                            ->where("semester", "=", $request["semester"]);
+    }
+    public function deleteNilai(Request $request)
+    {
+        try {
+            $this->condition($request)->delete();
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
+        return response()->json($request->all());
+    }
     public function getReadyToInsert($request)
     {
         $reqdata = $request->all();

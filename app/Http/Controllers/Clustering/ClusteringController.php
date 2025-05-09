@@ -76,7 +76,8 @@ class ClusteringController extends BaseController
     }
     public function getGradeStudent($request)
     {
-        return $this->model->where("course_id", "=", $request["course_id"])
+        return $this->model->join("students", "students.id", "=", "grades.student_id")
+        ->where("course_id", "=", $request["course_id"])
         ->where("year", "=", $request["year"])
         ->where("semester", "=", $request["semester"])
         ->get();
@@ -108,9 +109,9 @@ class ClusteringController extends BaseController
             $list_jarak = [];
             $clusters = [];
             $list_jarak = $this->hitungJarak($student, $centroid);
-            array_push($histori_jarak, ["Iterasi ke ".($iterate)."" => $list_jarak]);
+            array_push($histori_jarak, ["data_jarak" => $list_jarak]);
             $clusters = $this->buatCluster($list_jarak);
-            array_push($histori_cluster, ["Iterasi ke ".($iterate)."" => $clusters]);
+            array_push($histori_cluster, ["iterasi" => $clusters]);
             //mengelompokan cluster 
             $c1_tugas = 0.0; $c1_project = 0.0; $c1_ujian = 0.0;
             $c2_tugas = 0.0; $c2_project = 0.0; $c2_ujian = 0.0;
@@ -234,13 +235,14 @@ class ClusteringController extends BaseController
             );
             $item_jarak = [
                 "student_id" => $key['student_id'],
+                "name" => $key["name"],
                 "course_id" => $key["course_id"],
                 "assignment" => $key["assignment"],
                 "project" => $key["project"],
                 "exams" => $key["exams"],
-                "centroid1"=> $jarak_centroid1,
-                "centroid2" => $jarak_centroid2,
-                "centroid3"=> $jarak_centroid3
+                "centroid1"=> round($jarak_centroid1, 2),
+                "centroid2" => round($jarak_centroid2, 2),
+                "centroid3"=> round($jarak_centroid3, 2)
             ];
             array_push($list_jarak, $item_jarak);
         }
@@ -266,6 +268,7 @@ class ClusteringController extends BaseController
             }
             $item_cluster = [
                 "student_id" => $key['student_id'],
+                "name" => $key["name"],
                 "course_id" => $key["course_id"],
                 "assignment" => $key["assignment"],
                 "project" => $key["project"],

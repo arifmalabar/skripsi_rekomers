@@ -114,8 +114,11 @@ Route::controller(ClusteringHeadmasterController::class)->group(function () {
     $root = "/kakomli/clustering";
 
     Route::get($root, "index");
+    Route::get($root."/siswa_detail", "clusteringSiswa");
     Route::get($root."/api", "getData");
     Route::post($root."/api", "insertData");
+    Route::post($root."/detail", "getClusteringDetail");
+    Route::delete($root."/api", "deleteNilai");
 });
 Route::controller(ClusteringController::class)->group(function () {
     Route::get("/clustering", "index");

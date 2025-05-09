@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/produk" class="nav-link {{ $nama == 'clustering' ? 'active' : '' }}">
+                    <a href="/kakomli/clustering" class="nav-link {{ $nama == 'clustering' ? 'active' : '' }}">
                         <i class="fas nav-icon fa-users"></i>
                         <p>Clustering Mapel</p>
                     </a>
