@@ -31,7 +31,10 @@ Detail Penilaian
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-
+                                        <div class="col-md-12">
+                                            <label for="">Input Nilai Siswa</label>
+                                            <input type="file" class="form-control" id="input-nilai">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -41,7 +44,7 @@ Detail Penilaian
                                                 data-dismiss="modal">Close</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" style="width: 100%" class="btn btn-primary btn-tambah"
+                                            <button type="button" style="width: 100%" class="btn btn-primary btn-upload"
                                                 data-dismiss="modal"><i class="fa fa-plus"></i>Tambah
                                                 Data</button>
                                         </div>
@@ -180,4 +183,6 @@ Detail Penilaian
 @endsection
 @section('js')
 <script type="module" src="{{ asset('js/detail_nilai/app.js') }}"></script>
+<!-- SheetJS CDN -->
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 @endsection

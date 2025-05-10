@@ -3,8 +3,10 @@ import { deleteData, getData, insertData, updateData } from "../fetch/fetch.js";
 import { clearField, clearFields } from "../helper/clear_form.js";
 import { validateEmptyField } from "../helper/form_validation.js";
 import { showTables } from "../helper/table.js";
+import { uploadExcel } from "../helper/upload_excel.js";
 var token = "";
 var lastid = "";
+let selectedFile;
 export function init() {
     token = $(".token").val();
     get();
@@ -13,6 +15,12 @@ export function init() {
     });
     $(".btn-tambah").click(function (e) {
         insert();
+    });
+    $(".btn-upload").click(function (e) {
+        upload();
+    });
+    $("#input-nilai").on("change", function (e) {
+        selectedFile = e.target.files[0];
     });
     $("body").on("click", ".btn-hapus", function () {
         deleteDataGuru($(this).data("id"));
@@ -24,6 +32,22 @@ export function init() {
     });
     $(".btn-proses-update").on("click", function () {
         update();
+    });
+}
+async function upload() {
+    let ready = [];
+    const data = uploadExcel(selectedFile).then((e) => {
+        e.forEach((element) => {
+            ready.push({
+                student_id: element[0],
+                assignment: element[2],
+                project: element[3],
+                exams: element[4],
+                attendance_presence: element[5],
+            });
+        });
+        insertData(detai_nilai, ready, token);
+        get();
     });
 }
 async function get() {
