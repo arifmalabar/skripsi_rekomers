@@ -116,7 +116,7 @@ class ClusteringController extends BaseController
 
             //program baru
             $centroidBaru = $this->kelompokanCluster($clusters);
-            $rata_rata = $this->rataRataCluster($centroidBaru);
+            $centroidBaru = $this->rataRataCluster($centroidBaru);
             $same = 0;
             foreach (['C1', 'C2', 'C3'] as $index => $cluster) {
                 if ($this->isEqual($centroid[$index][0], $centroidBaru[$cluster]['assignment'])) $same++;
@@ -326,13 +326,14 @@ class ClusteringController extends BaseController
     }
     public function rataRataCluster($centroidBaru)
     {
-        foreach ($centroidBaru as $cluster => $data) {
+        foreach ($centroidBaru as $cluster => &$data) {
             if ($data['count'] > 0) {
                 $data['assignment'] /= $data['count'];
                 $data['project'] /= $data['count'];
                 $data['exams'] /= $data['count'];
             }
         }
+        return $centroidBaru;   
     }
     public function isEqual($a, $b)
     {
