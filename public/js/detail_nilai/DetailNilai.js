@@ -40,6 +40,7 @@ async function upload() {
         e.forEach((element) => {
             ready.push({
                 student_id: element[0],
+                name: element[1],
                 assignment: element[2],
                 project: element[3],
                 exams: element[4],
@@ -68,7 +69,10 @@ async function get() {
                 },
             },
             {
-                data: "nama_siswa",
+                data: null,
+                render: function (p1, p2, p3) {
+                    return `<b class="input-name">${p3.nama_siswa}</b>`;
+                },
             },
             {
                 data: null,
@@ -115,12 +119,14 @@ async function insert() {
     $("#example2 tbody tr").each(function (indexInArray, valueOfElement) {
         const row = $(this);
         const student_id = row.find(".input-nisn").text().trim();
+        const name = row.find(".input-name").text().trim();
         const assignment = row.find(".input-tugas").val();
         const project = row.find(".input-proyek").val();
         const exams = row.find(".input-ujian").val();
         const attendance_presence = row.find(".input-presensi").val();
         nilai.push({
             student_id,
+            name,
             assignment,
             project,
             exams,

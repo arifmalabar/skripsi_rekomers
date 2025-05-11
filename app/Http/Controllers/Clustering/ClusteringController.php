@@ -112,8 +112,29 @@ class ClusteringController extends BaseController
             array_push($histori_jarak, ["data_jarak" => $list_jarak]);
             $clusters = $this->buatCluster($list_jarak);
             array_push($histori_cluster, ["iterasi" => $clusters]);
-            //mengelompokan cluster 
-            $c1_tugas = 0.0; $c1_project = 0.0; $c1_ujian = 0.0;
+            //mengelompokan cluster
+
+            //program baru
+            $centroidBaru = $this->kelompokanCluster($clusters);
+            $rata_rata = $this->rataRataCluster($centroidBaru);
+            $same = 0;
+            foreach (['C1', 'C2', 'C3'] as $index => $cluster) {
+                if ($this->isEqual($centroid[$index][0], $centroidBaru[$cluster]['assignment'])) $same++;
+                if ($this->isEqual($centroid[$index][1], $centroidBaru[$cluster]['project'])) $same++;
+                if ($this->isEqual($centroid[$index][2], $centroidBaru[$cluster]['exams'])) $same++;
+            }
+
+            // Update centroid jika ada perubahan
+            if ($same == 0) {
+                foreach (['C1', 'C2', 'C3'] as $index => $cluster) {
+                    $centroid[$index][0] = $centroidBaru[$cluster]['assignment'];
+                    $centroid[$index][1] = $centroidBaru[$cluster]['project'];
+                    $centroid[$index][2] = $centroidBaru[$cluster]['exams'];
+                }
+            }
+
+            //program lama
+            /*$c1_tugas = 0.0; $c1_project = 0.0; $c1_ujian = 0.0;
             $c2_tugas = 0.0; $c2_project = 0.0; $c2_ujian = 0.0;
             $c3_tugas = 0.0; $c3_project = 0.0; $c3_ujian = 0.0;
             $countc1=0; $countc2=0; $countc3 = 0;
@@ -205,7 +226,7 @@ class ClusteringController extends BaseController
                 $centroid[2][1] = $c3_project;
                 $centroid[2][2] = $c3_ujian;
                 
-            }
+            }*/
         } while($same == 0 && $iterate < $maxiterate);
         
         return [
@@ -282,6 +303,36 @@ class ClusteringController extends BaseController
             array_push($clusters, $item_cluster);
         }
         return $clusters;
+    }
+    public function kelompokanCluster($clusters)
+    {
+        $centroidBaru = [
+            'C1' => ['assignment' => 0, 'project' => 0, 'exams' => 0, 'count' => 0],
+            'C2' => ['assignment' => 0, 'project' => 0, 'exams' => 0, 'count' => 0],
+            'C3' => ['assignment' => 0, 'project' => 0, 'exams' => 0, 'count' => 0],
+        ];
+
+        // Looping pengelompokan
+        foreach ($clusters as $key) {
+            $cluster = $key['cluster'];
+            if (isset($centroidBaru[$cluster])) {
+                $centroidBaru[$cluster]['assignment'] += $key['assignment'];
+                $centroidBaru[$cluster]['project'] += $key['project'];
+                $centroidBaru[$cluster]['exams'] += $key['exams'];
+                $centroidBaru[$cluster]['count']++;
+            }
+        }
+        return $centroidBaru;
+    }
+    public function rataRataCluster($centroidBaru)
+    {
+        foreach ($centroidBaru as $cluster => $data) {
+            if ($data['count'] > 0) {
+                $data['assignment'] /= $data['count'];
+                $data['project'] /= $data['count'];
+                $data['exams'] /= $data['count'];
+            }
+        }
     }
     public function isEqual($a, $b)
     {

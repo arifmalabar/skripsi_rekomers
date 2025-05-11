@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Teacher\Grading;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Headmaster\Course\CourseController;
+use App\Http\Controllers\Headmaster\Student\StudentController;
 use App\Http\Controllers\Teacher\BaseTeacherController;
 use App\Models\Teacher\Grade;
 use Doctrine\DBAL\Query\QueryException;
@@ -13,8 +15,12 @@ use Illuminate\Support\Facades\Session;
 class GradingDetailController extends BaseTeacherController
 {
     private $id_mapel, $tahun, $semester;
+    private StudentController $student;
+    private CourseController $course;
     public function __construct() {
         $this->model = new Grade();
+        $this->student = new StudentController();
+        $this->course = new CourseController();
     }
     public function index(Request $request)
     {
@@ -88,6 +94,13 @@ class GradingDetailController extends BaseTeacherController
         $data = $this->getUngradedStudent($request->all());
         return $data;
     }
+    public function condition($key)
+    {
+        return $this->model->where("student_id", "=", $key['student_id'])
+                            ->where("course_id", "=", Session::get("id_mapel"))
+                            ->where("year", "=", Session::get("tahun"))
+                            ->where("semester", "=", Session::get("semester"));
+    }
     public function saveNilai(Request $request)
     {
         $data = $request->except("_token");
@@ -100,14 +113,42 @@ class GradingDetailController extends BaseTeacherController
                     "exams" => $key['exams'],
                     "attendance_presence" => $key['attendance_presence']
                 ];
-                $this->model->where("student_id", "=", $key['student_id'])
-                            ->where("course_id", "=", Session::get("id_mapel"))
-                            ->where("year", "=", Session::get("tahun"))
-                            ->where("semester", "=", Session::get("semester"))
-                            ->update($item);
+                $this->availableData($key, $item);
             }
         } catch (\Throwable $th) {
             return $this->showError($th->getMessage());
         }
     }
+    private function availableData($key, $item)
+    {
+        $cek = $this->condition($key)->count();
+        if($cek != 0){
+            $this->onlyUpdateGrade($key, $item);
+        } else {
+            $this->insertNewGrade($key, $item);
+        }
+    }
+    private function onlyUpdateGrade($key, $item)
+    {
+        return $this->condition($key)->update($item);
+    }
+    private function insertNewGrade($key, $item)
+    {
+        $mapel = $this->course->model->where("id", "=", Session::get("id_mapel"))->first();
+        $data_siswa = [
+            "id" => $key["student_id"],
+            "classroom_id" => $mapel->classroom_id,
+            "name" => strtoupper($key["name"]),
+            "gender" => "pria"
+        ];
+        //insert data siswa
+        $this->student->model->insert($data_siswa);
+        //insert data nilai
+        $item["course_id"] = Session::get("id_mapel");
+        $item["student_id"] = $key["student_id"];
+        $item["year"] = Session::get("tahun");
+        $item["semester"] = Session::get("semester");
+        return $this->model->insert($item);
+    }
 }
+
