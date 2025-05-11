@@ -114,6 +114,7 @@ Route::controller(ClusteringHeadmasterController::class)->group(function () {
     $root = "/kakomli/clustering";
 
     Route::get($root, "index");
+    Route::post($root, "detailClustering");
     Route::get($root."/api", "getData");
     Route::post($root."/api", "insertData");
 });
