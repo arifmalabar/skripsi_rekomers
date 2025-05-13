@@ -141,8 +141,11 @@ class GradingDetailController extends BaseTeacherController
             "name" => strtoupper($key["name"]),
             "gender" => "pria"
         ];
-        //insert data siswa
-        $this->student->model->insert($data_siswa);
+        //insert data siswa jika data siswa belum ada
+        $cek_siswa = $this->student->model->where("id", "=", $key["student_id"]);
+        if($cek_siswa->count() == 0){
+            $this->student->model->insert($data_siswa);
+        } 
         //insert data nilai
         $item["course_id"] = Session::get("id_mapel");
         $item["student_id"] = $key["student_id"];
