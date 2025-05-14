@@ -21,8 +21,10 @@ class ClusteringHeadmasterController extends ClusteringController
     {
         return view("headmaster/clustering/clustering", ["nama" => "clustering"]);
     }
-    public function clusteringSiswa()
+    public function clusteringSiswa($id)
     {
+        //set session
+        //Session::put("", "")
         return view("headmaster/clustering_siswa/clustering_siswa", ["nama" => "clustering"]);
     }
     public function getData()

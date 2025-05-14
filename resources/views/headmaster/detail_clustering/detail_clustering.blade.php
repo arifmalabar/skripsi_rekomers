@@ -43,7 +43,8 @@ Detail Clustering
                         @foreach($data["hasil"] as $key)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $key["student_id"] }}</td>
+                            <td><a href="{{ url("kakomli/detail_cluster/clustering_siswa/".$key["student_id"]."")}}">{{
+                                    $key["student_id"] }}</a></td>
                             <td>{{ $key["name"] }}</td>
                             <td>{{ $key["centroid1"] }}</td>
                             <td>{{ $key["centroid2"] }}</td>

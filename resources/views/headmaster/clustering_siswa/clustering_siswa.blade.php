@@ -15,10 +15,10 @@ Clustering Siswa
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-ban"></i> Peringatan!</h5>
-            Siswa termasuk dalam risiko tinggi lemah di dalam mata pelajaran, segera lakukan perbaikan
+        <div class="alert alert-danger alert-dismissible information-status">
+            <h5><i class="icon fas fa-ban information-title"></i></h5>
+            <p class="information-message">Siswa termasuk dalam risiko tinggi lemah di dalam mata pelajaran, segera
+                lakukan perbaikan</p>
         </div>
     </div>
     <div class="col-md-4">
@@ -40,27 +40,30 @@ Clustering Siswa
                         alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">Ridho ArifW</h3>
+                <h3 class="profile-username text-center biodata-nama">Ridho ArifW</h3>
 
                 <p class="text-muted text-center">Siswa</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                        <b>Nama</b> <b class="float-right">Ridho Arif W</b>
+                        <b>Nama</b> <b class="float-right biodata-nama">Ridho Arif W</b>
                     </li>
                     <li class="list-group-item">
-                        <b>ID/NISN</b> <b class="float-right">543</b>
+                        <b>ID/NISN</b> <b class="float-right biodata-nisn">543</b>
                     </li>
                     <li class="list-group-item">
-                        <b>Status Siswa</b> <span class="badge badge-danger float-right">High Risk</span>
+                        <b>Status Siswa</b> <span class="badge badge-danger float-right biodata-risiko">High Risk</span>
                     </li>
                     <li class="list-group-item">
                         <strong><u>Catatan Khusus: </u></strong>
 
                         <p class="text-muted">
                             Siswa Memerlukan perbaikan di mata pelajaran
-                            <b class="color-red" style="color: red">IOT, PWPB</b>
+                            <b class="color-red rekomendasi-belajar" style="color: red">IOT, PWPB</b>
                         </p>
+                    </li>
+                    <li class="list-group-item rekomendasi-tambah-nilai">
+
                     </li>
                 </ul>
 
@@ -76,7 +79,7 @@ Clustering Siswa
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab"><i
-                                class="fa fa-user"></i>&nbsp;Risiko Siswa</a>
+                                class="fa fa-user"></i>&nbsp;Cluster Siswa</a>
 
                 </ul>
             </div><!-- /.card-header -->
@@ -108,6 +111,7 @@ Clustering Siswa
 </div>
 @endsection
 @section('js')
+<script type="module" src="{{ asset('js/detail_clustering_siswa/app.js') }}"></script>
 <script>
     $(function () {
         /* ChartJS
@@ -200,15 +204,5 @@ Clustering Siswa
     
   });
 </script>
-<script>
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-</script>
+
 @endsection

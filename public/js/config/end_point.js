@@ -14,6 +14,7 @@ export const siswa = `/${kakomlipath}/siswa/api`;
 export const tahun_ajaran = `/${kakomlipath}/tahun_ajaran/api`;
 export const mapel = `/${kakomlipath}/mata_pelajaran/api`;
 export const clustering = `/${kakomlipath}/clustering/api`;
+export const detail_cluster_siswa = `/${kakomlipath}/detail_cluster/api`;
 
 export const nilai = `/${guru}/grades/api`;
 export const detai_nilai = `/${guru}/grades_detail/api`;
