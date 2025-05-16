@@ -28,7 +28,7 @@ class GradingDetailController extends BaseTeacherController
         $this->setSession($data);
         return view("teacher.detail_nilai.detail_nilai", ["nama" => "penilaian"]);
     }
-    private function setSession($data)
+    public function setSession($data)
     {
         foreach ($data as $key => $value) {
             Session::put($key, $value);
@@ -57,7 +57,7 @@ class GradingDetailController extends BaseTeacherController
             return response()->json($th->getMessage(), 500);
         }
     }
-    private function getUngradedStudent($data)
+    public function getUngradedStudent($data)
     {
         try {
             
@@ -119,7 +119,7 @@ class GradingDetailController extends BaseTeacherController
             return $this->showError($th->getMessage());
         }
     }
-    private function availableData($key, $item)
+    public function availableData($key, $item)
     {
         $cek = $this->condition($key)->count();
         if($cek != 0){
@@ -128,11 +128,11 @@ class GradingDetailController extends BaseTeacherController
             $this->insertNewGrade($key, $item);
         }
     }
-    private function onlyUpdateGrade($key, $item)
+    public function onlyUpdateGrade($key, $item)
     {
         return $this->condition($key)->update($item);
     }
-    private function insertNewGrade($key, $item)
+    public function insertNewGrade($key, $item)
     {
         $mapel = $this->course->model->where("id", "=", Session::get("id_mapel"))->first();
         $data_siswa = [

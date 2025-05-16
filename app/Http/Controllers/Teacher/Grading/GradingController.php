@@ -41,7 +41,7 @@ class GradingController extends BaseTeacherController
     {
         return response()->json($request->all(), 200);
     }
-    private function getUngradedStudent($data)
+    public function getUngradedStudent($data)
     {
         try {
             //$kelas = Course::where("id", "=", $data["id_mapel"])->first();
@@ -77,7 +77,7 @@ class GradingController extends BaseTeacherController
             throw new QueryException($th->getMessage());
         }
     }
-    private function getReadyToInsert($request, $data) {
+    public function getReadyToInsert($request, $data) {
         $ready_toinsert = [];
         foreach ($data as $key) {
             $item_data = [

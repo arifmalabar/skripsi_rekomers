@@ -53,6 +53,12 @@
                         <p>Kelas</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/teacher/grades" class="nav-link {{ $nama == 'penilaian' ? 'active' : '' }}">
+                        <i class="fas nav-icon fa-pen"></i>
+                        <p>Nilai</p>
+                    </a>
+                </li>
 
                 <li class="nav-header">Mapel</li>
                 <li class="nav-item">
@@ -65,6 +71,12 @@
                     <a href="/kakomli/clustering" class="nav-link {{ $nama == 'clustering' ? 'active' : '' }}">
                         <i class="fas nav-icon fa-users"></i>
                         <p>Clustering Mapel</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/produk" class="nav-link {{ $nama == 'manufacturing' ? 'active' : '' }}">
+                        <i class="fas nav-icon fa-users"></i>
+                        <p>Clustering Report</p>
                     </a>
                 </li>
                 <!--<li class="nav-header">Purchase</li>
@@ -91,13 +103,7 @@
                         </li>
                     </ul>
                 </li>-->
-                <li class="nav-header">Clustering</li>
-                <li class="nav-item">
-                    <a href="/produk" class="nav-link {{ $nama == 'manufacturing' ? 'active' : '' }}">
-                        <i class="fas nav-icon fa-users"></i>
-                        <p>Clustering Report</p>
-                    </a>
-                </li>
+                
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
