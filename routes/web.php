@@ -34,8 +34,12 @@ Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('lo
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::controller(DashboardController::class)->group(function() {
-    $root = "/kakomli/";
-    Route::get($root."dashboard", "index")->name("dashboard");
+    $root = "/kakomli/dashboard/";
+    Route::get($root, "index")->name("dashboard");
+    Route::get($root."api", "getData");
+    Route::post($root."api", "insertData");
+    Route::put($root."api/{id}", "updateData");
+    Route::delete($root."api/{id}", "deleteData");
 });
 Route::controller(SemesterController::class)->group(function(){
     $root = "/kakomli/semester/";

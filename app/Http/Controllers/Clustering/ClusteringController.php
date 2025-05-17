@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Clustering;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Teacher\Grading\GradingDetailController;
+use App\Models\Clustering;
 use Illuminate\Http\Request;
 use App\Models\Teacher\Grade;
 
 class ClusteringController extends BaseController
 {
+    private GradingDetailController $grade;
     public function __construct() {
-        $this->model = new Grade();
+        $this->model = new Clustering();
+        $this->grade = new GradingDetailController();
     }
     private $siswa = [
         [
@@ -76,7 +80,7 @@ class ClusteringController extends BaseController
     }
     public function getGradeStudent($request)
     {
-        return $this->model->join("students", "students.id", "=", "grades.student_id")
+        return $this->grade->model->join("students", "students.id", "=", "grades.student_id")
         ->where("course_id", "=", $request["course_id"])
         ->where("year", "=", $request["year"])
         ->where("semester", "=", $request["semester"])

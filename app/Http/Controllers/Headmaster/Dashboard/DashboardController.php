@@ -2,84 +2,60 @@
 
 namespace App\Http\Controllers\Headmaster\Dashboard;
 
+use App\Http\Controllers\Clustering\ClusteringController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Headmaster\BaseHeadmasterController;
+use App\Http\Controllers\Headmaster\ProgramStudy\ProgramStudyController;
+use App\Http\Controllers\Headmaster\Student\StudentController;
+use App\Http\Controllers\Headmaster\Teacher\TeacherController;
+use App\Models\Headmaster\ProgramStudy;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class DashboardController extends BaseHeadmasterController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private TeacherController $teacher;
+    private StudentController $student;
+    private ProgramStudyController $programstudy;
+    private ClusteringController $clustering;
+    public function __construct() {
+        $this->teacher = new TeacherController();
+        $this->student = new StudentController();
+        $this->programstudy = new ProgramStudyController();
+        $this->clustering  = new ClusteringController();
+    }
     public function index()
     {
         return view("headmaster/dashboard/dashboard", ["nama" => "dashboard"]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getData()
     {
-        //
+        try {
+            $data = [
+                "jml_siswa" => $this->student->model->count(),
+                "jumlah_jurusan" => $this->programstudy->getData()->count(),
+                "jumlah_guru" => $this->teacher->getData()->count(),
+                "presentase" => $this->hitungPresentase()
+            ];
+            return response()->json($data);
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    private function hitungPresentase()
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+        $high = $this->getCount("C1")->count();
+        $mid = $this->getCount("C2")->count();
+        $low = $this->getCount("C3")->count();
+        
+        $total = $high + $mid + $low;
+        return [
+            "risiko_tinggi" => round(($high / $total) * 100, 0),
+            "risiko_tengah" => round(($mid / $total) * 100, 0),
+            "risiko_rendah" => round(($low / $total) * 100, 0)
+        ];
+    }   
+    private function getCount($criteria)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+        return $this->clustering->model->where("cluster", "=", $criteria);
+    } 
 }

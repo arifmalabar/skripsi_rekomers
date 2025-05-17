@@ -7,6 +7,7 @@ export const insert_guru = `guru/api`;
 export const update_guru = `/${kakomlipath}/guru/api`;
 export const delete_guru = `/${kakomlipath}/guru/api`;
 
+export const dashboard = `/${kakomlipath}/dashboard/api`;
 export const prodi = `/${kakomlipath}/jurusan/api`;
 export const kelas = `/${kakomlipath}/kelas/api`;
 export const semester = `/${kakomlipath}/semester/api`;

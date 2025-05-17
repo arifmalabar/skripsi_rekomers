@@ -135,8 +135,9 @@ class GradingDetailController extends BaseTeacherController
     public function insertNewGrade($key, $item)
     {
         $mapel = $this->course->model->where("id", "=", Session::get("id_mapel"))->first();
+        $id = str_replace(["/", "."], "", $key["student_id"]);
         $data_siswa = [
-            "id" => $key["student_id"],
+            "id" => $id,
             "classroom_id" => $mapel->classroom_id,
             "name" => strtoupper($key["name"]),
             "gender" => "pria"

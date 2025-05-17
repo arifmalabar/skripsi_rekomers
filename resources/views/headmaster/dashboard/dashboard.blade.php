@@ -14,7 +14,7 @@ Dashboard
 
         <div class="info-box-content">
           <span class="info-box-text">Jumlah Siswa</span>
-          <span class="info-box-number">240</span>
+          <span class="info-box-number jml_siswa">0</span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -27,7 +27,7 @@ Dashboard
 
         <div class="info-box-content">
           <span class="info-box-text">Jumlah Jurusan</span>
-          <span class="info-box-number">4</span>
+          <span class="info-box-number jml_jurusan">0 </span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -40,7 +40,7 @@ Dashboard
 
         <div class="info-box-content">
           <span class="info-box-text">Jumlah Guru</span>
-          <span class="info-box-number">5</span>
+          <span class="info-box-number jml_guru">0</span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -84,7 +84,7 @@ Dashboard
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>50<sup>%</sup></h3>
+              <h3 class="high-risk">0<sup>%</sup></h3>
 
               <p>Risiko Tinggi</p>
             </div>
@@ -99,7 +99,7 @@ Dashboard
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>11<sup style="font-size: 20px">%</sup></h3>
+              <h3 class="mid-risk"><sup style="font-size: 20px">%</sup></h3>
 
               <p>Risiko Rendah</p>
             </div>
@@ -114,7 +114,7 @@ Dashboard
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44<sup style="font-size: 20px">%</sup></h3>
+              <h3 class="low-risk">44<sup style="font-size: 20px">%</sup></h3>
 
               <p>Risiko Menengah</p>
             </div>
@@ -421,6 +421,7 @@ Dashboard
 </div>
 @endsection
 @section('js')
+<script type="module" src="{{ asset('js/dashboard/app.js') }}"></script>
 <script type="module" src="{{ asset('js/semester/app.js') }}"></script>
 <script type="module" src="{{ asset('js/tahun_ajaran/app.js') }}"></script>
 <script>
