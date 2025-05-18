@@ -33,78 +33,82 @@ Route::get('/', [LoginController::class,'index'])->name('login')->middleware('gu
 Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::controller(DashboardController::class)->group(function() {
-    $root = "/kakomli/dashboard/";
-    Route::get($root, "index")->name("dashboard");
-    Route::get($root."api", "getData");
-    Route::post($root."api", "insertData");
-    Route::put($root."api/{id}", "updateData");
-    Route::delete($root."api/{id}", "deleteData");
+Route::group(['middleware' => ['kakomli']], function () {
+    Route::controller(DashboardController::class)->group(function() {
+        $root = "/kakomli/dashboard/";
+        Route::get($root, "index")->name("dashboard");
+        Route::get($root."api", "getData");
+        Route::post($root."api", "insertData");
+        Route::put($root."api/{id}", "updateData");
+        Route::delete($root."api/{id}", "deleteData");
+    });
+    Route::controller(SemesterController::class)->group(function(){
+        $root = "/kakomli/semester/";
+        Route::get($root, "index");
+        Route::get($root."api", "getData");
+        Route::post($root."api", "insertData");
+        Route::put($root."api/{id}", "updateData");
+        Route::delete($root."api/{id}", "deleteData");
+    });
+    Route::controller(TeacherController::class)->group(function() {
+        $root = "/kakomli/";
+        Route::get($root."guru", "index");
+        Route::get($root."guru/api", "getData");
+        Route::post($root."guru/api", "insertData");
+        Route::put($root."guru/api/{id}", "updateData");
+        Route::delete($root."guru/api/{id}", "deleteData");
+    });
+    Route::controller(ProgramStudyController::class)->group(function () {
+        $root = "/kakomli/jurusan/";
+        Route::get($root, "index");
+        Route::get($root."api", "getData");
+        Route::post($root."api", "insertData");
+        Route::put($root."api/{id}", "updateData");
+        Route::delete($root."api/{id}", "deleteData");
+    });
+    Route::controller(ClassroomController::class)->group(function(){
+        $root = "/kakomli/kelas/";
+        Route::get($root, "index");
+        Route::get($root."api", "getData");
+        Route::post($root."api", "insertData");
+        Route::put($root."api/{id}", "updateData");
+        Route::delete($root."api/{id}", "deleteData");
+    });
+    Route::controller(StudentController::class)->group(function(){
+        $root = "/kakomli/";
+        Route::get($root."detail_kelas/{id}", "index");
+        Route::get($root."siswa/api", "getData");
+        Route::post($root."siswa/api", "insertData");
+        Route::put($root."siswa/api/{id}", "updateData");
+        Route::delete($root."siswa/api/{id}", "deleteData");
+    });
+    Route::controller(YearController::class)->group(function () {
+        $root = "/kakomli/tahun_ajaran/";
+        Route::get($root."api", "getData");
+        Route::post($root."api", "insertData");
+        Route::put($root."api/{id}", "updateData");
+        Route::delete($root."api/{id}", "deleteData");
+    });
+    Route::controller(CourseController::class)->group(function(){
+        $root = "/kakomli/mata_pelajaran";
+        Route::get($root, "index");
+        Route::get($root."/api", "getData");
+        Route::post($root."/api", "insertData");
+        Route::put($root."/api/{id}", "updateData");
+        Route::delete($root."/api/{id}", "deleteData");
+    });
 });
-Route::controller(SemesterController::class)->group(function(){
-    $root = "/kakomli/semester/";
-    Route::get($root, "index");
-    Route::get($root."api", "getData");
-    Route::post($root."api", "insertData");
-    Route::put($root."api/{id}", "updateData");
-    Route::delete($root."api/{id}", "deleteData");
-});
-Route::controller(TeacherController::class)->group(function() {
-    $root = "/kakomli/";
-    Route::get($root."guru", "index");
-    Route::get($root."guru/api", "getData");
-    Route::post($root."guru/api", "insertData");
-    Route::put($root."guru/api/{id}", "updateData");
-    Route::delete($root."guru/api/{id}", "deleteData");
-});
-Route::controller(ProgramStudyController::class)->group(function () {
-    $root = "/kakomli/jurusan/";
-    Route::get($root, "index");
-    Route::get($root."api", "getData");
-    Route::post($root."api", "insertData");
-    Route::put($root."api/{id}", "updateData");
-    Route::delete($root."api/{id}", "deleteData");
-});
-Route::controller(ClassroomController::class)->group(function(){
-    $root = "/kakomli/kelas/";
-    Route::get($root, "index");
-    Route::get($root."api", "getData");
-    Route::post($root."api", "insertData");
-    Route::put($root."api/{id}", "updateData");
-    Route::delete($root."api/{id}", "deleteData");
-});
-Route::controller(StudentController::class)->group(function(){
-    $root = "/kakomli/";
-    Route::get($root."detail_kelas/{id}", "index");
-    Route::get($root."siswa/api", "getData");
-    Route::post($root."siswa/api", "insertData");
-    Route::put($root."siswa/api/{id}", "updateData");
-    Route::delete($root."siswa/api/{id}", "deleteData");
-});
-Route::controller(YearController::class)->group(function () {
-    $root = "/kakomli/tahun_ajaran/";
-    Route::get($root."api", "getData");
-    Route::post($root."api", "insertData");
-    Route::put($root."api/{id}", "updateData");
-    Route::delete($root."api/{id}", "deleteData");
-});
-Route::controller(CourseController::class)->group(function(){
-    $root = "/kakomli/mata_pelajaran";
-    Route::get($root, "index");
-    Route::get($root."/api", "getData");
-    Route::post($root."/api", "insertData");
-    Route::put($root."/api/{id}", "updateData");
-    Route::delete($root."/api/{id}", "deleteData");
-});
+
+
 
 Route::controller(TeacherDashboardController::class)->group(function() {
     $root = "/teacher/dashboard";
-    Route::get($root, "index");
+    Route::get($root, "index")->name("/teacher/dashboard");
 });
 Route::controller(GradingController::class)->group(function () {
     $root = "/teacher/grades";
     Route::get($root, "index");
-    Route::get($root."/api", "getData");
+    Route::get($root."/api", "getData")->name("/teacher/grades");
     Route::post($root."/api", "insertData");
     Route::put($root."/api/{id}", "updateNilai");
     Route::delete($root."/api", "deleteNilai");

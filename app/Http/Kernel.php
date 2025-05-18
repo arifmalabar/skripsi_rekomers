@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\HeadmasterMiddleware;
+use App\Http\Middleware\TeachermasterMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +65,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'kakomli' => HeadmasterMiddleware::class,
+        'teacher' => TeachermasterMiddleware::class,
     ];
 }

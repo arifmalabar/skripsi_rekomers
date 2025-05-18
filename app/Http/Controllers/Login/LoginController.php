@@ -24,11 +24,15 @@ class LoginController extends Controller
             'password'  => $request->password
         ];
         if(Auth::guard("teachers")->attempt($data)){
-            //return redirect()->route('dashboard');
-            return "1";
+            $request->session()->regenerate();
+            $role = Auth::guard("teachers")->user()->role;
+            if($role == "kakomli"){
+                return redirect()->route("dashboard");
+            } else {
+                return redirect()->route("/teacher/dashboard");
+            }
         } else{
-            //return redirect()->route('login')->with('failed', 'Email atau Password Salah!');
-            return "0";
+            return redirect("/");
         }
     }
 
