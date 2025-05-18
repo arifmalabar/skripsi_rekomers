@@ -22,4 +22,9 @@ class TeacherController extends BaseController
     {
         return view("headmaster/guru/guru", ["nama" => "guru"]);
     }
+    public function insertData(Request $request)
+    {
+        $request["password"] = bcrypt($request["password"]);
+        return parent::insertData($request);
+    }
 }

@@ -64,6 +64,44 @@ Guru
                                                 <input type="hidden" value="{{ csrf_token() }}" class="token">
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <label for="">Username<sup>*</sup></label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-user"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" id="insert-username"
+                                                    placeholder="masukan username">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="">Password<sup>*</sup></label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-key"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="password" class="form-control" id="insert-password"
+                                                    placeholder="masukan password">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="">Role<sup>*</sup></label>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fa fa-key"></i>
+                                                    </span>
+                                                </div>
+                                                <select name="" id="insert-role" class="form-control">
+                                                    <option value="guru">guru</option>
+                                                    <option value="kakomli">kakomli</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -123,7 +161,7 @@ Guru
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <label for="">NIP<sup>*</sup></label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -135,7 +173,7 @@ Guru
                                                 placeholder="masukan nip">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <label for="">Nama<sup>*</sup></label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -148,6 +186,46 @@ Guru
                                             <input type="hidden" value="{{ csrf_token() }}" class="token">
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <label for="">Username<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" id="update-username"
+                                                placeholder="masukan username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="">Password<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-key"></i>
+                                                </span>
+                                            </div>
+                                            <input type="password" class="form-control" id="update-password"
+                                                placeholder="masukan password">
+                                            <input type="hidden" class="form-control" id="update-old-password"
+                                                placeholder="masukan password">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="">Role<sup>*</sup></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-key"></i>
+                                                </span>
+                                            </div>
+                                            <select name="" id="update-role" class="form-control">
+                                                <option value="guru">guru</option>
+                                                <option value="kakomli">kakomli</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -157,8 +235,9 @@ Guru
                                             data-dismiss="modal">Close</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" style="width: 100%" class="btn btn-warning btn-proses-update"
-                                            data-dismiss="modal"><i class="fa fa-plus"></i>Update
+                                        <button type="button" style="width: 100%"
+                                            class="btn btn-warning btn-proses-update" data-dismiss="modal"><i
+                                                class="fa fa-plus"></i>Update
                                             Data</button>
                                     </div>
                                 </div>

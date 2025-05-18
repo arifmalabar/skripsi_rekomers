@@ -23,6 +23,8 @@ export function init() {
         lastid = $(this).data("id");
         $(".update-nip").val($(this).data("id"));
         $(".update-nama").val($(this).data("nama"));
+        $("#update-username").val($(this).data("username"));
+        $("#update-old-password").val($(this).data("password"));
     });
     $(".btn-proses-update").on("click", function () {
         update();
@@ -55,7 +57,7 @@ async function get() {
                 data: null,
                 render: function (p1, p2, p3) {
                     return `
-                        <button class="btn btn-outline-warning btn-sm btn-update" data-id="${p3.id}" data-nama="${p3.name}"
+                        <button class="btn btn-outline-warning btn-sm btn-update" data-id="${p3.id}" data-nama="${p3.name}" data-username="${p3.username}" data-password="${p3.password}"
                          data-toggle="modal" data-target="#modal-update"
                         >
                                 <i class="fa fa-edit"></i>
@@ -77,15 +79,28 @@ async function get() {
 async function insert() {
     var nama = $("#insert-nama").val();
     var nip = $("#insert-nip").val();
+    var username = $("#insert-username").val();
+    var password = $("#insert-password").val();
+    var role = $("#insert-role").val();
     var data = {
         id: nip,
         name: nama,
+        username: username,
+        password: password,
+        role: role,
     };
     try {
         validateEmptyField(nama);
         validateEmptyField(nip);
+        validateEmptyField(username);
+        validateEmptyField(password);
         await insertData(insert_guru, data, token);
-        clearFields(["#insert-nama", "#insert-nip"]);
+        clearFields([
+            "#insert-nama",
+            "#insert-nip",
+            "#insert-username",
+            "#insert-password",
+        ]);
         get();
     } catch (error) {
         alert(error);
@@ -94,16 +109,31 @@ async function insert() {
 async function update() {
     var nama = $(".update-nama").val();
     var nip = $(".update-nip").val();
+    var username = $("#insert-username").val();
+    var password = $("#insert-password").val();
+    var oldpassword = $("#update-old-password").val();
+    var role = $("#insert-role").val();
     var data = {
         id: nip,
         name: nama,
+        username: username,
+        password: password === "" ? oldpassword : password,
+        role: role,
     };
     try {
-        //alert(`${update_guru}/${lastid}`);
         validateEmptyField(nama);
         validateEmptyField(nip);
-        await updateData(`${update_guru}/${lastid}`, data, token);
-        clearFields([".update-nama", ".update-nip"]);
+        validateEmptyField(username);
+        validateEmptyField(password);
+        await updateData(`${update_guru}/${lastid}`, data, token).then((e) => {
+            console.log(e);
+        });
+        clearFields([
+            ".update-nama",
+            ".update-nip",
+            "#insert-username",
+            "#insert-password",
+        ]);
         get();
     } catch (error) {
         alert(error);
