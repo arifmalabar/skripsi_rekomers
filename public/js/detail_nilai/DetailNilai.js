@@ -47,7 +47,12 @@ async function upload() {
                 attendance_presence: element[5],
             });
         });
-        insertData(detai_nilai, ready, token);
+        try {
+            console.log(insertData(detai_nilai, ready, token));
+            console.log(ready);
+        } catch (error) {
+            console.log("Error" + error);
+        }
         get();
     });
 }

@@ -16,6 +16,7 @@ class ClusteringHeadmasterController extends ClusteringController
     public function __construct() {
         $this->model = new Grade();
         $this->mdl = new Clustering();
+        parent::__construct();
     }
     public function index()
     {

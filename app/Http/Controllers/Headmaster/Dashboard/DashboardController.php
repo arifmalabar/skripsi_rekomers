@@ -48,11 +48,19 @@ class DashboardController extends BaseHeadmasterController
         $low = $this->getCount("C3")->count();
         
         $total = $high + $mid + $low;
-        return [
-            "risiko_tinggi" => round(($high / $total) * 100, 0),
-            "risiko_tengah" => round(($mid / $total) * 100, 0),
-            "risiko_rendah" => round(($low / $total) * 100, 0)
-        ];
+        try {
+            return [
+                "risiko_tinggi" => round(($high / $total) * 100, 0),
+                "risiko_tengah" => round(($mid / $total) * 100, 0),
+                "risiko_rendah" => round(($low / $total) * 100, 0)
+            ];
+        } catch (\Throwable $th) {
+            return [
+                "risiko_tinggi" => 0,
+                "risiko_tengah" => 0,
+                "risiko_rendah" => 0
+            ];
+        }
     }   
     private function getCount($criteria)
     {

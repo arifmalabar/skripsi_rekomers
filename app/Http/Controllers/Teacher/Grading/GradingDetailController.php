@@ -96,7 +96,8 @@ class GradingDetailController extends BaseTeacherController
     }
     public function condition($key)
     {
-        return $this->model->where("student_id", "=", $key['student_id'])
+        $id = str_replace(["/", "."], "", $key["student_id"]);
+        return $this->model->where("student_id", "=", $id)
                             ->where("course_id", "=", Session::get("id_mapel"))
                             ->where("year", "=", Session::get("tahun"))
                             ->where("semester", "=", Session::get("semester"));
@@ -121,10 +122,12 @@ class GradingDetailController extends BaseTeacherController
     }
     public function availableData($key, $item)
     {
+        //return $this->condition($key)->get();
         $cek = $this->condition($key)->count();
         if($cek != 0){
             $this->onlyUpdateGrade($key, $item);
         } else {
+            
             $this->insertNewGrade($key, $item);
         }
     }
@@ -143,7 +146,7 @@ class GradingDetailController extends BaseTeacherController
             "gender" => "pria"
         ];
         //insert data siswa jika data siswa belum ada
-        $cek_siswa = $this->student->model->where("id", "=", $key["student_id"]);
+        $cek_siswa = $this->student->model->where("id", "=", $id);
         if($cek_siswa->count() == 0){
             $this->student->model->insert($data_siswa);
         } 

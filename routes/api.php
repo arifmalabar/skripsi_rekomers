@@ -35,9 +35,12 @@ Route::controller(StudentController::class)->group(function(){
     Route::post($root."siswa/api", "insertData");
 });
 Route::controller(ClusteringHeadmasterController::class)->group(function () {
-    $root = "/kakomli/";
-    Route::get($root."clustering", function() {
-        return ["response" => "asas"];
-    });
-    Route::post($root."clustering", "insertData");
+    $root = "/kakomli/clustering";
+
+    Route::get($root, "index");
+    Route::get($root."/siswa_detail/{id}", "clusteringSiswa");
+    Route::get($root."/api", "getData");
+    Route::post($root."/api", "insertData");
+    Route::post($root."/detail", "getClusteringDetail");
+    Route::delete($root."/api", "deleteNilai");
 });

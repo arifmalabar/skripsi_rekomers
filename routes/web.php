@@ -33,8 +33,7 @@ Route::get('/', [LoginController::class,'index'])->name('login')->middleware('gu
 Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => ['kakomli']], function () {
-    Route::controller(DashboardController::class)->group(function() {
+Route::controller(DashboardController::class)->group(function() {
         $root = "/kakomli/dashboard/";
         Route::get($root, "index")->name("dashboard");
         Route::get($root."api", "getData");
@@ -97,7 +96,6 @@ Route::group(['middleware' => ['kakomli']], function () {
         Route::put($root."/api/{id}", "updateData");
         Route::delete($root."/api/{id}", "deleteData");
     });
-});
 
 
 
