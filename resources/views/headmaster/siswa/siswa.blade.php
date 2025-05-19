@@ -3,7 +3,7 @@
 active
 @endsection
 @section('judul')
-XII RPL D
+Data Siswa
 @endsection
 @section('css')
 <style>
@@ -20,7 +20,7 @@ XII RPL D
                 <!-- small card -->
                 <div class="small-box bg-gray">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3 class="jk-pria">44</h3>
 
                         <p>Jenis Kelamin Pria</p>
                     </div>
@@ -34,7 +34,7 @@ XII RPL D
                 <!-- small card -->
                 <div class="small-box bg-pink">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3 class="jk-wanita">44</h3>
 
                         <p>Jenis Kelamin Wanita</p>
                     </div>
@@ -55,11 +55,49 @@ XII RPL D
                     Data Siswa
                 </h3>
                 <div class="card-tools">
-                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-lg"><i
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-upload"><i
                             class="fa fa-upload"></i> Upload Excel Data</button>
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-lg"><i
                             class="fa fa-plus"></i> Tambah Data</button>
 
+                    <div class="modal fade" id="modal-upload">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Upload Data Siswa</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label for="">Upload Data Siswa</label>
+                                            <input type="file" name="" id="" class="form-control upload-siswa">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row" style="width: 100%; text-align: center">
+                                        <div class="col-md-6">
+                                            <button type="button" style="width: 100%" class="btn btn-outline-primary"
+                                                data-dismiss="modal">Close</button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button type="button" style="width: 100%" class="btn btn-primary btn-upload"
+                                                data-dismiss="modal"><i class="fa fa-plus"></i>Tambah
+                                                Data</button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                    </div>
+                    <!-- mOdal tambah -->
                     <div class="modal fade" id="modal-lg">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -221,6 +259,7 @@ XII RPL D
 @endsection
 @section('js')
 <script type="module" src="{{ asset('js/siswa/app.js') }}"></script>
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 <script>
     $(function () {
         //Initialize Select2 Elements

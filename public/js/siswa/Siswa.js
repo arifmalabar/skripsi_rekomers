@@ -3,8 +3,12 @@ import { deleteData, getData, insertData, updateData } from "../fetch/fetch.js";
 import { clearField, clearFields } from "../helper/clear_form.js";
 import { validateEmptyField } from "../helper/form_validation.js";
 import { showTables } from "../helper/table.js";
+import { uploadExcel } from "../helper/upload_excel.js";
 var token = "";
 var lastid = "";
+let selectedFile;
+var pria = 0,
+    wanita = 0;
 export function init() {
     token = $(".token").val();
     get();
@@ -14,6 +18,9 @@ export function init() {
     $("body").on("click", ".btn-hapus", function () {
         delData($(this).data("id"));
     });
+    $(".upload-siswa").change(function (e) {
+        selectedFile = e.target.files[0];
+    });
     $("body").on("click", ".btn-update", function () {
         lastid = $(this).data("id");
         $(".update-nisn").val($(this).data("id"));
@@ -21,6 +28,9 @@ export function init() {
     });
     $(".btn-proses-update").on("click", function () {
         update();
+    });
+    $(".btn-upload").click(function () {
+        uploadDataSiswa();
     });
     showListJurusan();
 }
@@ -34,6 +44,8 @@ async function showListJurusan() {
     $(".list-jurusan").html(list);
 }
 async function get() {
+    pria = 0;
+    wanita = 0;
     try {
         var no = 1;
         var data = await getData(siswa);
@@ -51,7 +63,15 @@ async function get() {
                 data: "name",
             },
             {
-                data: "gender",
+                data: null,
+                render: function (p1, p2, p3) {
+                    if (p3.gender === "pria") {
+                        pria += 1;
+                    } else if (p3.gender === "wanita") {
+                        wanita += 1;
+                    }
+                    return p3.gender;
+                },
             },
 
             {
@@ -74,8 +94,28 @@ async function get() {
         ];
 
         showTables(data, columm);
+        $(".jk-pria").text(pria);
+        $(".jk-wanita").text(wanita);
     } catch (error) {
         alert(error);
+    }
+}
+async function uploadDataSiswa() {
+    try {
+        let data = [];
+        let hasil = await uploadExcel(selectedFile).then((e) => {
+            e.forEach((element) => {
+                data.push({
+                    id: element[0],
+                    name: element[1],
+                    gender: element[2],
+                });
+            });
+        });
+        insertData(`${siswa}/multiple`, data, token);
+        get();
+    } catch (error) {
+        console.log(error);
     }
 }
 async function insert() {

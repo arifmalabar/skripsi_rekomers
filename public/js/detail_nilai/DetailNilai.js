@@ -36,7 +36,7 @@ export function init() {
 }
 async function upload() {
     let ready = [];
-    const data = uploadExcel(selectedFile).then((e) => {
+    const data = await uploadExcel(selectedFile).then((e) => {
         e.forEach((element) => {
             ready.push({
                 student_id: element[0],
@@ -48,8 +48,7 @@ async function upload() {
             });
         });
         try {
-            console.log(insertData(detai_nilai, ready, token));
-            console.log(ready);
+            insertData(detai_nilai, ready, token);
         } catch (error) {
             console.log("Error" + error);
         }

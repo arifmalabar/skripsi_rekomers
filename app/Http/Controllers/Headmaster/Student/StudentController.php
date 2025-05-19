@@ -39,4 +39,11 @@ class StudentController extends BaseHeadmasterController
         $request->merge(["classroom_id" => Session::get("classroom_id")]);
         return parent::insertData($request);
     }
+    public function insertMultipleData(Request $request)
+    {
+        foreach ($request->except("token") as $key) {
+            $key["classroom_id"] = Session::get("classroom_id");
+            return $this->model->insert($key);
+        }
+    }
 }
