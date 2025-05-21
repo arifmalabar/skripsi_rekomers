@@ -46,6 +46,7 @@ class ClusteringHeadmasterController extends ClusteringController
     public function getClusteringDetail(Request $request)
     {
         try {
+            //return $this->runKmeans($request);
             return view("headmaster/detail_clustering/detail_clustering", ["nama" => "clustering", "data" => $this->runKmeans($request)]);
         } catch (\Throwable $th) {
             return $this->showError($th->getMessage());

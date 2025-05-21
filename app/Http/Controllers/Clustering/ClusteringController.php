@@ -92,13 +92,13 @@ class ClusteringController extends BaseController
         $k = 3;
         $centroid = [
             [
-                40, 50, 60
+                20, 20, 20
             ],
             [
-                65, 70, 80
+                70, 70, 70
             ],
             [
-                85, 90, 100
+                100, 100, 100
             ]
         ];
         $iterate = 0;
@@ -232,13 +232,71 @@ class ClusteringController extends BaseController
                 
             }*/
         } while($same == 0 && $iterate < $maxiterate);
-        
+
+        $silhouette_score = $this->hitungSilhouetteScore($clusters);
+
         return [
             "jarak" => $histori_jarak,
             "pengelompokan_cluster" => $histori_cluster,
             "hasil" => $clusters,
+            "siholuete" => round($silhouette_score, 3),
         ];
         
+    }
+    public function hitungSilhouetteScore($clusters)
+    {
+        $clusterGroups = [
+            'C1' => [],
+            'C2' => [],
+            'C3' => []
+        ];
+
+        foreach ($clusters as $item) {
+            $clusterGroups[$item['cluster']][] = $item;
+        }
+
+        $scores = [];
+
+        foreach ($clusters as $current) {
+            $currentCluster = $current['cluster'];
+            $a = 0;
+            $b = PHP_FLOAT_MAX;
+            $sameCluster = $clusterGroups[$currentCluster];
+            $totalInSameCluster = count($sameCluster) - 1;
+
+            // a(i): rata-rata jarak ke cluster sendiri
+            foreach ($sameCluster as $other) {
+                if ($current['student_id'] === $other['student_id']) continue;
+                $a += $this->euclideanDistance($current, $other);
+            }
+            $a = ($totalInSameCluster > 0) ? $a / $totalInSameCluster : 0;
+
+            // b(i): jarak ke cluster terdekat
+            foreach ($clusterGroups as $key => $group) {
+                if ($key === $currentCluster) continue;
+
+                $total = 0;
+                foreach ($group as $item) {
+                    $total += $this->euclideanDistance($current, $item);
+                }
+                $avg = count($group) > 0 ? $total / count($group) : 0;
+                if ($avg < $b) $b = $avg;
+            }
+
+            // silhouette s(i)
+            $s = ($a == 0 && $b == 0) ? 0 : ($b - $a) / max($a, $b);
+            $scores[] = $s;
+        }
+
+        return count($scores) > 0 ? array_sum($scores) / count($scores) : 0;
+    }
+    public function euclideanDistance($a, $b)
+    {
+        return sqrt(
+            pow($a['assignment'] - $b['assignment'], 2) +
+            pow($a['project'] - $b['project'], 2) +
+            pow($a['exams'] - $b['exams'], 2)
+        );
     }
     public function hitungJarak($student, $centroid)
     {   $list_jarak = [];
