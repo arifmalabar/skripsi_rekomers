@@ -74,9 +74,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/produk" class="nav-link {{ $nama == 'manufacturing' ? 'active' : '' }}">
+                    <a href="/kakomli/clustering_allsiswa"
+                        class="nav-link {{ $nama == 'manufacturing' ? 'active' : '' }}">
                         <i class="fas nav-icon fa-users"></i>
-                        <p>Clustering Report</p>
+                        <p>Clustering Siswa</p>
                     </a>
                 </li>
                 <!--<li class="nav-header">Purchase</li>
@@ -103,7 +104,7 @@
                         </li>
                     </ul>
                 </li>-->
-                
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

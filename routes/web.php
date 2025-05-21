@@ -3,6 +3,7 @@
 use App\Http\Controllers\Clustering\ClusteringController;
 use App\Http\Controllers\Headmaster\Classroom\ClassroomController;
 use App\Http\Controllers\Headmaster\Clustering\DetailSiswaClusteringController;
+use App\Http\Controllers\Headmaster\ClusteringSiswa\ClusteringSiswaController;
 use App\Http\Controllers\Headmaster\Course\CourseController;
 use App\Http\Controllers\Headmaster\Dashboard\DashboardController;
 use App\Http\Controllers\Headmaster\Teacher\TeacherController;
@@ -131,6 +132,12 @@ Route::controller(ClusteringHeadmasterController::class)->group(function () {
 Route::controller(DetailSiswaClusteringController::class)->group(function () {
     $root = "kakomli/detail_cluster/";
     Route::get($root."clustering_siswa/{id}", "index");
+    Route::get($root."api", "getData");
+    
+});
+Route::controller(ClusteringSiswaController::class)->group(function () {
+    $root = "kakomli/clustering_allsiswa/";
+    Route::get($root, "index");
     Route::get($root."api", "getData");
     
 });
