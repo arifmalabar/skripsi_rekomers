@@ -1,9 +1,17 @@
 @extends('template/headmaster_layout/layout')
+@section('css')
+<style>
+    span {
+        width: 40%;
+        text-transform: uppercase
+    }
+</style>
+@endsection
 @section('status')
 active
 @endsection
 @section('judul')
-Detail Clustering
+Intepretasi
 
 @endsection
 @section('content')
@@ -14,11 +22,10 @@ Detail Clustering
                 <h3 class="card-title">
                     <i class="fa fa-book"></i>
                     &nbsp;
-                    Clustering All Siswa
+                    Interpretasi Siswa
                 </h3>
                 <div class="card-tools">
-                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-lg"><i
-                            class="fa fa-sync"></i>&nbsp;Sinkronasi Data</button>
+
                 </div>
             </div>
             <!-- /.card-header -->
@@ -29,7 +36,7 @@ Detail Clustering
                             <th>No</th>
                             <th>NISN</th>
                             <th>Nama</th>
-                            <th>Cluster</th>
+                            <th>Risiko</th>
                         </tr>
                     </thead>
                     <tbody>

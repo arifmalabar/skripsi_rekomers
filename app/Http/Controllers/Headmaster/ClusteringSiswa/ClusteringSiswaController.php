@@ -41,11 +41,11 @@ class ClusteringSiswaController extends ClusteringHeadmasterController
     private function getRisk($key)
     {
         $risk = "";
-        if($key["centroid1"] >= $key["centroid2"] || $key["centroid1"] >= $key["centroid3"]){
+        if($key["cluster1"] >= $key["cluster2"] && $key["cluster1"] >= $key["cluster3"]){
             $risk = "high";
-        } elseif($key["centroid2"] >= $key["centroid3"] || $key["centroid2"] >= $key["centroid1"]){
+        } elseif($key["cluster2"] >= $key["cluster3"] && $key["cluster2"] >= $key["cluster1"]){
             $risk = "medium";
-        } elseif($key["centroid3"] >= $key["centroid1"] || $key["centroid3"] >= $key["centroid2"]){
+        } elseif($key["cluster3"] >= $key["cluster1"] && $key["cluster3"] >= $key["cluster2"]){
             $risk = "low";
         }
         return $risk;

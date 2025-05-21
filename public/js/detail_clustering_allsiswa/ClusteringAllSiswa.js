@@ -30,7 +30,18 @@ async function get() {
                 data: "name",
             },
             {
-                data: "risiko",
+                data: null,
+                render: function (p1, p2, p3) {
+                    if (p3.risiko === "high") {
+                        return `<span class="badge badge-danger">${p3.risiko}</span>`;
+                    } else if (p3.risiko === "medium") {
+                        return `<span class="badge badge-warning">${p3.risiko}</span>`;
+                    } else if (p3.risiko === "low") {
+                        return `<span class="badge badge-success">${p3.risiko}</span>`;
+                    } else {
+                        return `<span class="badge badge-primary">undefined</span>`;
+                    }
+                },
             },
         ];
         showTables(data, columm);

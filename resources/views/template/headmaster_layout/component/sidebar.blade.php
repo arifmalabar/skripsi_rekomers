@@ -75,9 +75,9 @@
                 </li>
                 <li class="nav-item">
                     <a href="/kakomli/clustering_allsiswa"
-                        class="nav-link {{ $nama == 'manufacturing' ? 'active' : '' }}">
+                        class="nav-link {{ $nama == 'clustering_all_siswa' ? 'active' : '' }}">
                         <i class="fas nav-icon fa-users"></i>
-                        <p>Clustering Siswa</p>
+                        <p>Intepretasi Siswa</p>
                     </a>
                 </li>
                 <!--<li class="nav-header">Purchase</li>
