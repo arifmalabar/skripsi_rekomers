@@ -11,5 +11,6 @@ export function showTables(dt, col, tbid = null) {
         bDestroy: true,
         data: dt,
         columns: col,
+        columnDefs: [{ targets: [1, 2], className: "align-kiri" }],
     });
 }

@@ -10,6 +10,9 @@ Clustering Siswa
     sup {
         color: red;
     }
+    .align-kiri {
+        text-align: left !important;
+    }
 </style>
 @endsection
 @section('content')

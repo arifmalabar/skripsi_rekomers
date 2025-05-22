@@ -106,12 +106,6 @@ async function get() {
                                             class="form-control input-presensi">`;
                 },
             },
-            {
-                data: null,
-                render: function (p1, p2, p3) {
-                    return `<button class="btn btn-sm btn-primary">Update</button>`;
-                },
-            },
         ];
         showTables(data, columm);
     } catch (error) {

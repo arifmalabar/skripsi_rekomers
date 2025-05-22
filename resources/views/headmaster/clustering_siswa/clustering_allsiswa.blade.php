@@ -2,9 +2,13 @@
 @section('css')
 <style>
     span {
-        width: 40%;
+        width: 20%;
         text-transform: uppercase
     }
+    .align-kiri {
+        text-align: left !important;
+    }
+    
 </style>
 @endsection
 @section('status')
@@ -33,10 +37,10 @@ Intepretasi
                 <table id="example2" style="text-align: center" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>NISN</th>
-                            <th>Nama</th>
-                            <th>Risiko</th>
+                            <th style="width: 10%">No</th>
+                            <th style="width: 10%">NISN</th>
+                            <th style="width: 50%">Nama</th>
+                            <th style="width: 30%">Risiko</th>
                         </tr>
                     </thead>
                     <tbody>

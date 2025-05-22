@@ -45,7 +45,7 @@ Detail Clustering
                             <td>{{ $no++ }}</td>
                             <td><a href="{{ url("kakomli/detail_cluster/clustering_siswa/".$key["student_id"]."")}}">{{
                                     $key["student_id"] }}</a></td>
-                            <td>{{ $key["name"] }}</td>
+                            <td style="text-align: start">{{ $key["name"] }}</td>
                             <td>{{ $key["centroid1"] }}</td>
                             <td>{{ $key["centroid2"] }}</td>
                             <td>{{ $key["centroid3"] }}</td>
@@ -102,7 +102,7 @@ Detail Clustering
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $key["student_id"] }}</td>
-                            <td>{{ $key["name"] }}</td>
+                            <td style="text-align: start">{{ $key["name"] }}</td>
                             <td>{{ $key["centroid1"] }}</td>
                             <td>{{ $key["centroid2"] }}</td>
                             <td>{{ $key["centroid3"] }}</td>
@@ -199,7 +199,7 @@ Detail Clustering
     $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
-      "searching": false,
+      "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": false,

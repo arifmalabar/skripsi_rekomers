@@ -72,27 +72,10 @@ Detail Penilaian
                                     <th>Proyek</th>
                                     <th>Ujian</th>
                                     <th>Presensi</th>
-                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>0027197002</td>
-                                    <td>Ridho Arif W</td>
-                                    <td><input type="number" placeholder="Input Nilai Tugas"
-                                            class="form-control input-tugas">
-                                    </td>
-                                    <td><input type="number" placeholder="Input Nilai Proyek"
-                                            class="form-control input-proyek">
-                                    </td>
-                                    <td><input type="number" placeholder="Input Nilai Ujian"
-                                            class="form-control input-ujian">
-                                    </td>
-                                    <td><input type="number" placeholder="Input Nilai Tugas"
-                                            class="form-control input-presensi"></td>
-                                    <td><button class="btn btn-sm btn-primary">Update</button></td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>

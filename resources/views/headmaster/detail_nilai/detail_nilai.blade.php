@@ -72,7 +72,6 @@ Detail Penilaian
                                     <th>Proyek</th>
                                     <th>Ujian</th>
                                     <th>Presensi</th>
-                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,7 +90,7 @@ Detail Penilaian
                                     </td>
                                     <td><input type="number" placeholder="Input Nilai Tugas"
                                             class="form-control input-presensi"></td>
-                                    <td><button class="btn btn-sm btn-primary">Update</button></td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
