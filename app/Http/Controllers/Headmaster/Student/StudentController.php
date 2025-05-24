@@ -41,9 +41,23 @@ class StudentController extends BaseHeadmasterController
     }
     public function insertMultipleData(Request $request)
     {
-        foreach ($request->except("token") as $key) {
-            $key["classroom_id"] = Session::get("classroom_id");
-            return $this->model->insert($key);
+        try {
+            foreach ($request->except("token") as $key) {
+                $key["classroom_id"] = Session::get("classroom_id");
+                $this->checkAvailable($key);
+            }
+            return true;
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
+    }
+    private function checkAvailable($key)
+    {
+        $cek = $this->model->where("id", "=", $key["id"]);
+        if($cek->count() == 0){
+            $this->model->insert($key);
+        } else {
+            $cek->update($key);
         }
     }
 }

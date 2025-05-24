@@ -103,7 +103,7 @@ async function get() {
 async function uploadDataSiswa() {
     try {
         let data = [];
-        let hasil = await uploadExcel(selectedFile).then((e) => {
+        await uploadExcel(selectedFile).then((e) => {
             e.forEach((element) => {
                 data.push({
                     id: element[0],
@@ -112,7 +112,9 @@ async function uploadDataSiswa() {
                 });
             });
         });
-        insertData(`${siswa}/multiple`, data, token);
+        await insertData(`${siswa}/multiple`, data, token).then((e) => {
+            console.log(e);
+        });
         get();
     } catch (error) {
         console.log(error);
