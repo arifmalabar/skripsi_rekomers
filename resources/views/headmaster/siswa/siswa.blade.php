@@ -73,6 +73,17 @@ Data Siswa
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12">
+                                            <div class="alert alert-info">
+                                                <label for=""><i class="fa fa-info"></i>&nbsp;Baca Petunjuk Berikut:</label>
+                                                <ol>
+                                                    <li>Unduh format excel berikut untuk melakukan upload data siswa, unduh di link berikut: <a class="text-danger" href="{{ asset('assets/dist/format/datasiswa.xlsx') }}" target="_blank">Unduh Format Excel</a></li>
+                                                    <li>Pastikan file berformat XLS/XLSX selain itu sistem akan menolak</li>
+                                                    <li>Batas ukuran upload file adalah 2mb, diatas itu maka file akan ditolak oleh sistem</li>
+                                                    <li>Sebelum upload file pastikan <b>telah sesuai dengan pentunjuk</b></li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
                                             <label for="">Upload Data Siswa</label>
                                             <input type="file" name="" id="" class="form-control upload-siswa">
                                         </div>
@@ -86,7 +97,7 @@ Data Siswa
                                         </div>
                                         <div class="col-md-6">
                                             <button type="button" style="width: 100%" class="btn btn-primary btn-upload"
-                                                data-dismiss="modal"><i class="fa fa-plus"></i>Tambah
+                                                data-dismiss="modal"><i class="fa fa-upload"></i>Upload
                                                 Data</button>
                                         </div>
                                     </div>

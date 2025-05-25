@@ -2,6 +2,16 @@ import { kelas, prodi } from "../config/end_point.js";
 import { deleteData, getData, insertData, updateData } from "../fetch/fetch.js";
 import { clearField, clearFields } from "../helper/clear_form.js";
 import { validateEmptyField } from "../helper/form_validation.js";
+import { showDlg, showMsg } from "../helper/message.js";
+import {
+    btnhapus,
+    cancelhapus,
+    confirmhapus,
+    questhapus,
+    successdeletedata,
+    successtambahdata,
+    successupdatedata,
+} from "../helper/string.js";
 import { showTables } from "../helper/table.js";
 var token = "";
 var lastid = "";
@@ -23,20 +33,24 @@ export function init() {
         update();
     });
     showListJurusan();
+    $(".list-jurusan").change(function (e) {
+        var id = $(this).val();
+        get(id);
+    });
 }
 async function showListJurusan() {
     var data = await getData(prodi);
     var list = "<option value=''>Pilih Jurusan</option>";
     data.forEach((e) => {
-        list =
-            `<option value="${e.id}">${e.program_study_name}</option>` + list;
+        list += `<option value="${e.id}">${e.program_study_name}</option>`;
     });
     $(".list-jurusan").html(list);
 }
-async function get() {
+async function get(id = null) {
     try {
         var no = 1;
-        var data = await getData(kelas);
+        var data =
+            id == null ? await getData(kelas) : await getData(`${kelas}/${id}`);
         var columm = [
             {
                 data: null,
@@ -82,7 +96,7 @@ async function get() {
         ];
         showTables(data, columm);
     } catch (error) {
-        alert(error);
+        showMsg("Error", `${error}`, "error");
     }
 }
 async function insert() {
@@ -98,8 +112,9 @@ async function insert() {
         await insertData(kelas, data, token);
         clearField(".insert-nama-kelas");
         get();
+        showMsg("Success", successtambahdata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Error", `${error}`, "error");
     }
 }
 async function update() {
@@ -115,20 +130,23 @@ async function update() {
         await updateData(`${kelas}/${lastid}`, data, token);
         clearField(".insert-nama-kelas");
         get();
+        showMsg("Berhasil", successupdatedata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Error", `${error}`, "error");
     }
 }
 async function delData(id) {
     try {
-        var opt = confirm("Apakah anda ingin mneghapus data?");
-        if (opt) {
-            await deleteData(kelas, id, token);
-        } else {
-            alert("batal hapus data");
-        }
+        await showDlg(questhapus, confirmhapus, btnhapus).then((e) => {
+            if (e.isConfirmed) {
+                deleteData(kelas, id, token);
+            } else {
+                throw cancelhapus;
+            }
+        });
         get();
+        showMsg("Berhasil", successdeletedata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Error", `${error}`, "error");
     }
 }

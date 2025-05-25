@@ -1,7 +1,16 @@
 import { detai_nilai, nilai } from "../config/end_point.js";
 import { deleteData, getData, insertData, updateData } from "../fetch/fetch.js";
+import { checkFormatExcel } from "../helper/check_format_excel.js";
 import { clearField, clearFields } from "../helper/clear_form.js";
 import { validateEmptyField } from "../helper/form_validation.js";
+import { showDlg, showMsg } from "../helper/message.js";
+import {
+    btnhapus,
+    questhapus,
+    successdeletedata,
+    successtambahdata,
+    successupdatedata,
+} from "../helper/string.js";
 import { showTables } from "../helper/table.js";
 import { uploadExcel } from "../helper/upload_excel.js";
 var token = "";
@@ -21,6 +30,12 @@ export function init() {
     });
     $("#input-nilai").on("change", function (e) {
         selectedFile = e.target.files[0];
+        try {
+            checkFormatExcel(selectedFile);
+        } catch (error) {
+            $(this).val("");
+            showMsg("Gagal", error, "error");
+        }
     });
     $("body").on("click", ".btn-hapus", function () {
         deleteDataGuru($(this).data("id"));
@@ -36,24 +51,28 @@ export function init() {
 }
 async function upload() {
     let ready = [];
-    const data = await uploadExcel(selectedFile).then((e) => {
-        e.forEach((element) => {
-            ready.push({
-                student_id: element[0],
-                name: element[1],
-                assignment: element[2],
-                project: element[3],
-                exams: element[4],
-                attendance_presence: element[5],
+
+    try {
+        insertData(detai_nilai, ready, token);
+        checkFormatExcel(selectedFile);
+        const data = await uploadExcel(selectedFile).then((e) => {
+            e.forEach((element) => {
+                ready.push({
+                    student_id: element[0],
+                    name: element[1],
+                    assignment: element[2],
+                    project: element[3],
+                    exams: element[4],
+                    attendance_presence: element[5],
+                });
             });
         });
-        try {
-            insertData(detai_nilai, ready, token);
-        } catch (error) {
-            console.log("Error" + error);
-        }
         get();
-    });
+        showMsg("Berhasil", "Berhasil upload data", "success");
+        $(".upload-file").val("");
+    } catch (error) {
+        showMsg("Gagal", error, "error");
+    }
 }
 async function get() {
     try {
@@ -109,7 +128,7 @@ async function get() {
         ];
         showTables(data, columm);
     } catch (error) {
-        alert(error);
+        showMsg(error);
     }
 }
 async function insert() {
@@ -135,8 +154,9 @@ async function insert() {
         insertData(detai_nilai, nilai, token).then((e) => {
             console.log(e);
         });
+        showMsg("Berhasil", successtambahdata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", error, "error");
     }
 }
 async function update() {
@@ -153,20 +173,23 @@ async function update() {
         await updateData(`${update_guru}/${lastid}`, data, token);
         clearFields([".update-nama", ".update-nip"]);
         get();
+        showMsg("Berhasil", successupdatedata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", error, "error");
     }
 }
 async function deleteDataGuru(id) {
     try {
-        var opt = confirm("Apakah anda ingin mneghapus data?");
-        if (opt) {
-            await deleteData(delete_guru, id, token);
-        } else {
-            alert("batal hapus data");
-        }
+        await showDlg("Hapus data?", questhapus, btnhapus).then((opt) => {
+            if (opt.isConfirmed) {
+                deleteData(delete_guru, id, token);
+            } else {
+                throw "batal hapus data";
+            }
+        });
         get();
+        showMsg("Berhasil", successdeletedata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", error, "error");
     }
 }

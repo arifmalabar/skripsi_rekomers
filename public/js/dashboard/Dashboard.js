@@ -1,5 +1,6 @@
 import { dashboard } from "../config/end_point.js";
 import { getData } from "../fetch/fetch.js";
+import { showDlg, showMsg } from "../helper/message.js";
 
 export async function get() {
     try {
@@ -13,7 +14,7 @@ export async function get() {
         $(".low-risk").text(`${presentase.risiko_rendah} %`);
         showBar(presentase);
     } catch (error) {
-        alert(error);
+        showMsg("Erorr", "Gagal menampilkan data " + error, "error");
     }
 }
 function showBar(presentase) {

@@ -14,6 +14,15 @@ import {
 } from "../helper/fill_combobox.js";
 import { validateEmptyField } from "../helper/form_validation.js";
 import { showTables } from "../helper/table.js";
+import { showDlg, showMsg } from "../helper/message.js";
+import {
+    btnhapus,
+    cancelhapus,
+    confirmhapus,
+    failloadata,
+    successdeletedata,
+    successtambahdata,
+} from "../helper/string.js";
 var token = "";
 var lastid = "";
 var course_id;
@@ -100,16 +109,10 @@ async function get() {
                                         Tampilkan List Nilai
                                     </button>
                                 </form>
-                                <button class="dropdown-item"
-                                data-toggle="modal" data-target="#modal-update" data-courseid="${p3.id_mapel}" data-year="${p3.tahun}" data-semester="${p3.semester}"
-                                >
-                                        <i class="fa fa-edit"></i>
-                                        Update
-                                    </button>
-                                    <button class="dropdown-item btn-hapus" data-courseid="${p3.id_mapel}" data-year="${p3.tahun}" data-semester="${p3.semester}">
-                                        <i class="fa fa-trash"></i>
-                                        Hapus
-                                    </button>
+                                <button class="dropdown-item btn-hapus" data-courseid="${p3.id_mapel}" data-year="${p3.tahun}" data-semester="${p3.semester}">
+                                    <i class="fa fa-trash"></i>
+                                    Hapus
+                                </button>
                             </div>
                         </div>
                         
@@ -119,7 +122,7 @@ async function get() {
         ];
         showTables(data, columm);
     } catch (error) {
-        alert(error);
+        showMsg("Error", failloadata, "error");
     }
 }
 async function insert() {
@@ -140,8 +143,9 @@ async function insert() {
         });
         clearFields(["#insert-mapel", "#insert-thajaran", "#insert-semester"]);
         get();
+        showMsg("Berhasil", successtambahdata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", error, "error");
     }
 }
 async function update(last_data) {
@@ -167,16 +171,18 @@ async function update(last_data) {
 }
 async function deleteDataNilai(data) {
     try {
-        var opt = confirm("Apakah anda ingin mneghapus data?");
-        if (opt) {
-            await deleteDataByCompact(nilai, data, token).then((e) => {
-                console.log(e);
-            });
-        } else {
-            alert("batal hapus data");
-        }
+        await showDlg("Hapus data?", confirmhapus, btnhapus).then((opt) => {
+            if (opt.isConfirmed) {
+                deleteDataByCompact(nilai, data, token).then((e) => {
+                    console.log(e);
+                });
+            } else {
+                throw cancelhapus;
+            }
+        });
         get();
+        showMsg("Berhasil", successdeletedata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", cancelhapus, "error");
     }
 }

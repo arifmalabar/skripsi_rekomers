@@ -1,7 +1,18 @@
 import { siswa, prodi } from "../config/end_point.js";
 import { deleteData, getData, insertData, updateData } from "../fetch/fetch.js";
+import { checkFormatExcel } from "../helper/check_format_excel.js";
 import { clearField, clearFields } from "../helper/clear_form.js";
 import { validateEmptyField } from "../helper/form_validation.js";
+import { showDlg, showMsg } from "../helper/message.js";
+import {
+    btnhapus,
+    cancelhapus,
+    confirmhapus,
+    failloadata,
+    successdeletedata,
+    successtambahdata,
+    successupdatedata,
+} from "../helper/string.js";
 import { showTables } from "../helper/table.js";
 import { uploadExcel } from "../helper/upload_excel.js";
 var token = "";
@@ -20,6 +31,12 @@ export function init() {
     });
     $(".upload-siswa").change(function (e) {
         selectedFile = e.target.files[0];
+        try {
+            checkFormatExcel(selectedFile);
+        } catch (error) {
+            $(this).val("");
+            showMsg("Gagal", error, "error");
+        }
     });
     $("body").on("click", ".btn-update", function () {
         lastid = $(this).data("id");
@@ -66,8 +83,10 @@ async function get() {
                 data: null,
                 render: function (p1, p2, p3) {
                     if (p3.gender === "pria") {
+                        console.log("pria");
                         pria += 1;
                     } else if (p3.gender === "wanita") {
+                        console.log("wanita");
                         wanita += 1;
                     }
                     return p3.gender;
@@ -97,12 +116,13 @@ async function get() {
         $(".jk-pria").text(pria);
         $(".jk-wanita").text(wanita);
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", failloadata + " " + error, "error");
     }
 }
 async function uploadDataSiswa() {
     try {
         let data = [];
+        checkFormatExcel(selectedFile);
         await uploadExcel(selectedFile).then((e) => {
             e.forEach((element) => {
                 data.push({
@@ -112,12 +132,12 @@ async function uploadDataSiswa() {
                 });
             });
         });
-        await insertData(`${siswa}/multiple`, data, token).then((e) => {
-            console.log(e);
-        });
+        await insertData(`${siswa}/multiple`, data, token);
         get();
+        showMsg("Berhasil", successtambahdata, "success");
+        $(".upload-file").val("");
     } catch (error) {
-        console.log(error);
+        showMsg("Gagal", error, "error");
     }
 }
 async function insert() {
@@ -137,8 +157,10 @@ async function insert() {
         clearField(".insert-nisn");
         clearField(".insert-nama");
         get();
+        showMsg("Berhasil", successtambahdata, "success");
     } catch (error) {
         alert(error);
+        showMsg("Gagal", error, "error");
     }
 }
 async function update() {
@@ -158,20 +180,24 @@ async function update() {
         clearField(".update-nisn");
         clearField(".update-nama");
         get();
+        showMsg("Berhasil", successupdatedata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", error, "error");
     }
 }
 async function delData(id) {
     try {
-        var opt = confirm("Apakah anda ingin mneghapus data?");
-        if (opt) {
-            await deleteData(siswa, id, token);
-        } else {
-            alert("batal hapus data");
-        }
+        await showDlg("Hapus data?", confirmhapus, btnhapus).then((opt) => {
+            if (opt.isConfirmed) {
+                deleteData(siswa, id, token);
+            } else {
+                throw cancelhapus;
+            }
+        });
+
         get();
+        showMsg("Berhasil", successdeletedata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", error, "error");
     }
 }

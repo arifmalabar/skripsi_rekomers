@@ -23,8 +23,8 @@ Guru
                     Data Guru
                 </h3>
                 <div class="card-tools">
-                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-lg"><i
-                            class="fa fa-upload"></i> Upload Data Excel</button>
+                    <!--<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-lg"><i
+                            class="fa fa-upload"></i> Upload Data Excel</button>-->
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-lg"><i
                             class="fa fa-plus"></i>Tambah Data</button>
 

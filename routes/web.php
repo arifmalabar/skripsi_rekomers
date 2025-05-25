@@ -70,6 +70,7 @@ Route::controller(DashboardController::class)->group(function() {
         $root = "/kakomli/kelas/";
         Route::get($root, "index");
         Route::get($root."api", "getData");
+        Route::get($root."api/{id}", "find");
         Route::post($root."api", "insertData");
         Route::put($root."api/{id}", "updateData");
         Route::delete($root."api/{id}", "deleteData");

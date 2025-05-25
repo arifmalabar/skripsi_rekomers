@@ -8,6 +8,16 @@ import {
     setCbThAjar,
 } from "../helper/fill_combobox.js";
 import { validateEmptyField } from "../helper/form_validation.js";
+import { showMsg, showDlg } from "../helper/message.js";
+import {
+    failloadata,
+    successdeletedata,
+    successtambahdata,
+    successupdatedata,
+    confirmhapus,
+    btnhapus,
+    cancelhapus,
+} from "../helper/string.js";
 import { showTables } from "../helper/table.js";
 var token = "";
 var lastid = "";
@@ -73,7 +83,7 @@ async function get() {
         ];
         showTables(data, columm);
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", failloadata, "error");
     }
 }
 async function insert() {
@@ -104,8 +114,9 @@ async function insert() {
             "#insert-guru",
         ]);
         get();
+        showMsg("Berhasil", successtambahdata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", error, "error");
     }
 }
 async function update() {
@@ -136,20 +147,23 @@ async function update() {
             "#update-guru",
         ]);
         get();
+        showMsg("Berhasil", successupdatedata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", error, "error");
     }
 }
 async function deleteDataGuru(id) {
     try {
-        var opt = confirm("Apakah anda ingin mneghapus data?");
-        if (opt) {
-            await deleteData(mapel, id, token);
-        } else {
-            alert("batal hapus data");
-        }
+        await showDlg("Hapus data?", confirmhapus, btnhapus).then((opt) => {
+            if (opt.isConfirmed) {
+                deleteData(mapel, id, token);
+            } else {
+                throw cancelhapus;
+            }
+        });
         get();
+        showMsg("Berhasil", successdeletedata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", error, "error");
     }
 }
