@@ -2,13 +2,13 @@
 @section('css')
 <style>
     span {
-        width: 20%;
+        width: 28%;
         text-transform: uppercase
     }
+
     .align-kiri {
         text-align: left !important;
     }
-    
 </style>
 @endsection
 @section('status')

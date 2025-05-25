@@ -3,6 +3,7 @@ import { deleteData, getData, insertData, updateData } from "../fetch/fetch.js";
 import { clearField, clearFields } from "../helper/clear_form.js";
 import { validateEmptyField } from "../helper/form_validation.js";
 import { showTables } from "../helper/table.js";
+import { showDlg, showMsg } from "../helper/message.js";
 var token = "";
 var lastid = "";
 export function init() {
@@ -46,12 +47,6 @@ async function get() {
             {
                 data: null,
                 render: function (p1, p2, p3) {
-                    return `<span class="badge badge-success">Aktif</span>`;
-                },
-            },
-            {
-                data: null,
-                render: function (p1, p2, p3) {
                     return `
                         <button class="btn btn-outline-warning btn-sm btn-update" data-id="${p3.id}" data-nama="${p3.program_study_name}"
                          data-toggle="modal" data-target="#modal-update"
@@ -85,8 +80,9 @@ async function insert() {
         await insertData(prodi, data, token);
         clearFields([".insert-nama-prodi", ".insert-kode-prodi"]);
         get();
+        showMsg("Berhasil", "Berhasil Menambah Data", "success");
     } catch (error) {
-        alert(error);
+        showMsg("Error", "Gagal Menambah Data" + error, "error");
     }
 }
 async function update() {
@@ -103,20 +99,28 @@ async function update() {
         await updateData(`${prodi}/${lastid}`, data, token);
         clearFields([".update-nama-prodi", ".update-kode-prodi"]);
         get();
+        showMsg("Berhasil", "Berhasil mengubah Data", "success");
     } catch (error) {
-        alert(error);
+        showMsg("Error", "Gagal mengubah Data" + error, "error");
     }
 }
 async function deleteDataGuru(id) {
     try {
-        var opt = confirm("Apakah anda ingin mneghapus data?");
-        if (opt) {
-            await deleteData(prodi, id, token);
-        } else {
-            alert("batal hapus data");
-        }
+        await showDlg(
+            "Hapus Data",
+            "Anda Yakin Ingin Hapus data",
+            "Ya Hapus"
+        ).then((opt) => {
+            if (opt.isConfirmed) {
+                deleteData(prodi, id, token);
+            } else {
+                throw "Anda membatalkan aksi";
+            }
+        });
+
         get();
+        showMsg("Berhasil", "Berhasil Menghapus Data", "success");
     } catch (error) {
-        alert(error);
+        showMsg("Error", "Gagal Hapus data " + error, "error");
     }
 }

@@ -60,7 +60,7 @@ Jurusan
                                                 </div>
                                                 <input type="text" class="form-control upper insert-nama-prodi"
                                                     placeholder="masukan nama jurusan">
-                                                    <input type="hidden" class="token" value="{{ csrf_token() }}">
+                                                <input type="hidden" class="token" value="{{ csrf_token() }}">
                                             </div>
                                         </div>
                                     </div>
@@ -72,8 +72,9 @@ Jurusan
                                                 data-dismiss="modal">Close</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" style="width: 100%" class="btn btn-primary btn-tambah"><i
-                                                    class="fa fa-plus"></i>Tambah Data</button>
+                                            <button type="button" style="width: 100%"
+                                                class="btn btn-primary btn-tambah"><i class="fa fa-plus"></i>Tambah
+                                                Data</button>
                                         </div>
                                     </div>
 
@@ -94,28 +95,11 @@ Jurusan
                             <th>Kode Jurusan</th>
                             <th>Nama Jurusan</th>
                             <th>Jumlah kelas</th>
-                            <th>Status</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>TKJ</td>
-                            <td>Teknik Komputer Jaringan</td>
-                            <td>13</td>
-                            <td><span class="badge badge-success">Aktif</span></td>
-                            <td style="text-align: center">
-                                <button class="btn btn-outline-warning btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                    Update
-                                </button>
-                                <button class="btn btn-outline-danger btn-sm">
-                                    <i class="fa fa-trash"></i>
-                                    Hapus
-                                </button>
-                            </td>
-                        </tr>
+
                     </tbody>
                 </table>
                 <div class="modal fade" id="modal-update">
@@ -162,8 +146,9 @@ Jurusan
                                             data-dismiss="modal">Close</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" style="width: 100%" class="btn btn-warning btn-proses-update"><i
-                                                class="fa fa-plus" data-dismiss="modal"></i>Update Data</button>
+                                        <button type="button" style="width: 100%"
+                                            class="btn btn-warning btn-proses-update"><i class="fa fa-plus"
+                                                data-dismiss="modal"></i>Update Data</button>
                                     </div>
                                 </div>
 
@@ -181,7 +166,7 @@ Jurusan
 </div>
 @endsection
 @section('js')
-<script type="module" src="{{ asset("js/program_study/app.js") }}"></script>
+<script type="module" src="{{ asset('js/program_study/app.js') }}"></script>
 <script>
     $(function () {
     $("#example1").DataTable({

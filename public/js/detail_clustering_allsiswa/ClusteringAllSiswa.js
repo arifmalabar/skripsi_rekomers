@@ -33,13 +33,13 @@ async function get() {
                 data: null,
                 render: function (p1, p2, p3) {
                     if (p3.risiko === "high") {
-                        return `<span class="badge badge-danger">${p3.risiko}</span>`;
+                        return `<span class="badge badge-danger text-capitalize">${p3.risiko} Risk</span>`;
                     } else if (p3.risiko === "medium") {
-                        return `<span class="badge badge-warning">${p3.risiko}</span>`;
+                        return `<span class="badge badge-warning text-capitalize">${p3.risiko} Risk</span>`;
                     } else if (p3.risiko === "low") {
-                        return `<span class="badge badge-success">${p3.risiko}</span>`;
+                        return `<span class="badge badge-success text-capitalize">${p3.risiko} Risk</span>`;
                     } else {
-                        return `<span class="badge badge-primary">undefined</span>`;
+                        return `<span class="badge badge-primary text-capitalize">undefined</span>`;
                     }
                 },
             },

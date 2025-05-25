@@ -7,6 +7,7 @@ import {
 import { deleteData, getData, insertData, updateData } from "../fetch/fetch.js";
 import { clearField, clearFields } from "../helper/clear_form.js";
 import { validateEmptyField } from "../helper/form_validation.js";
+import { showDlg, showMsg } from "../helper/message.js";
 import { showTables } from "../helper/table.js";
 var token = "";
 var lastid = "";
@@ -73,7 +74,7 @@ async function get() {
         ];
         showTables(data, columm);
     } catch (error) {
-        alert(error);
+        showMsg("Error", "Gagal Menambah Data" + error, "error");
     }
 }
 async function insert() {
@@ -102,8 +103,9 @@ async function insert() {
             "#insert-password",
         ]);
         get();
+        showMsg("Berhasil", "Berhasil Menambah Data", "success");
     } catch (error) {
-        alert(error);
+        showMsg("Error", "Gagal Menambah Data" + error, "error");
     }
 }
 async function update() {
@@ -135,20 +137,28 @@ async function update() {
             "#insert-password",
         ]);
         get();
+        showMsg("Berhasil", "Berhasil mengubah Data", "success");
     } catch (error) {
-        alert(error);
+        showMsg("Error", "Gagal mengubah Data" + error, "error");
     }
 }
 async function deleteDataGuru(id) {
     try {
-        var opt = confirm("Apakah anda ingin mneghapus data?");
-        if (opt) {
-            await deleteData(delete_guru, id, token);
-        } else {
-            alert("batal hapus data");
-        }
+        await showDlg(
+            "Hapus Data",
+            "Anda Yakin Ingin Hapus data",
+            "Ya Hapus"
+        ).then((opt) => {
+            if (opt.isConfirmed) {
+                deleteData(delete_guru, id, token);
+            } else {
+                throw "anda membatalkan aksi hapus";
+            }
+        });
+
         get();
+        showMsg("Berhasil", "Berhasil Menghapus Data", "success");
     } catch (error) {
-        alert(error);
+        showMsg("Error", "Gagal Menambah Data " + error, "error");
     }
 }

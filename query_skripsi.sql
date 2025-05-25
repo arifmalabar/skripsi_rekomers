@@ -164,4 +164,22 @@ SELECT
     (SELECT COUNT(*) FROM clusterings WHERE clusterings.student_id = id AND cluster = 'C3') as cluster3
 FROM
 	students
+UNION ALL
+SELECT 
+	student_id
+FROM 
+	clusterings
 ;
+
+SELECT 
+	id, 
+    name,
+    (SELECT COUNT(*) FROM clusterings WHERE clusterings.student_id = id AND cluster = 'C1') as cluster1,
+    (SELECT COUNT(*) FROM clusterings WHERE clusterings.student_id = id AND cluster = 'C2') as cluster2,
+    (SELECT COUNT(*) FROM clusterings WHERE clusterings.student_id = id AND cluster = 'C3') as cluster3
+FROM
+	students
+JOIN 
+	clusterings
+ON 
+	clusterings.student_id = students.id;

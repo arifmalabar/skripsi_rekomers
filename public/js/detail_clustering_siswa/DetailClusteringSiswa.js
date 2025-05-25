@@ -67,8 +67,8 @@ function rekomendasiBelajar(data) {
         .html(`<strong><u>Catatan Tambahan: </u></strong>
 
                         <p class="text-muted">
-                            Siswa Memerlukan perbaikan di mata pelajaran
-                            <b class="color-red rekomendasi-belajar" style="color: red">${tambah_nilai}</b>
+                            Siswa Memerlukan tambahan nilai di mata pelajaran<br>
+                            <b class="text-warning rekomendasi-belajar">${tambah_nilai}</b>
                         </p>`);
 }
 function risikoSiswa(data) {
