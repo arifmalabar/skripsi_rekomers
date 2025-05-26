@@ -48,12 +48,7 @@ async function get() {
             {
                 data: "name",
             },
-            {
-                data: null,
-                render: function (p1, p2, p3) {
-                    return `<span class="badge badge-success">Aktif</span>`;
-                },
-            },
+
             {
                 data: null,
                 render: function (p1, p2, p3) {

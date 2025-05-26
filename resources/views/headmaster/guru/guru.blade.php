@@ -133,20 +133,11 @@ Guru
                             <th>No</th>
                             <th>NIP</th>
                             <th>Nama</th>
-                            <th>Status</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>19988299121212001</td>
-                            <td>Dian Puspita Yulianti S.pd</td>
-                            <td><span class="badge badge-success">Aktif</span></td>
-                            <td style="text-align: center">
-
-                            </td>
-                        </tr>
+                        
                     </tbody>
                 </table>
 

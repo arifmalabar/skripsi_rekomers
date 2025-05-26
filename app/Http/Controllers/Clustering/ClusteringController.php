@@ -92,13 +92,13 @@ class ClusteringController extends BaseController
         $k = 3;
         $centroid = [
             [
-                20, 20, 20
+                20, 20, 20, 30
             ],
             [
-                70, 70, 70
+                70, 70, 70, 80
             ],
             [
-                100, 100, 100
+                100, 100, 100, 90
             ]
         ];
         $iterate = 0;
@@ -126,6 +126,7 @@ class ClusteringController extends BaseController
                 if ($this->isEqual($centroid[$index][0], $centroidBaru[$cluster]['assignment'])) $same++;
                 if ($this->isEqual($centroid[$index][1], $centroidBaru[$cluster]['project'])) $same++;
                 if ($this->isEqual($centroid[$index][2], $centroidBaru[$cluster]['exams'])) $same++;
+                if ($this->isEqual($centroid[$index][3], $centroidBaru[$cluster]['attendance_presence'])) $same++;
             }
 
             // Update centroid jika ada perubahan
@@ -134,6 +135,7 @@ class ClusteringController extends BaseController
                     $centroid[$index][0] = $centroidBaru[$cluster]['assignment'];
                     $centroid[$index][1] = $centroidBaru[$cluster]['project'];
                     $centroid[$index][2] = $centroidBaru[$cluster]['exams'];
+                    $centroid[$index][3] = $centroidBaru[$cluster]['attendance_presence'];
                 }
             }
 
@@ -304,17 +306,20 @@ class ClusteringController extends BaseController
             $jarak_centroid1 = sqrt(
                 pow(($key['assignment'] - $centroid[0][0]), 2) + 
                 pow(($key['project'] - $centroid[0][1]), 2) +
-                pow(($key['exams']-$centroid[0][2]), 2)
+                pow(($key['exams']-$centroid[0][2]), 2)+ 
+                pow(($key["attendance_presence"]-$centroid[0][3]), 2)
             );
             $jarak_centroid2 = sqrt(
                 pow(($key['assignment'] - $centroid[1][0]), 2) + 
                 pow(($key['project'] - $centroid[1][1]), 2) +
-                pow(($key['exams']-$centroid[1][2]), 2)
+                pow(($key['exams']-$centroid[1][2]), 2) +
+                pow(($key["attendance_presence"]-$centroid[1][3]), 2)
             );
             $jarak_centroid3 = sqrt(
                 pow(($key['assignment'] - $centroid[2][0]), 2) + 
                 pow(($key['project'] - $centroid[2][1]), 2) +
-                pow(($key['exams']-$centroid[2][2]), 2)
+                pow(($key['exams']-$centroid[2][2]), 2) +
+                pow(($key["attendance_presence"]-$centroid[2][3]), 2)
             );
             $item_jarak = [
                 "student_id" => $key['student_id'],
@@ -323,6 +328,7 @@ class ClusteringController extends BaseController
                 "assignment" => $key["assignment"],
                 "project" => $key["project"],
                 "exams" => $key["exams"],
+                "attendance_presence" => $key["attendance_presence"],
                 "centroid1"=> round($jarak_centroid1, 2),
                 "centroid2" => round($jarak_centroid2, 2),
                 "centroid3"=> round($jarak_centroid3, 2)
@@ -356,6 +362,7 @@ class ClusteringController extends BaseController
                 "assignment" => $key["assignment"],
                 "project" => $key["project"],
                 "exams" => $key["exams"],
+                "attendance_presence" => $key["attendance_presence"],
                 "centroid1" => $key["centroid1"],
                 "centroid2" => $key["centroid2"], 
                 "centroid3" => $key["centroid3"],
@@ -369,9 +376,9 @@ class ClusteringController extends BaseController
     public function kelompokanCluster($clusters)
     {
         $centroidBaru = [
-            'C1' => ['assignment' => 0, 'project' => 0, 'exams' => 0, 'count' => 0],
-            'C2' => ['assignment' => 0, 'project' => 0, 'exams' => 0, 'count' => 0],
-            'C3' => ['assignment' => 0, 'project' => 0, 'exams' => 0, 'count' => 0],
+            'C1' => ['assignment' => 0, 'project' => 0, 'exams' => 0, 'attendance_presence' => 0,'count' => 0],
+            'C2' => ['assignment' => 0, 'project' => 0, 'exams' => 0, 'attendance_presence' => 0,'count' => 0],
+            'C3' => ['assignment' => 0, 'project' => 0, 'exams' => 0, 'attendance_presence' => 0,'count' => 0],
         ];
 
         // Looping pengelompokan
@@ -381,6 +388,7 @@ class ClusteringController extends BaseController
                 $centroidBaru[$cluster]['assignment'] += $key['assignment'];
                 $centroidBaru[$cluster]['project'] += $key['project'];
                 $centroidBaru[$cluster]['exams'] += $key['exams'];
+                $centroidBaru[$cluster]['attendance_presence'] += $key['attendance_presence'];
                 $centroidBaru[$cluster]['count']++;
             }
         }
@@ -393,6 +401,7 @@ class ClusteringController extends BaseController
                 $data['assignment'] /= $data['count'];
                 $data['project'] /= $data['count'];
                 $data['exams'] /= $data['count'];
+                $data['attendance_presence'] /= $data['count'];
             }
         }
         return $centroidBaru;   

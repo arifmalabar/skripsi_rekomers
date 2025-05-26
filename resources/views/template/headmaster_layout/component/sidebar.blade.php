@@ -38,7 +38,7 @@
                 <li class="nav-item">
                     <a href="/kakomli/guru" class="nav-link {{ $nama == 'guru' ? 'active' : '' }}">
                         <i class="fas nav-icon fa-pen"></i>
-                        <p>Teachers</p>
+                        <p>Guru</p>
                     </a>
                 </li>
                 <li class="nav-item">

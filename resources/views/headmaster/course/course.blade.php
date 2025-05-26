@@ -134,7 +134,6 @@ Mata Pelajaran
                         <tr>
                             <th>No</th>
                             <th>Nama Mapel</th>
-                            <th>Kelas</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>

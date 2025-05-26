@@ -13,6 +13,15 @@ import {
     setCbThAjar,
 } from "../helper/fill_combobox.js";
 import { validateEmptyField } from "../helper/form_validation.js";
+import { showDlg, showMsg } from "../helper/message.js";
+import {
+    cancelhapus,
+    confirmhapus,
+    failloadata,
+    questhapus,
+    successdeletedata,
+    successtambahdata,
+} from "../helper/string.js";
 import { showTables } from "../helper/table.js";
 var token = "";
 var lastid = "";
@@ -105,7 +114,7 @@ async function get() {
         ];
         showTables(data, columm);
     } catch (error) {
-        alert(error);
+        showMsg("Error", error, "error");
     }
 }
 async function insert() {
@@ -126,8 +135,9 @@ async function insert() {
         });
         clearFields(["#insert-mapel", "#insert-thajaran", "#insert-semester"]);
         get();
+        showMsg("Berhasil", successtambahdata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", failloadata, "error");
     }
 }
 async function update(last_data) {
@@ -153,16 +163,21 @@ async function update(last_data) {
 }
 async function deleteDataNilai(data) {
     try {
-        var opt = confirm("Apakah anda ingin mneghapus data?");
-        if (opt) {
-            await deleteDataByCompact(clustering, data, token).then((e) => {
-                console.log(e);
-            });
-        } else {
-            alert("batal hapus data");
-        }
+        await showDlg("Hapus Data?", confirmhapus, "Ya, Hapus cluster").then(
+            (opt) => {
+                if (opt.isConfirmed) {
+                    deleteDataByCompact(clustering, data, token).then((e) => {
+                        console.log(e);
+                    });
+                } else {
+                    throw cancelhapus;
+                }
+            }
+        );
+
         get();
+        showMsg("Berhasil", successdeletedata, "success");
     } catch (error) {
-        alert(error);
+        showMsg("Gagal", error, "error");
     }
 }

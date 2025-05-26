@@ -60,12 +60,6 @@ async function get() {
             {
                 data: null,
                 render: function (p1, p2, p3) {
-                    return `<span class="badge badge-success">Aktif</span>`;
-                },
-            },
-            {
-                data: null,
-                render: function (p1, p2, p3) {
                     return `
                         <button class="btn btn-outline-warning btn-sm btn-update" data-id="${p3.id}" data-nama="${p3.course_name}" data-semester="${p3.semester_id}" data-year="${p3.year}" data-classroom="${p3.classroom_id}" data-teacher="${p3.teacher_id}"
                          data-toggle="modal" data-target="#modal-update"
