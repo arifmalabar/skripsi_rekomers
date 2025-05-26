@@ -137,7 +137,7 @@ async function insert() {
         get();
         showMsg("Berhasil", successtambahdata, "success");
     } catch (error) {
-        showMsg("Gagal", failloadata, "error");
+        showMsg("Gagal", error, "error");
     }
 }
 async function update(last_data) {
