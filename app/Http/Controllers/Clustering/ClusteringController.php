@@ -90,7 +90,7 @@ class ClusteringController extends BaseController
     {
         $list_jarak = [];
         $k = 3;
-        $centroid = [
+        /*$centroid = [
             [
                 20, 20, 20, 30
             ],
@@ -100,7 +100,8 @@ class ClusteringController extends BaseController
             [
                 100, 100, 100, 90
             ]
-        ];
+        ];*/
+        $centroid = $this->getCentroid();
         $iterate = 0;
         $maxiterate = 100;
         $same = 0;
@@ -244,6 +245,48 @@ class ClusteringController extends BaseController
             "siholuete" => round($silhouette_score, 3),
         ];
         
+    }
+    private function getCentroid()
+    {
+        $grade_model = $this->grade->model;
+        $threshold = 60;
+        $lowest = $grade_model->orderByRaw('(assignment + project + exams + attendance_presence) ASC')
+                            ->limit(5)
+                            ->inRandomOrder()
+                            ->first();
+
+        $middleIndex = floor($grade_model::count() / 2);
+        $middle = $grade_model::orderByRaw('(assignment + project + exams + attendance_presence)')
+            ->skip($middleIndex)
+            ->take(1)
+            ->first();
+
+        // Ambil nilai total tertinggi (acak dari 5 teratas)
+        $highest = $grade_model::orderByRaw('(assignment + project + exams + attendance_presence) DESC')
+            ->limit(5)
+            ->inRandomOrder()
+            ->first();
+        $centroid = [
+            [
+                $lowest->assignment,
+                $lowest->project,
+                $lowest->exams,
+                $lowest->attendance_presence,
+            ],
+            [
+                $middle->assignment,
+                $middle->project,
+                $middle->exams,
+                $middle->attendance_presence,
+            ],
+            [
+                $highest->assignment,
+                $highest->project,
+                $highest->exams,
+                $highest->attendance_presence,
+            ],
+        ];
+        return $centroid;
     }
     public function hitungSilhouetteScore($clusters)
     {

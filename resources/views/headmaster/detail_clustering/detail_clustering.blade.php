@@ -23,7 +23,7 @@ Detail Clustering
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <!--<label for="">Sholuete Score : {{ $data["siholuete"] }}</label>-->
+                <label for="">Sholuete Score : {{ $data["siholuete"] }}</label>
                 <table id="example2" style="text-align: center" class="table table-bordered table-hover">
                     <thead>
                         <tr>
