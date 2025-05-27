@@ -103,7 +103,7 @@ class ClusteringController extends BaseController
 
             ]
         ];
-        $centroid = $this->getCentroid();
+        //$centroid = $this->getCentroid();
         $iterate = 0;
         $maxiterate = 100;
         $same = 0;
@@ -453,8 +453,8 @@ class ClusteringController extends BaseController
     }
     public function isEqual($a, $b)
     {
-        $epsilon = 0.0001;
-        return abs($a-$b) < $epsilon;
+        $epsilon = 0.1; // atau bahkan 0.1 tergantung kebutuhan konvergensi Anda
+        return abs($a - $b) < $epsilon;
     }
     public function run()
     {
