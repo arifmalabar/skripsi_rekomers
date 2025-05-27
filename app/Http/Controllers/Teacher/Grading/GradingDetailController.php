@@ -116,6 +116,7 @@ class GradingDetailController extends BaseTeacherController
                 ];
                 $this->availableData($key, $item);
             }
+            return response()->json(["status" => "success"]);
         } catch (\Throwable $th) {
             return $this->showError($th->getMessage());
         }

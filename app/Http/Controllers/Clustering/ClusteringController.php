@@ -90,17 +90,19 @@ class ClusteringController extends BaseController
     {
         $list_jarak = [];
         $k = 3;
-        /*$centroid = [
+        $centroid = [
             [
-                20, 20, 20, 30
+                30,	30,	30,	29,
             ],
             [
-                70, 70, 70, 80
+                80,	80,	80,	9
+
             ],
             [
-                100, 100, 100, 90
+                88,	98,	95,	0,
+
             ]
-        ];*/
+        ];
         $centroid = $this->getCentroid();
         $iterate = 0;
         $maxiterate = 100;

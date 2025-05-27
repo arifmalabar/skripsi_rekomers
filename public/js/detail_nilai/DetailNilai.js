@@ -53,7 +53,6 @@ async function upload() {
     let ready = [];
 
     try {
-        insertData(detai_nilai, ready, token);
         checkFormatExcel(selectedFile);
         const data = await uploadExcel(selectedFile).then((e) => {
             e.forEach((element) => {
@@ -67,6 +66,7 @@ async function upload() {
                 });
             });
         });
+        insertData(detai_nilai, ready, token);
         get();
         showMsg("Berhasil", "Berhasil upload data", "success");
         $(".upload-file").val("");
