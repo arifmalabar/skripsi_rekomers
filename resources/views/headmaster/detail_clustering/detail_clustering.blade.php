@@ -46,6 +46,7 @@ Detail Clustering
                             <td><a href="{{ url("kakomli/detail_cluster/clustering_siswa/".$key["student_id"]."")}}">{{
                                     $key["student_id"] }}</a></td>
                             <td style="text-align: start">{{ $key["name"] }}</td>
+
                             <td>{{ $key["centroid1"] }}</td>
                             <td>{{ $key["centroid2"] }}</td>
                             <td>{{ $key["centroid3"] }}</td>
@@ -89,6 +90,10 @@ Detail Clustering
                             <th>No</th>
                             <th>NISN</th>
                             <th>Nama Siswa</th>
+                            <th>Tugas</th>
+                            <th>Projek</th>
+                            <th>Ujian</th>
+                            <th>Presensi</th>
                             <th>Centroid 1</th>
                             <th>Centroid 2</th>
                             <th>Centroid 3</th>
@@ -103,11 +108,53 @@ Detail Clustering
                             <td>{{ $no++ }}</td>
                             <td>{{ $key["student_id"] }}</td>
                             <td style="text-align: start">{{ $key["name"] }}</td>
+                            <td>{{ $key["assignment"] }}</td>
+                            <td>{{ $key["project"] }}</td>
+                            <td>{{ $key["exams"] }}</td>
+                            <td>{{ $key["attendance_presence"] }}</td>
                             <td>{{ $key["centroid1"] }}</td>
                             <td>{{ $key["centroid2"] }}</td>
                             <td>{{ $key["centroid3"] }}</td>
                         </tr>
                         @endforeach
+                        <tr>
+                            <th colspan="6" rowspan="3">Centroid Lama</th>
+                            <th>{{ $item["centroid_lama"][0][0] }}</th>
+                            <th>{{ $item["centroid_lama"][0][1] }}</th>
+                            <th>{{ $item["centroid_lama"][0][2] }}</th>
+                            <th>{{ $item["centroid_lama"][0][3] }}</th>
+                        </tr>
+                        <tr>
+                            <th>{{ $item["centroid_lama"][1][0] }}</th>
+                            <th>{{ $item["centroid_lama"][1][1] }}</th>
+                            <th>{{ $item["centroid_lama"][1][2] }}</th>
+                            <th>{{ $item["centroid_lama"][1][3] }}</th>
+                        </tr>
+                        <tr>
+                            <th>{{ $item["centroid_lama"][2][0] }}</th>
+                            <th>{{ $item["centroid_lama"][2][1] }}</th>
+                            <th>{{ $item["centroid_lama"][2][2] }}</th>
+                            <th>{{ $item["centroid_lama"][2][3] }}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="6" rowspan="3">Centroid Baru</th>
+                            <th>{{ $item["centroid_baru"][0][0] }}</th>
+                            <th>{{ $item["centroid_baru"][0][1] }}</th>
+                            <th>{{ $item["centroid_baru"][0][2] }}</th>
+                            <th>{{ $item["centroid_baru"][0][3] }}</th>
+                        </tr>
+                        <tr>
+                            <th>{{ $item["centroid_baru"][1][0] }}</th>
+                            <th>{{ $item["centroid_baru"][1][1] }}</th>
+                            <th>{{ $item["centroid_baru"][1][2] }}</th>
+                            <th>{{ $item["centroid_baru"][1][3] }}</th>
+                        </tr>
+                        <tr>
+                            <th>{{ $item["centroid_baru"][2][0] }}</th>
+                            <th>{{ $item["centroid_baru"][2][1] }}</th>
+                            <th>{{ $item["centroid_baru"][2][2] }}</th>
+                            <th>{{ $item["centroid_baru"][2][3] }}</th>
+                        </tr>
                     </tbody>
                 </table>
 

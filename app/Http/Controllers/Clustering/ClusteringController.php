@@ -105,43 +105,55 @@ class ClusteringController extends BaseController
         ];
         //$centroid = $this->getCentroid();
         $iterate = 0;
-        $maxiterate = 100;
-        $same = 0;
+        $maxiterate = 15;
+        //$same = 0;
         $student = $this->getGradeStudent($request);
         
         $histori_jarak = [];
         $histori_cluster = [];
         do {
-            $iterate++;
             $list_jarak = [];
             $clusters = [];
             $list_jarak = $this->hitungJarak($student, $centroid);
-            array_push($histori_jarak, ["data_jarak" => $list_jarak]);
+            //dd($list_jarak);
             $clusters = $this->buatCluster($list_jarak);
-            array_push($histori_cluster, ["iterasi" => $clusters]);
+            //dd($clusters);
             //mengelompokan cluster
 
             //program baru
             $centroidBaru = $this->kelompokanCluster($clusters);
+            //dd($centroidBaru);
             $centroidBaru = $this->rataRataCluster($centroidBaru);
+            
             $same = 0;
+
             foreach (['C1', 'C2', 'C3'] as $index => $cluster) {
                 if ($this->isEqual($centroid[$index][0], $centroidBaru[$cluster]['assignment'])) $same++;
                 if ($this->isEqual($centroid[$index][1], $centroidBaru[$cluster]['project'])) $same++;
                 if ($this->isEqual($centroid[$index][2], $centroidBaru[$cluster]['exams'])) $same++;
                 if ($this->isEqual($centroid[$index][3], $centroidBaru[$cluster]['attendance_presence'])) $same++;
             }
-
             // Update centroid jika ada perubahan
-            if ($same == 0) {
+            $centroid_lama = $centroid;
+            if ($same != 12) {
                 foreach (['C1', 'C2', 'C3'] as $index => $cluster) {
                     $centroid[$index][0] = $centroidBaru[$cluster]['assignment'];
                     $centroid[$index][1] = $centroidBaru[$cluster]['project'];
                     $centroid[$index][2] = $centroidBaru[$cluster]['exams'];
                     $centroid[$index][3] = $centroidBaru[$cluster]['attendance_presence'];
+                    
                 }
             }
-
+            array_push($histori_jarak, ["data_jarak" => $list_jarak, "centroid_lama" => $centroid_lama, "centroid_baru" => $centroid]);
+            array_push($histori_cluster, ["iterasi" => $clusters]);
+            
+            //array_push($histori_jarak, ["centroid_lama" => $centroid]);
+            //array_push($histori_jarak, ["centroid_baru" => $centroidBaru]);
+            $totalAttributes = 4; // assignment, project, exams, attendance_presence
+            $k = 3;
+            $maxSame = $totalAttributes * $k; // 12
+            
+            $iterate+=1;
             //program lama
             /*$c1_tugas = 0.0; $c1_project = 0.0; $c1_ujian = 0.0;
             $c2_tugas = 0.0; $c2_project = 0.0; $c2_ujian = 0.0;
@@ -236,10 +248,10 @@ class ClusteringController extends BaseController
                 $centroid[2][2] = $c3_ujian;
                 
             }*/
-        } while($same == 0 && $iterate < $maxiterate);
+        } while($same != 12 && $iterate < $maxiterate);
 
         $silhouette_score = $this->hitungSilhouetteScore($clusters);
-
+        //dd($histori_jarak);
         return [
             "jarak" => $histori_jarak,
             "pengelompokan_cluster" => $histori_cluster,
@@ -454,7 +466,8 @@ class ClusteringController extends BaseController
     public function isEqual($a, $b)
     {
         $epsilon = 0.1; // atau bahkan 0.1 tergantung kebutuhan konvergensi Anda
-        return abs($a - $b) < $epsilon;
+        //return abs($a - $b) < $epsilon;
+        return round($a, 4) == round($b, 4);
     }
     public function run()
     {
