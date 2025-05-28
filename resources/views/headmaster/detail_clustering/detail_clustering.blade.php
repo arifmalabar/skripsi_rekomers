@@ -94,10 +94,10 @@ Detail Clustering
                             <th width="8%">Projek</th>
                             <th width="8%">Ujian</th>
                             <th width="8%">Presensi</th>
-                            <th">Centroid 1</th>
-                                <th>Centroid 2</th>
-                                <th>Centroid 3</th>
-                                <th>Cluster</th>
+                            <th>Centroid 1</th>
+                            <th>Centroid 2</th>
+                            <th>Centroid 3</th>
+                            <th>Cluster</th>
                         </tr>
                     </thead>
                     <tbody>
