@@ -144,7 +144,7 @@ class ClusteringController extends BaseController
                     
                 }
             }
-            array_push($histori_jarak, ["data_jarak" => $list_jarak, "centroid_lama" => $centroid_lama, "centroid_baru" => $centroid]);
+            array_push($histori_jarak, ["data_jarak" => $clusters, "centroid_lama" => $centroid_lama, "centroid_baru" => $centroid]);
             array_push($histori_cluster, ["iterasi" => $clusters]);
             
             //array_push($histori_jarak, ["centroid_lama" => $centroid]);

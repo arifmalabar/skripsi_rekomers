@@ -90,13 +90,14 @@ Detail Clustering
                             <th>No</th>
                             <th>NISN</th>
                             <th>Nama Siswa</th>
-                            <th>Tugas</th>
-                            <th>Projek</th>
-                            <th>Ujian</th>
-                            <th>Presensi</th>
-                            <th>Centroid 1</th>
-                            <th>Centroid 2</th>
-                            <th>Centroid 3</th>
+                            <th width="8%">Tugas</th>
+                            <th width="8%">Projek</th>
+                            <th width="8%">Ujian</th>
+                            <th width="8%">Presensi</th>
+                            <th">Centroid 1</th>
+                                <th>Centroid 2</th>
+                                <th>Centroid 3</th>
+                                <th>Cluster</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,6 +116,7 @@ Detail Clustering
                             <td>{{ $key["centroid1"] }}</td>
                             <td>{{ $key["centroid2"] }}</td>
                             <td>{{ $key["centroid3"] }}</td>
+                            <td>{{ $key["cluster"] }}</td>
                         </tr>
                         @endforeach
                         <tr>
