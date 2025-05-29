@@ -8,6 +8,54 @@ Detail Clustering
 @endsection
 @section('content')
 <div class="row">
+    <div class="col-lg-4 col-6">
+        <!-- small card -->
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>{{ $count["C1"] }}</h3>
+
+                <p>Sangat Lemah</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-user"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-6">
+        <!-- small card -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>{{ $count["C2"] }}</h3>
+
+                <p>Kelemahan Menengah</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-pen"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-6">
+        <!-- small card -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>{{ $count["C3"] }}</h3>
+
+                <p>Tidak Lemah</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-book"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                More info <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
     <div class="col-md-12">
         <div class="card card-success card-outline">
             <div class="card-header">
@@ -121,22 +169,22 @@ Detail Clustering
                         @endforeach
                         <tr>
                             <th colspan="6" rowspan="3">Centroid Lama</th>
-                            <th>{{ $item["centroid_lama"][0][0] }}</th>
-                            <th>{{ $item["centroid_lama"][0][1] }}</th>
-                            <th>{{ $item["centroid_lama"][0][2] }}</th>
-                            <th>{{ $item["centroid_lama"][0][3] }}</th>
+                            <th>{{ round($item["centroid_lama"][0][0], 2) }}</th>
+                            <th>{{ round($item["centroid_lama"][0][1], 2) }}</th>
+                            <th>{{ round($item["centroid_lama"][0][2], 2) }}</th>
+                            <th>{{ round($item["centroid_lama"][0][3], 2) }}</th>
                         </tr>
                         <tr>
-                            <th>{{ $item["centroid_lama"][1][0] }}</th>
-                            <th>{{ $item["centroid_lama"][1][1] }}</th>
-                            <th>{{ $item["centroid_lama"][1][2] }}</th>
-                            <th>{{ $item["centroid_lama"][1][3] }}</th>
+                            <th>{{ round($item["centroid_lama"][1][0],2) }}</th>
+                            <th>{{ round($item["centroid_lama"][1][1],2) }}</th>
+                            <th>{{ round($item["centroid_lama"][1][2],2) }}</th>
+                            <th>{{ round($item["centroid_lama"][1][3],2) }}</th>
                         </tr>
                         <tr>
-                            <th>{{ $item["centroid_lama"][2][0] }}</th>
-                            <th>{{ $item["centroid_lama"][2][1] }}</th>
-                            <th>{{ $item["centroid_lama"][2][2] }}</th>
-                            <th>{{ $item["centroid_lama"][2][3] }}</th>
+                            <th>{{ round($item["centroid_lama"][2][0],2) }}</th>
+                            <th>{{ round($item["centroid_lama"][2][1],2) }}</th>
+                            <th>{{ round($item["centroid_lama"][2][2],2) }}</th>
+                            <th>{{ round($item["centroid_lama"][2][3],2) }}</th>
                         </tr>
                         <tr>
                             <th colspan="6" rowspan="3">Centroid Baru</th>

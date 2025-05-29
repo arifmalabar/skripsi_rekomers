@@ -43,11 +43,25 @@ class ClusteringHeadmasterController extends ClusteringController
             return $this->showError($th->getMessage());
         }
     }
+    
+    private function getCountClustering($request)
+    {
+        $data = [
+            "C1" => $this->getClusterCount($request, "C1"),
+            "C2" => $this->getClusterCount($request, "C2"),
+            "C3" => $this->getClusterCount($request, "C3")
+        ];
+        return $data;
+    }
+    private function getClusterCount($request, $cluster)
+    {
+        return $this->mdl->where("course_id", "=", $request["course_id"])->where("cluster", "=", $cluster)->get()->count();
+    }
     public function getClusteringDetail(Request $request)
     {
         try {
             //return $this->runKmeans($request);
-            return view("headmaster/detail_clustering/detail_clustering", ["nama" => "clustering", "data" => $this->runKmeans($request)]);
+            return view("headmaster/detail_clustering/detail_clustering", ["nama" => "clustering", "data" => $this->runKmeans($request), "count" => $this->getCountClustering($request)]);
         } catch (\Throwable $th) {
             return $this->showError($th->getMessage());
         }
