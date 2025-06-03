@@ -29,6 +29,7 @@ class ClusteringSiswaController extends ClusteringHeadmasterController
                 (SELECT COUNT(*) FROM clusterings WHERE clusterings.student_id = id AND cluster = 'C3') as cluster3
             ")
             ->join("clusterings", "students.id", "=", "clusterings.student_id")
+            ->groupBy("id")
             ->get();
             $new_data = [];
             foreach ($data as $key) {
