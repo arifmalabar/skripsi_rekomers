@@ -22,7 +22,7 @@ function showBar(presentase) {
         labels: ["Risiko Tinggi", "Risiko Tengah", "Risiko Rendah"],
         datasets: [
             {
-                label: "Digital Goods",
+                label: "Risiko",
                 backgroundColor: "rgba(60,141,188,0.9)",
                 borderColor: "rgba(60,141,188,0.8)",
                 pointRadius: false,
@@ -35,6 +35,18 @@ function showBar(presentase) {
                     presentase.risiko_tengah,
                     presentase.risiko_rendah,
                 ],
+                options: {
+                    scales: {
+                        y: {
+                            type: "logarithmic",
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: "Nilai (Skala Logaritmik)",
+                            },
+                        },
+                    },
+                },
             },
             {
                 label: "Electronics",
@@ -68,6 +80,11 @@ function showBar(presentase) {
                 {
                     gridLines: {
                         display: false,
+                    },
+                    beginAtZero: true,
+                    suggestedMax: 100,
+                    ticks: {
+                        stepSize: 10,
                     },
                 },
             ],
