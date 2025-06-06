@@ -129,6 +129,7 @@ Route::controller(ClusteringHeadmasterController::class)->group(function () {
     Route::post($root."/api", "insertData");
     Route::post($root."/detail", "getClusteringDetail");
     Route::delete($root."/api", "deleteNilai");
+    Route::get($root."/detail/export", "exportData");
 });
 Route::controller(DetailSiswaClusteringController::class)->group(function () {
     $root = "kakomli/detail_cluster/";

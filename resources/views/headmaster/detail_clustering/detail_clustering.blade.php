@@ -65,8 +65,8 @@ Detail Clustering
                     Hasil Clustering
                 </h3>
                 <div class="card-tools">
-                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-lg"><i
-                            class="fa fa-sync"></i>&nbsp;Sinkronasi Data</button>
+                    <a class="btn btn-sm btn-success" target="_blank" href="/kakomli/clustering/detail/export"><i
+                            class="fa fa-table"></i>&nbsp;Export Ke Excel</a>
                 </div>
             </div>
             <!-- /.card-header -->

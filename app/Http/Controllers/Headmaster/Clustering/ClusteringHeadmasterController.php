@@ -9,6 +9,7 @@ use App\Models\Teacher\Grade;
 use Error;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Session;
 
 class ClusteringHeadmasterController extends ClusteringController
 {
@@ -61,6 +62,7 @@ class ClusteringHeadmasterController extends ClusteringController
     {
         try {
             //return $this->runKmeans($request);
+            Session::put($request->except("token"));
             return view("headmaster/detail_clustering/detail_clustering", ["nama" => "clustering", "data" => $this->runKmeans($request), "count" => $this->getCountClustering($request)]);
         } catch (\Throwable $th) {
             return $this->showError($th->getMessage());
@@ -127,5 +129,14 @@ class ClusteringHeadmasterController extends ClusteringController
         }
         return $ready_toinsert;
         
+    }
+    public function exportData()
+    {
+        $request = [
+            "course_id" => Session::get("course_id"),
+            "year" => Session::get("year"),
+            "semester" => Session::get("semester")
+        ];
+        return $this->exportAsExcel($request);
     }
 }

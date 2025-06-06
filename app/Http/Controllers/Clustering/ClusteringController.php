@@ -8,6 +8,9 @@ use App\Http\Controllers\Teacher\Grading\GradingDetailController;
 use App\Models\Clustering;
 use Illuminate\Http\Request;
 use App\Models\Teacher\Grade;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class ClusteringController extends BaseController
 {
@@ -519,5 +522,47 @@ class ClusteringController extends BaseController
             'cluster_assignment' => $cluster_assignment,
             'iterations' => $iterasi
         ];
+    }
+    public function exportAsExcel($request)
+    {
+        $data = $this->runKmeans($request)["hasil"];
+        
+        $filename = 'clusterings '.$request["course_id"].'-'.date('Y-m-d').'.xls';
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Set header manual, kolom A sampai H
+        $sheet->setCellValue('A1', 'ID');
+        $sheet->setCellValue('B1', 'Assignment');
+        $sheet->setCellValue('C1', 'Project');
+        $sheet->setCellValue('D1', 'Exams');
+        $sheet->setCellValue('E1', 'Attendance Presence');
+        $sheet->setCellValue('F1', 'Centroid 1');
+        $sheet->setCellValue('G1', 'Centroid 2');
+        $sheet->setCellValue('H1', 'Centroid 3');
+        $sheet->setCellValue('I1', 'Cluster');
+        // Mulai isi data dari baris ke-2
+        $rowNumber = 2;
+        foreach ($data as $row) {
+            $sheet->setCellValue('A' . $rowNumber, $row['name']);
+            $sheet->setCellValue('B' . $rowNumber, $row['assignment']);
+            $sheet->setCellValue('C' . $rowNumber, $row['project']);
+            $sheet->setCellValue('D' . $rowNumber, $row['exams']);
+            $sheet->setCellValue('E' . $rowNumber, $row['attendance_presence']);
+            $sheet->setCellValue('F' . $rowNumber, $row['centroid1']);
+            $sheet->setCellValue('G' . $rowNumber, $row['centroid2']);
+            $sheet->setCellValue('H' . $rowNumber, $row['centroid3']);
+            $sheet->setCellValue('I' . $rowNumber, $row['cluster']);
+            $rowNumber++;
+        }
+
+        $writer = new Xls($spreadsheet);
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+
+        exit;
     }
 }
