@@ -118,14 +118,10 @@ class ClusteringController extends BaseController
             $list_jarak = [];
             $clusters = [];
             $list_jarak = $this->hitungJarak($student, $centroid);
-            //dd($list_jarak);
             $clusters = $this->buatCluster($list_jarak);
-            //dd($clusters);
             //mengelompokan cluster
-
             //program baru
             $centroidBaru = $this->kelompokanCluster($clusters);
-            //dd($centroidBaru);
             $centroidBaru = $this->rataRataCluster($centroidBaru);
             
             $same = 0;
@@ -147,114 +143,16 @@ class ClusteringController extends BaseController
                     
                 }
             }
+            //histori perhitungan 
             array_push($histori_jarak, ["data_jarak" => $clusters, "centroid_lama" => $centroid_lama, "centroid_baru" => $centroid]);
             array_push($histori_cluster, ["iterasi" => $clusters]);
-            
-            //array_push($histori_jarak, ["centroid_lama" => $centroid]);
-            //array_push($histori_jarak, ["centroid_baru" => $centroidBaru]);
             $totalAttributes = 4; // assignment, project, exams, attendance_presence
             $k = 3;
-            $maxSame = $totalAttributes * $k; // 12
-            
+            $maxSame = $totalAttributes * $k;
             $iterate+=1;
-            //program lama
-            /*$c1_tugas = 0.0; $c1_project = 0.0; $c1_ujian = 0.0;
-            $c2_tugas = 0.0; $c2_project = 0.0; $c2_ujian = 0.0;
-            $c3_tugas = 0.0; $c3_project = 0.0; $c3_ujian = 0.0;
-            $countc1=0; $countc2=0; $countc3 = 0;
-            foreach ($clusters as $key) {
-                if($key['cluster'] === "C1"){
-                    $c1_project += $key['project'];
-                    $c1_tugas +=  $key['assignment'];
-                    $c1_ujian +=  $key['exams'];
-                    $countc1++;
-                } else if($key['cluster'] === "C2"){
-                    $c2_project += $key['project'];
-                    $c2_tugas += $key['assignment'];
-                    $c2_ujian += $key['exams'];
-                    $countc2++;
-                } else if($key['cluster'] === "C3"){
-                    $c3_project += $key['project'];
-                    $c3_tugas += $key['assignment'];
-                    $c3_ujian += $key['exams'];
-                    $countc3++;
-                }
-            }
-            //hitung rata rata cluster 
-            $same = 0;
-            if($countc1 > 0){
-                $c1_tugas /= $countc1;
-                $c1_project /= $countc1;
-                $c1_ujian /= $countc1;
-            } 
-            if($countc2 > 0){
-                $c2_tugas /= $countc2;
-                $c2_project /= $countc2;
-                $c2_ujian /= $countc2;
-            } 
-            if($countc3 > 0){
-                $c3_tugas /= $countc3;
-                $c3_project /= $countc3;
-                $c3_ujian /= $countc3;
-                $countc3;
-            }
-            if($this->isEqual($centroid[0][0], $c1_tugas))
-            {
-                $same+=1;
-            }
-
-            if($this->isEqual($centroid[0][1], $c1_project))
-            {
-                $same+=1;
-            }
-
-            if($this->isEqual($centroid[0][2], $c1_ujian))
-            {
-                $same+=1;
-            }
-
-            if($this->isEqual($centroid[1][0], $c2_tugas))
-            {
-                $same+=1;
-            }if($this->isEqual($centroid[1][1], $c2_project))
-            {
-                $same+=1;
-            }
-            if($this->isEqual($centroid[1][2], $c2_ujian))
-            {
-                $same+=1;
-            }
-
-            if($this->isEqual($centroid[2][0], $c3_tugas))
-            {
-                $same+=1;
-            }
-            if($this->isEqual($centroid[2][1], $c3_project))
-            {
-                $same+=1;
-            }if($this->isEqual($centroid[2][2], $c3_ujian))
-            {
-                $same+=1;
-            }
-
-            if($same == 0){
-                $centroid[0][0] = $c1_tugas;
-                $centroid[0][1] = $c1_project;
-                $centroid[0][2] = $c1_ujian;
-                
-                $centroid[1][0] = $c2_tugas;
-                $centroid[1][1] = $c2_project;
-                $centroid[1][2] = $c2_ujian;
-                
-                $centroid[2][0] = $c3_tugas;
-                $centroid[2][1] = $c3_project;
-                $centroid[2][2] = $c3_ujian;
-                
-            }*/
-        } while($same != 12 && $iterate < $maxiterate);
-
+        } while($same != 12 && $iterate < $maxiterate);  // jumlah nilai yang sama == 12 jika dibawah itu maka centroid tidak sama
+        //dari perhitungan yang sudah dilakukan tentukan silhouette score
         $silhouette_score = $this->hitungSilhouetteScore($clusters);
-        //dd($histori_jarak);
         return [
             "jarak" => $histori_jarak,
             "pengelompokan_cluster" => $histori_cluster,
