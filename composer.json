@@ -15,9 +15,8 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "maatwebsite/excel": "^1.1",
         "nesbot/carbon": "2.66",
-        "phpoffice/phpspreadsheet": "^4.3"
+        "phpoffice/phpspreadsheet": "1.29"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
