@@ -39,6 +39,13 @@ Guru
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
+                                        <div class="col-md-12 f-state">
+                                            <div class="alert alert-info">
+                                                <label for=""><i class="fa fa-info"></i>&nbsp;Perhatian!</label>
+                                                <br>
+                                                <b>Anda berada pada sesi kakomli, anda diminta untuk melakukan input username dan password untuk menambah sesi</b>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6">
                                             <label for="">NIP<sup>*</sup></label>
                                             <div class="input-group mb-3">
@@ -64,7 +71,7 @@ Guru
                                                 <input type="hidden" value="{{ csrf_token() }}" class="token">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 f-username">
                                             <label for="">Username<sup>*</sup></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
@@ -76,7 +83,7 @@ Guru
                                                     placeholder="masukan username">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 f-password">
                                             <label for="">Password<sup>*</sup></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
@@ -152,6 +159,13 @@ Guru
                             </div>
                             <div class="modal-body">
                                 <div class="row">
+                                    <div class="col-md-12 f-state">
+                                        <div class="alert alert-warning">
+                                            <label for=""><i class="fa fa-info"></i>&nbsp;Perhatian!</label>
+                                            <br>
+                                            <b>Anda berada pada sesi kakomli, anda diminta untuk melakukan ubah username dan password untuk menambah sesi</b>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <label for="">NIP<sup>*</sup></label>
                                         <div class="input-group mb-3">
@@ -177,7 +191,7 @@ Guru
                                             <input type="hidden" value="{{ csrf_token() }}" class="token">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 f-username">
                                         <label for="">Username<sup>*</sup></label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -189,7 +203,7 @@ Guru
                                                 placeholder="masukan username">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 f-password">
                                         <label for="">Password<sup>*</sup></label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">

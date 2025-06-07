@@ -27,4 +27,13 @@ class TeacherController extends BaseController
         $request["password"] = bcrypt($request["password"]);
         return parent::insertData($request);
     }
+    public function getData()
+    {
+        try {
+            $id = auth()->guard("teachers")->user()->id;
+            return $this->model->where("id", "!=", $id)->get();
+        } catch (\Throwable $th) {
+            return $this->showError($th->getMessage());
+        }
+    }
 }

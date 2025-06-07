@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\BaseMiddleware;
 
-class HeadmasterMiddleware extends BaseMiddleware
+class HeadmasterMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,12 @@ class HeadmasterMiddleware extends BaseMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function __construct() {
-        parent::__construct("kakomli");
-    }
     public function handle(Request $request, Closure $next)
     {
-        return parent::handle($request, $next);
+        if(auth()->guard("teachers")->check() == null)
+        {
+            return redirect("/")->with('failed', 'Anda belum login');
+        } 
+        return $next($request);
     }
 }

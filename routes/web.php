@@ -18,6 +18,7 @@ use App\Http\Controllers\Headmaster\Year\YearController;
 use App\Http\Controllers\Teacher\Dashboard\DashboardController as TeacherDashboardController;
 use App\Http\Controllers\Teacher\Grading\GradingDetailController;
 use App\Http\Controllers\Headmaster\Clustering\ClusteringHeadmasterController;
+use App\Http\Middleware\HeadmasterMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +34,8 @@ use App\Http\Controllers\Headmaster\Clustering\ClusteringHeadmasterController;
 Route::get('/', [LoginController::class,'index'])->name('login')->middleware('guest');
 Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
-Route::controller(DashboardController::class)->group(function() {
+Route::middleware(HeadmasterMiddleware::class)->group(function () {
+    Route::controller(DashboardController::class)->group(function() {
         $root = "/kakomli/dashboard/";
         Route::get($root, "index")->name("dashboard");
         Route::get($root."api", "getData");
@@ -42,6 +43,7 @@ Route::controller(DashboardController::class)->group(function() {
         Route::put($root."api/{id}", "updateData");
         Route::delete($root."api/{id}", "deleteData");
     });
+    
     Route::controller(SemesterController::class)->group(function(){
         $root = "/kakomli/semester/";
         Route::get($root, "index");
@@ -99,7 +101,18 @@ Route::controller(DashboardController::class)->group(function() {
         Route::put($root."/api/{id}", "updateData");
         Route::delete($root."/api/{id}", "deleteData");
     });
+    Route::controller(ClusteringHeadmasterController::class)->group(function () {
+        $root = "/kakomli/clustering";
 
+        Route::get($root, "index");
+        Route::get($root."/siswa_detail/{id}", "clusteringSiswa");
+        Route::get($root."/api", "getData");
+        Route::post($root."/api", "insertData");
+        Route::post($root."/detail", "getClusteringDetail");
+        Route::delete($root."/api", "deleteNilai");
+        Route::get($root."/detail/export", "exportData");
+    });
+});
 
 
 Route::controller(TeacherDashboardController::class)->group(function() {
@@ -120,17 +133,7 @@ Route::controller(GradingDetailController::class)->group(function() {
     Route::get($root."/api", "getData");
     Route::post($root."/api", "saveNilai");
 });
-Route::controller(ClusteringHeadmasterController::class)->group(function () {
-    $root = "/kakomli/clustering";
 
-    Route::get($root, "index");
-    Route::get($root."/siswa_detail/{id}", "clusteringSiswa");
-    Route::get($root."/api", "getData");
-    Route::post($root."/api", "insertData");
-    Route::post($root."/detail", "getClusteringDetail");
-    Route::delete($root."/api", "deleteNilai");
-    Route::get($root."/detail/export", "exportData");
-});
 Route::controller(DetailSiswaClusteringController::class)->group(function () {
     $root = "kakomli/detail_cluster/";
     Route::get($root."clustering_siswa/{id}", "index");

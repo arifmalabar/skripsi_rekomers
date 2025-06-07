@@ -32,7 +32,7 @@ class LoginController extends Controller
                 return redirect()->route("/teacher/dashboard");
             }
         } else{
-            return redirect("/");
+            return redirect("/")->with('failed', 'Email atau Password Salah!');
         }
     }
 
@@ -43,6 +43,6 @@ class LoginController extends Controller
 
         request()->session()->regenerateToken();
         
-        return redirect()->route('login')->with('succes', 'Berhasil Logout');
+        return redirect()->route('login')->with('success', 'Berhasil Logout');
     }
 }
