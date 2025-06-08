@@ -14,13 +14,17 @@
                 <div class="col-md-6">
                     <div class="card-body">
                         <div class="text-center mb-3">
-                            <img src="{{ asset('assets/dist/img/KOS.png') }}" alt="Logo" class="brand-image"
-                                style="width: 30px; height: 25px; margin-bottom: 10px;">
+                            <img src="https://smkn8malang.sch.id/img/logo.png" alt="Logo" class="brand-image"
+                                style="width: 30px; height: 30px; margin-bottom: 10px;">
                             <h1 class="h6" style="color: rgb(6, 165, 157);">Welcome Back,</h1>
                             <h1 class="h4"
                                 style="color: rgb(6, 165, 157); font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
                                 <b>REKOMERS</b>
                             </h1>
+                            <div class="alert alert-success alert-dismissible">
+                                Untuk ujicoba sistem kebutuhan semhas gunakan <b>Username : login</b> dan <b>Password :
+                                    login</b>
+                            </div>
                         </div>
                         <form action="{{ route('login-proses') }}" method="post">
                             @csrf
