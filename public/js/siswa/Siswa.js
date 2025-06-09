@@ -190,11 +190,11 @@ async function delData(id) {
         await showDlg("Hapus data?", confirmhapus, btnhapus).then((opt) => {
             if (opt.isConfirmed) {
                 deleteData(siswa, id, token);
+                get();
             } else {
                 throw cancelhapus;
             }
         });
-
         get();
         showMsg("Berhasil", successdeletedata, "success");
     } catch (error) {

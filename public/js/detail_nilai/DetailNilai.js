@@ -65,6 +65,7 @@ async function upload() {
                     attendance_presence: element[5],
                 });
             });
+            get();
         });
         insertData(detai_nilai, ready, token);
         get();
@@ -78,6 +79,7 @@ async function get() {
     try {
         var no = 1;
         var data = await getData(detai_nilai);
+        var validation = `<div class="invalid-feedback">Nilai harus antara 0 sampai 100</div>`;
         var columm = [
             {
                 data: null,
@@ -101,28 +103,28 @@ async function get() {
                 data: null,
                 render: function (p1, p2, p3) {
                     return `<input type="number" style="text-align:center" value="${p3.assignment}" placeholder="Input Nilai Tugas"
-                                            class="form-control input-tugas">`;
+                                            class="form-control input-tugas"> ${validation}`;
                 },
             },
             {
                 data: null,
                 render: function (p1, p2, p3) {
                     return `<input type="number" style="text-align:center" value="${p3.project}" placeholder="Input Nilai Proyek"
-                                            class="form-control input-proyek">`;
+                                            class="form-control input-proyek"> ${validation}`;
                 },
             },
             {
                 data: null,
                 render: function (p1, p2, p3) {
                     return `<input type="number" style="text-align:center" value="${p3.exams}" placeholder="Input Nilai Ujian"
-                                            class="form-control input-ujian">`;
+                                            class="form-control input-ujian"> ${validation}`;
                 },
             },
             {
                 data: null,
                 render: function (p1, p2, p3) {
                     return `<input type="number" style="text-align:center" value="${p3.attendance_presence}" placeholder="Input Nilai Tugas"
-                                            class="form-control input-presensi">`;
+                                            class="form-control input-presensi"> ${validation}`;
                 },
             },
         ];
@@ -151,12 +153,39 @@ async function insert() {
         });
     });
     try {
+        checkNilai();
         insertData(detai_nilai, nilai, token).then((e) => {
             console.log(e);
         });
         showMsg("Berhasil", successtambahdata, "success");
     } catch (error) {
         showMsg("Gagal", error, "error");
+    }
+}
+function checkNilai() {
+    $("#example2 tbody tr").each(function (indexInArray, valueOfElement) {
+        const row = $(this);
+        const assignment = row.find(".input-tugas").val();
+        const project = row.find(".input-proyek").val();
+        const exams = row.find(".input-ujian").val();
+        const attendance_presence = row.find(".input-presensi").val();
+        validateInput(row, assignment, ".input-tugas");
+        validateInput(row, project, ".input-proyek");
+        validateInput(row, exams, ".input-ujian");
+        validateInput(row, attendance_presence, ".input-presensi");
+    });
+}
+function validateInput(row, value, component) {
+    let error = false;
+    if (value < 0 || value > 100) {
+        row.find(component).addClass("is-invalid");
+        error = true;
+    } else {
+        row.find(component).removeClass("is-invalid");
+        error = false;
+    }
+    if (error) {
+        throw new Error("Diluar jangkauan rentang nilai");
     }
 }
 async function update() {
