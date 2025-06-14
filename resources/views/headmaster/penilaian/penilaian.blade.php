@@ -96,12 +96,12 @@ Penilaian
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example2" style="text-align: center" class="table table-bordered table-hover">
+                <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Mata Pelajaran</th>
-                            <th>Semster</th>
+                            <th>Semester</th>
                             <th>Tahun Ajaran</th>
                             <th>Opsi</th>
                         </tr>

@@ -1,4 +1,4 @@
-export function showTables(dt, col, tbid = null) {
+export function showTables(dt, col, tbid = null, coldef = null) {
     const id = tbid == null ? "#example2" : tbid;
     $(id).DataTable({
         paging: true,
@@ -11,6 +11,10 @@ export function showTables(dt, col, tbid = null) {
         bDestroy: true,
         data: dt,
         columns: col,
-        columnDefs: [{ targets: [1, 2], className: "align-kiri" }],
+        autoWidth: true,
+        columnDefs:
+            coldef == null
+                ? [{ targets: [1, 2], className: "align-kiri" }]
+                : coldef,
     });
 }

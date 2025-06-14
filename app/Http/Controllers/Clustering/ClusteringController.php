@@ -157,7 +157,7 @@ class ClusteringController extends BaseController
             "jarak" => $histori_jarak,
             "pengelompokan_cluster" => $histori_cluster,
             "hasil" => $clusters,
-            "siholuete" => round($silhouette_score, 3),
+            "siholuete" => round($silhouette_score, 3)
         ];
         
     }

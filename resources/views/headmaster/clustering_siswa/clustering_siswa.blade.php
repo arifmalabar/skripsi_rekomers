@@ -89,7 +89,7 @@ Clustering Siswa
             <div class="card-body">
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
-                        <table id="example2" style="text-align: center" class="table table-bordered table-hover">
+                        <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>No</th>

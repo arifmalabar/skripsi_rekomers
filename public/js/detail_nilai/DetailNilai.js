@@ -128,7 +128,13 @@ async function get() {
                 },
             },
         ];
-        showTables(data, columm);
+        const coldef = [
+            {
+                targets: [1, 2], // indeks kolom yang ingin diatur
+                className: "text-start", // gunakan Bootstrap 5 atau ganti dengan 'dt-body-left' jika pakai DataTables style
+            },
+        ];
+        showTables(data, columm, null, coldef);
     } catch (error) {
         showMsg(error);
     }

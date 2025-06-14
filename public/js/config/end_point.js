@@ -17,6 +17,7 @@ export const mapel = `/${kakomlipath}/mata_pelajaran/api`;
 export const clustering = `/${kakomlipath}/clustering/api`;
 export const detail_cluster_siswa = `/${kakomlipath}/detail_cluster/api`;
 export const all_cluster_siswa = `/${kakomlipath}/clustering_allsiswa/api`;
+export const elbow = `/${kakomlipath}/elbow`;
 
 export const nilai = `/${guru}/grades/api`;
 export const detai_nilai = `/${guru}/grades_detail/api`;

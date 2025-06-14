@@ -94,7 +94,13 @@ async function get(id = null) {
                 },
             },
         ];
-        showTables(data, columm);
+        const coldef = [
+            {
+                targets: [5], // indeks kolom yang ingin diatur
+                className: "text-center", // gunakan Bootstrap 5 atau ganti dengan 'dt-body-left' jika pakai DataTables style
+            },
+        ];
+        showTables(data, columm, null, coldef);
     } catch (error) {
         showMsg("Error", `${error}`, "error");
     }

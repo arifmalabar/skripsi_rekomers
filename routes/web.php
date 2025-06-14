@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Clustering\ClusteringController;
+use App\Http\Controllers\Clustering\ElbowController;
 use App\Http\Controllers\Headmaster\Classroom\ClassroomController;
 use App\Http\Controllers\Headmaster\Clustering\DetailSiswaClusteringController;
 use App\Http\Controllers\Headmaster\ClusteringSiswa\ClusteringSiswaController;
@@ -111,6 +112,11 @@ Route::middleware(HeadmasterMiddleware::class)->group(function () {
         Route::post($root."/detail", "getClusteringDetail");
         Route::delete($root."/api", "deleteNilai");
         Route::get($root."/detail/export", "exportData");
+    });
+    Route::controller(ElbowController::class)->group(function () {
+        $root = "/kakomli/elbow";
+
+        Route::get($root, "index");
     });
 });
 

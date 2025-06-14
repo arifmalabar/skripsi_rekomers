@@ -57,6 +57,29 @@ Detail Clustering
         </div>
     </div>
     <div class="col-md-12">
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+            <h3 class="card-title">
+                <i class="far fa-chart-bar"></i>
+                Elbow Method
+            </h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+                </button>
+            </div>
+            </div>
+            <div class="card-body">
+                <div id="elbowChart" style="height: 300px;"></div>
+            </div>
+            <!-- /.card-body-->
+        </div>
+    </div>
+    <div class="col-md-12">
         <div class="card card-success card-outline">
             <div class="card-header">
                 <h3 class="card-title">
@@ -72,7 +95,7 @@ Detail Clustering
             <!-- /.card-header -->
             <div class="card-body">
                 <label for="">Sholuete Score : {{ $data["siholuete"] }}</label>
-                <table id="example2" style="text-align: center" class="table table-bordered table-hover">
+                <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -132,7 +155,7 @@ Detail Clustering
             <!-- /.card-header -->
             <div class="card-body">
 
-                <table id="example2" style="text-align: center" class="table table-bordered table-hover">
+                <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -292,6 +315,13 @@ Detail Clustering
 </div>
 @endsection
 @section('js')
+<!-- FLOT CHARTS -->
+<script src="{{ asset("assets/plugins/flot/jquery.flot.js")}}"></script>
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="{{ asset("assets/plugins/flot/plugins/jquery.flot.resize.js")}}"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="{{ asset("assets/plugins/flot/plugins/jquery.flot.pie.js")}}"></script>
+<script type="module" src="{{ asset("js/elbow/App.js") }}"></script>
 <script>
     $('#example2').DataTable({
       "paging": true,
@@ -302,5 +332,13 @@ Detail Clustering
       "autoWidth": false,
       "responsive": true,
     });
+     /*
+     * LINE CHART
+     * ----------
+     */
+    //LINE randomly generated data
+
+    
+
 </script>
 @endsection

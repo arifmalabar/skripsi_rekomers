@@ -96,7 +96,7 @@ Penilaian
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example2" style="text-align: center" class="table table-bordered table-hover">
+                <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>

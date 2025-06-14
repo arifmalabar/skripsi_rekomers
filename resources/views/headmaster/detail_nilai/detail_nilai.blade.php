@@ -62,7 +62,7 @@ Detail Penilaian
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <table id="example2" style="text-align: center" class="table table-bordered table-hover">
+                        <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>No</th>
