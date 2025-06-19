@@ -66,7 +66,7 @@ Detail Clustering
 
 
             </div>
-            <div class="card-body">
+            <div class="card-body" style="overflow:auto; width:100%">
                 <div id="elbowChart" style="height: 300px;"></div>
                 <label for="">List Nilai WCSS</label>
                 <table id="exampe1" class="table table-bordered table-hover">
@@ -96,7 +96,7 @@ Detail Clustering
                 </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body" style="overflow:auto; width:100%">
                 <label for="">Sholuete Score : {{ $data["siholuete"] }}</label>
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
@@ -156,7 +156,7 @@ Detail Clustering
                 </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body" style="overflow:auto; width:100%">
 
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
