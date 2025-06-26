@@ -19,64 +19,6 @@ class ClusteringController extends BaseController
         $this->model = new Clustering();
         $this->grade = new GradingDetailController();
     }
-    private $siswa = [
-        [
-            "course_id"=> "C001",
-            "year"=> 2021,
-            "semester"=> "GANJIL",
-            "student_id"=> "002272323/debug",
-            "assignment"=> 20,
-            "project"=> 20,
-            "exams"=>10,
-            "attendance_presence"=> 0
-        ],
-        [
-            "course_id"=>"C001",
-            "year"=> 2021,
-            "semester"=> "GANJIL",
-            "student_id"=> "0027197004",
-            "assignment"=> 100,
-            "project"=> 100,
-            "exams"=> 100,
-            "attendance_presence"=> 0
-        ],
-        [
-            "course_id"=> "C001",
-            "year"=> 2021,
-            "semester"=> "GANJIL",
-            "student_id"=>"108323",
-            "assignment"=> 90,
-            "project"=> 90,
-            "exams"=> 97,
-            "attendance_presence"=> 0
-        ],
-        [
-            "course_id"=> "C001",
-            "year"=> 2021,
-            "semester"=> "GANJIL",
-            "student_id"=>"1092423",
-            "assignment"=> 0,
-            "project"=> 65,
-            "exams"=> 70,
-            "attendance_presence"=> 0
-        ],
-        [
-            "course_id"=> "C001",
-            "year"=> 2021,
-            "semester"=> "GANJIL",
-            "student_id"=>"561212",
-            "assignment"=> 50,
-            "project"=> 02,
-            "exams"=> 87,
-            "attendance_presence"=> 0
-        ],
-    ];
-
-    private $centroid = [
-        [50, 60, 40],
-        [65, 70, 80],
-        [85, 90, 100]
-    ];
     public function index()
     {
         //return $this->runKmeans();
@@ -109,9 +51,7 @@ class ClusteringController extends BaseController
         //$centroid = $this->getCentroid();
         $iterate = 0;
         $maxiterate = 15;
-        //$same = 0;
         $student = $this->getGradeStudent($request);
-        
         $histori_jarak = [];
         $histori_cluster = [];
         do {
@@ -119,13 +59,16 @@ class ClusteringController extends BaseController
             $clusters = [];
             $list_jarak = $this->hitungJarak($student, $centroid);
             $clusters = $this->buatCluster($list_jarak);
-            //mengelompokan cluster
-            //program baru
             $centroidBaru = $this->kelompokanCluster($clusters);
             $centroidBaru = $this->rataRataCluster($centroidBaru);
-            
+            /*
+                PROSES CEK CENTROID BARU
+                1. jika nilai centroid lama sama dengan centroid baru maka tambah nilai same
+                2. fungsi penjumlahan nilai same digunakan sebagai patokan apakah data sudah konvergen
+                    2a. nilai same = 12 -> data sudah konvergen 
+                    2b. nilai same < 12 -> ada centroid yang masih berubah/tidak sama dengan centroid baru
+            */
             $same = 0;
-
             foreach (['C1', 'C2', 'C3'] as $index => $cluster) {
                 if ($this->isEqual($centroid[$index][0], $centroidBaru[$cluster]['assignment'])) $same++;
                 if ($this->isEqual($centroid[$index][1], $centroidBaru[$cluster]['project'])) $same++;
@@ -135,6 +78,9 @@ class ClusteringController extends BaseController
             // Update centroid jika ada perubahan
             $centroid_lama = $centroid;
             if ($same != 12) {
+                /*
+                    update centroid hanya berlaku jika data masih berubah(nilai variabel same < 12)
+                */
                 foreach (['C1', 'C2', 'C3'] as $index => $cluster) {
                     $centroid[$index][0] = $centroidBaru[$cluster]['assignment'];
                     $centroid[$index][1] = $centroidBaru[$cluster]['project'];
@@ -369,57 +315,6 @@ class ClusteringController extends BaseController
         $epsilon = 0.1; // atau bahkan 0.1 tergantung kebutuhan konvergensi Anda
         //return abs($a - $b) < $epsilon;
         return round($a, 4) == round($b, 4);
-    }
-    public function run()
-    {
-        $centroid = $this->centroid;
-        $max_iterasi = 100; // Batas maksimum iterasi agar tidak infinite loop
-        $iterasi = 0;
-        $cluster_assignment = [];
-
-        do {
-            $changed = false;
-            $cluster_assignment = [];
-
-            // Inisialisasi cluster sementara
-            foreach ($this->siswa as $siswa) {
-                $assignment = $siswa['assignment'];
-                $project = $siswa['project'];
-                $exams = $siswa['exams'];
-
-                $minDist = PHP_INT_MAX;
-                $chosenCluster = 0;
-
-                // Hitung jarak ke setiap centroid
-                foreach ($centroid as $i => $c) {
-                    $dist = $this->euclideanDistanceMulti([$assignment, $project, $exams], $c);
-                    if ($dist < $minDist) {
-                        $minDist = $dist;
-                        $chosenCluster = $i;
-                    }
-                }
-
-                // Simpan hasil cluster untuk siswa ini
-                $cluster_assignment[$siswa['student_id']] = $chosenCluster;
-            }
-
-            // Hitung centroid baru berdasarkan cluster assignment
-            $new_centroid = $this->updateCentroid($cluster_assignment);
-
-            // Bandingkan centroid lama dengan yang baru
-            if ($new_centroid != $centroid) {
-                $changed = true;
-                $centroid = $new_centroid;
-            }
-
-            $iterasi++;
-        } while ($changed && $iterasi < $max_iterasi);
-
-        return [
-            'final_centroid' => $centroid,
-            'cluster_assignment' => $cluster_assignment,
-            'iterations' => $iterasi
-        ];
     }
     public function exportAsExcel($request)
     {
