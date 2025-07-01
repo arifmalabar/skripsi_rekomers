@@ -126,11 +126,11 @@ Detail Clustering
                             <td>{{ $key["centroid3"] }}</td>
                             <td>
                                 @if($key["cluster"] == "C1")
-                                <span class="badge badge-danger">{{ $key["cluster"] }}/High</span>
+                                <span class="badge badge-danger">{{ $key["cluster"] }}</span>
                                 @elseif($key["cluster"] == "C2")
-                                <span class="badge badge-warning">{{ $key["cluster"] }}/Medium</span>
+                                <span class="badge badge-warning">{{ $key["cluster"] }}</span>
                                 @elseif($key["cluster"] == "C3")
-                                <span class="badge badge-success">{{ $key["cluster"] }}/Less</span>
+                                <span class="badge badge-success">{{ $key["cluster"] }}</span>
                                 @endif
                             </td>
                         </tr>
