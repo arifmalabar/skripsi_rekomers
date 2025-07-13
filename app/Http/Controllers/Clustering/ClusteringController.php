@@ -110,11 +110,11 @@ class ClusteringController extends BaseController
     private function getCentroid()
     {
         $grade_model = $this->grade->model;
-        $threshold = 60;
-        $lowest = $grade_model->orderByRaw('(assignment + project + exams + attendance_presence) ASC')
-                            ->limit(5)
-                            ->inRandomOrder()
-                            ->first();
+        //Mengambil satu siswa secara acak dari 5 siswa yang memiliki total nilai terendah.
+        $lowest = $grade_model->orderByRaw('(assignment + project + exams + attendance_presence) ASC') //urutkan berdasarkan penjumlahan dari total kolom assignment,project, exams, presensi secara naik
+                            ->limit(5) //limit data yang ditampilkan adalah 5 data teratas
+                            ->inRandomOrder() //acak data yang ditampilkan
+                            ->first(); //ambil 1 record dari hasil yang sudah diacak saja
 
         $middleIndex = floor($grade_model::count() / 2);
         $middle = $grade_model::orderByRaw('(assignment + project + exams + attendance_presence)')
